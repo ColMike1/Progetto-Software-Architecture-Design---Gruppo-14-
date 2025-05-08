@@ -20,6 +20,7 @@
 
 *Story Points*: **(1, 2, 3, 5, 8, 13...) Un numero di Fibonacci**
 
+
 ## *User Story 2* : Come utente voglio disegnare un cerchio.
 **Acceptance Criteria**:
 * l’utente clicca su “Seleziona Figura” e seleziona “Cerchio”.
