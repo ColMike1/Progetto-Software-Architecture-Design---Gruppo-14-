@@ -1,11 +1,20 @@
 package com.example.progetto_sad_gruppo14_ah;
+
+import com.example.Command.AggiungiFiguraCommand;
+import com.example.Command.Command;
+import com.example.Command.Invoker;
 import com.example.Factory.EllisseFactory;
 import com.example.Factory.FiguraFactory;
 import com.example.Factory.RettangoloFactory;
 import com.example.Factory.SegmentoFactory;
+import com.example.Model.LavagnaModel;
+import com.example.View.LavagnaView;
 import javafx.fxml.FXML;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
+
 
 public class HelloController{
 
@@ -17,6 +26,17 @@ public class HelloController{
     private ToggleButton ellisseButton;
     @FXML
     private ToggleButton rettangoloButton;
+
+    @FXML
+    private ColorPicker strokeColorPicker;
+    @FXML
+    private ColorPicker fillColorPicker;
+
+
+    private LavagnaModel lavagnaModel;
+    private LavagnaView lavagnaView;
+
+    private double x1, y1;
 
 
 
@@ -30,17 +50,58 @@ public class HelloController{
     @FXML
     private void initialize() {
 
+        lavagnaModel = LavagnaModel.getInstance();
+        lavagnaView = LavagnaView.getInstance(lavagnaModel, lavagna);
+
         rettangoloButton.setOnAction(e -> {
-            figuraFactory = rettangoloFactory;
+            if (rettangoloButton.isSelected()) {
+                figuraFactory = rettangoloFactory;
+
+            } else {
+                figuraFactory = null;
+            }
         });
 
         segmentoButton.setOnAction(e -> {
-           figuraFactory = segmentoFactory;
+            if (segmentoButton.isSelected()) {
+                figuraFactory = segmentoFactory;
+
+            } else {
+                figuraFactory = null;
+            }
         });
 
+
         ellisseButton.setOnAction(e -> {
-            figuraFactory = ellisseFactory;
+            if (ellisseButton.isSelected()) {
+                figuraFactory = ellisseFactory;
+
+            } else {
+                figuraFactory = null;
+            }
         });
+
+        lavagna.setOnMousePressed(event ->{
+            x1 = event.getX();
+            y1 = event.getY();
+        });
+
+
+        lavagna.setOnMouseReleased(event ->{
+            double x2 = event.getX();
+            double y2 = event.getY();
+
+            if(figuraFactory!=null) {
+
+                Command cmd = new AggiungiFiguraCommand(lavagnaModel, figuraFactory, x1, y1, x2, y2, strokeColorPicker.getValue(), fillColorPicker.getValue());
+
+                Invoker.getInstance().executeCommand(cmd);
+
+                System.out.println("FIGURA CREATA");
+            }
+        });
+
+
 
     }
 
