@@ -36,5 +36,18 @@ public abstract class Figura {
         return strokeColor;
     }
 
+    public double getX1() {
+        return x1;
+    }
+    public double getY1() {
+        return y1;
+    }
+    public double getX2() {
+        return x2;
+    }
+    public double getY2() {
+        return y2;
+    }
+
     public abstract Node creaNodoJavaFX();
 }

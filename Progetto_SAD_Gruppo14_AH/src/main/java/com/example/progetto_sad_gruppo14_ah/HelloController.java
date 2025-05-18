@@ -1,8 +1,6 @@
 package com.example.progetto_sad_gruppo14_ah;
 
-import com.example.Command.AggiungiFiguraCommand;
-import com.example.Command.Command;
-import com.example.Command.Invoker;
+import com.example.Command.*;
 import com.example.Factory.EllisseFactory;
 import com.example.Factory.FiguraFactory;
 import com.example.Factory.RettangoloFactory;
@@ -10,10 +8,13 @@ import com.example.Factory.SegmentoFactory;
 import com.example.Model.LavagnaModel;
 import com.example.View.LavagnaView;
 import javafx.fxml.FXML;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public class HelloController{
@@ -26,6 +27,11 @@ public class HelloController{
     private ToggleButton ellisseButton;
     @FXML
     private ToggleButton rettangoloButton;
+    @FXML
+    private MenuItem salvaConNome;
+    @FXML
+    private MenuItem caricaFile;
+
 
     @FXML
     private ColorPicker strokeColorPicker;
@@ -101,6 +107,15 @@ public class HelloController{
             }
         });
 
+        salvaConNome.setOnAction(e ->{
+
+            Command cmd = new SalvaFiguraCommand(salvaConNome, lavagnaModel);
+
+            Invoker.getInstance().executeCommand(cmd);
+
+            System.out.println("FIGURA SALVATA");
+
+        });
 
 
     }
