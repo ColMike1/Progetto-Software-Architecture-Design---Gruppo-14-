@@ -117,6 +117,14 @@ public class HelloController{
 
         });
 
+        caricaFile.setOnAction(e->{
+            Command cmd = new CaricaCommand(lavagnaModel, caricaFile);
+
+            Invoker.getInstance().executeCommand(cmd);
+
+            System.out.println("FILE CARICATO");
+        });
+
 
     }
 
