@@ -17,13 +17,13 @@ import javafx.stage.FileChooser;
 
 public class CaricaCommand implements Command {
 
-    private final LavagnaModel model;
-    private final MenuItem apriFile;
+    private LavagnaModel lavagnaModel;
+    private MenuItem apriFile;
 
 
-    public CaricaCommand(LavagnaModel lavagna, MenuItem apri) {
-        this.model = lavagna;
-        this.apriFile = apri;
+    public CaricaCommand(LavagnaModel lavagnaModel, MenuItem apriFile) {
+        this.lavagnaModel = lavagnaModel;
+        this.apriFile = apriFile;
     }
 
     @Override
@@ -36,9 +36,9 @@ public class CaricaCommand implements Command {
         File file = fileChooser.showOpenDialog(apriFile.getParentPopup().getOwnerWindow());
         if (file != null) {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                List<Figura> figure = model.getFigure();
+                List<Figura> figure = lavagnaModel.getFigure();
                 figure.clear();
-                model.notificaOsservatori();
+                lavagnaModel.notificaOsservatori();
                 List<Figura> figureTemp = new ArrayList<>();
                 boolean fileVuoto = true;
                 String line;
@@ -68,8 +68,7 @@ public class CaricaCommand implements Command {
                     } catch (Exception e) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Errore di caricamento");
-                        alert.setHeaderText("Formato del file non valido");
-                        alert.setContentText("Errore nella riga: \"" + line + "\"");
+                        alert.setHeaderText("Formattazione del file non valida!");
 
                         alert.showAndWait();
                         return;
@@ -85,12 +84,12 @@ public class CaricaCommand implements Command {
                 } else {
 
                     figure.addAll(figureTemp);
-                    model.notificaOsservatori();
+                    lavagnaModel.notificaOsservatori();
                 }
 
             } catch (IOException e) {
                 e.printStackTrace();
-                model.getFigure().clear();
+                lavagnaModel.getFigure().clear();
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Errore di lettura");
                 alert.setHeaderText("Impossibile leggere il file");

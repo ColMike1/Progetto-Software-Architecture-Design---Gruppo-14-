@@ -1,16 +1,14 @@
 package com.example.View;
 import com.example.Model.Figura;
 import com.example.Model.LavagnaModel;
-import javafx.animation.ScaleTransition;
+import com.example.State.Stato;
+//import com.example.State.FiguraSelezionataManager;
 import javafx.scene.Node;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.util.Duration;
 
 
 public class LavagnaView implements Runnable{
+
 
     private static LavagnaView instance;
     private LavagnaModel lavagnaModel;
@@ -22,7 +20,6 @@ public class LavagnaView implements Runnable{
         }
         return instance;
     }
-
 
 
     public LavagnaView(LavagnaModel model, AnchorPane lavagna){
@@ -38,18 +35,20 @@ public class LavagnaView implements Runnable{
 
             Node nodo = f.creaNodoJavaFX();
 
+
             /*nodo.setOnMouseClicked(event -> {
-                // sbagliato secondo MVC, da gestire.
-                lavagnaModel.setFiguraSelezionata(f);
-                event.consume();
-            });
 
-            if (f == lavagnaModel.getFiguraSelezionata()) {
-                DropShadow glow = new DropShadow(20, Color.PURPLE);
-                nodo.setEffect(glow);
-                System.out.println("ho selezionato");
+                if(statoCorrente != null) {
+                    statoCorrente.onFiguraClicked(f, nodo, event);
 
-            }*/
+                }
+
+                if(FiguraSelezionataManager.getInstance().get()==f) {
+
+                }
+
+            });*/
+
 
             lavagna.getChildren().add(nodo);
 
