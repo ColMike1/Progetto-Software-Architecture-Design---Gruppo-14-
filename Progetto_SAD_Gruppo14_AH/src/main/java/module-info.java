@@ -8,4 +8,5 @@ module com.example.progetto_sad_gruppo14_ah {
     exports com.example.Model;
     exports com.example.Factory;
     exports com.example.Command;
+    exports com.example.State;
 }

@@ -69,6 +69,7 @@ public class CaricaCommand implements Command {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Errore di caricamento");
                         alert.setHeaderText("Formattazione del file non valida!");
+                        alert.setContentText("Errore nella riga: \"" + line + "\"");
 
                         alert.showAndWait();
                         return;
