@@ -7,27 +7,27 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="922.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_sad_gruppo14_ah.HelloController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1178.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_sad_gruppo14_ah.HelloController">
   <top>
-    <VBox prefHeight="68.0" prefWidth="650.0" BorderPane.alignment="CENTER">
+    <VBox prefHeight="38.0" prefWidth="922.0" BorderPane.alignment="CENTER">
       <children>
         <MenuBar prefWidth="815.0">
           <menus>
             <Menu mnemonicParsing="false" text="File">
               <items>
-                <MenuItem mnemonicParsing="false" text="Apri" />
-                <MenuItem mnemonicParsing="false" text="Salva con nome" />
+                <MenuItem fx:id="caricaFile" mnemonicParsing="false" text="Apri" />
+                <MenuItem fx:id="salvaConNome" mnemonicParsing="false" text="Salva con nome" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Edit">
@@ -45,55 +45,11 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
           </padding>
         </MenuBar>
-        <ToolBar prefHeight="40.0" prefWidth="200.0">
-          <items>
-            <HBox prefHeight="18.0" prefWidth="150.0" spacing="10.0">
-              <children>
-                <ToggleButton fx:id="segmentoButton" mnemonicParsing="false" prefHeight="36.0" prefWidth="50.0">
-                  <graphic>
-                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                      <image>
-                        <Image url="@../../../Images/line.png" />
-                      </image>
-                    </ImageView>
-                  </graphic>
-                  <toggleGroup>
-                    <ToggleGroup fx:id="a" />
-                  </toggleGroup>
-                </ToggleButton>
-                <ToggleButton fx:id="ellisseButton" mnemonicParsing="false" prefHeight="36.0" prefWidth="50.0" toggleGroup="$a">
-                  <graphic>
-                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                      <image>
-                        <Image url="@../../../Images/ellipse.png" />
-                      </image>
-                    </ImageView>
-                  </graphic>
-                </ToggleButton>
-                <ToggleButton fx:id="rettangoloButton" mnemonicParsing="false" prefHeight="36.0" prefWidth="50.0" toggleGroup="$a">
-                  <graphic>
-                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                      <image>
-                        <Image url="@../../../Images/Rect.png" />
-                      </image>
-                    </ImageView>
-                  </graphic>
-                </ToggleButton>
-              </children>
-              <padding>
-                <Insets left="10.0" right="10.0" />
-              </padding>
-            </HBox>
-          </items>
-          <padding>
-            <Insets bottom="15.0" left="5.0" right="10.0" top="15.0" />
-          </padding>
-        </ToolBar>
       </children>
     </VBox>
   </top>
   <right>
-    <VBox prefHeight="548.0" prefWidth="116.0" spacing="10.0" style="-fx-border-radius: 30; -fx-border-color: #3062A8; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+    <VBox fx:id="editor" maxWidth="-Infinity" prefHeight="675.0" prefWidth="110.0" spacing="10.0" style="-fx-border-radius: 30; -fx-border-color: #3062A8; -fx-border-width: 3;" BorderPane.alignment="CENTER">
       <children>
         <Label alignment="CENTER" graphicTextGap="8.0" prefHeight="30.0" prefWidth="64.0" text="Editor" textAlignment="CENTER" underline="true" wrapText="true">
           <font>
@@ -114,7 +70,7 @@
             <Insets left="30.0" right="30.0" top="10.0" />
           </VBox.margin>
         </ImageView>
-        <ColorPicker prefHeight="30.0" prefWidth="90.0">
+        <ColorPicker fx:id="fillColorPicker" prefHeight="30.0" prefWidth="90.0">
           <VBox.margin>
             <Insets left="10.0" right="10.0" />
           </VBox.margin>
@@ -130,10 +86,13 @@
             <Insets left="30.0" right="30.0" top="10.0" />
           </VBox.margin>
         </ImageView>
-        <ColorPicker prefHeight="30.0" prefWidth="90.0">
+        <ColorPicker fx:id="strokeColorPicker" prefHeight="30.0" prefWidth="90.0">
           <VBox.margin>
             <Insets left="10.0" right="10.0" />
           </VBox.margin>
+               <value>
+                  <Color />
+               </value>
         </ColorPicker>
       </children>
       <BorderPane.margin>
@@ -141,7 +100,50 @@
       </BorderPane.margin>
     </VBox>
   </right>
-  <center>
-    <AnchorPane fx:id="lavagna" prefHeight="630.0" prefWidth="160.0" BorderPane.alignment="CENTER" />
-  </center>
+   <left>
+      <VBox maxWidth="-Infinity" prefHeight="655.0" prefWidth="90.0" spacing="20.0" style="-fx-border-color: #3062A8; -fx-border-radius: 30; -fx-border-width: 3;">
+         <children>
+    <ToggleButton fx:id="ellisseButton" mnemonicParsing="false" prefHeight="36.0" prefWidth="50.0">
+      <graphic>
+        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../../Images/ellipse.png" />
+          </image>
+        </ImageView>
+      </graphic>
+               <toggleGroup>
+        <ToggleGroup fx:id="a" />
+               </toggleGroup>
+    </ToggleButton>
+    <ToggleButton fx:id="segmentoButton" mnemonicParsing="false" prefHeight="36.0" prefWidth="50.0" toggleGroup="$a">
+      <graphic>
+        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../../Images/line.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </ToggleButton>
+    <ToggleButton fx:id="rettangoloButton" mnemonicParsing="false" prefHeight="36.0" prefWidth="50.0" toggleGroup="$a">
+      <graphic>
+        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../../Images/Rect.png" />
+          </image>
+        </ImageView>
+      </graphic>
+    </ToggleButton>
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </left>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane fx:id="lavagna" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1330.0" style="-fx-border-color: #3062A8;" />
+        </content>
+      </ScrollPane>
+   </center>
 </BorderPane>
