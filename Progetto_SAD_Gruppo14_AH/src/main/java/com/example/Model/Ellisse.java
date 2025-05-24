@@ -1,6 +1,8 @@
 package com.example.Model;
 
+import com.example.State.FiguraSelezionataManager;
 import javafx.scene.Node;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 
@@ -24,6 +26,11 @@ public class Ellisse extends Figura {
         e.setStroke(strokeColor);
         e.setFill(fillColor);
         e.setUserData(this);
+
+
+        if (FiguraSelezionataManager.getInstance().get() == this) {
+            e.setEffect(new DropShadow(20, Color.GREY));
+        }
 
         return e;
     }

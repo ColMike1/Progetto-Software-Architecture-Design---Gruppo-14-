@@ -1,4 +1,4 @@
-/*package com.example.State;
+package com.example.State;
 
 import com.example.Model.Figura;
 
@@ -40,4 +40,3 @@ public class FiguraSelezionataManager {
 
 
 }
-*/

@@ -133,6 +133,15 @@
         </ImageView>
       </graphic>
     </ToggleButton>
+            <ToggleButton fx:id="selezioneButton" mnemonicParsing="false" toggleGroup="$a">
+               <graphic>
+                  <ImageView fitHeight="36.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Images/cursore.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
          </children>
          <padding>
             <Insets left="20.0" right="20.0" top="20.0" />

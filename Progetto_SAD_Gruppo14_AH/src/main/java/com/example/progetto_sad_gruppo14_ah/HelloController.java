@@ -34,6 +34,8 @@ public class HelloController{
     @FXML
     private MenuItem caricaFile;
 
+    @FXML
+    private ToggleButton selezioneButton;
 
     @FXML
     private ColorPicker strokeColorPicker;
@@ -82,6 +84,16 @@ public class HelloController{
 
             } else {
                 System.out.println("ho deselezionato ellisse button");
+                statoManager.setStato(null);;
+            }
+        });
+
+        selezioneButton.setOnAction(e -> {
+            if (selezioneButton.isSelected()) {
+                statoManager.setStato(new SelezionaFiguraStato(lavagnaModel));
+
+            } else {
+
                 statoManager.setStato(null);;
             }
         });

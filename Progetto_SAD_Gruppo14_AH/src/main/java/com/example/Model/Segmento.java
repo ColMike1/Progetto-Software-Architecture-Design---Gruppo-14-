@@ -1,5 +1,7 @@
 package com.example.Model;
 
+import com.example.State.FiguraSelezionataManager;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
@@ -15,6 +17,14 @@ public class Segmento extends Figura {
         line.setStrokeWidth(3);
         line.setStroke(strokeColor);
         line.setUserData(this);
+
+        if (FiguraSelezionataManager.getInstance().get() == this) {
+            line.setEffect(new DropShadow(20, Color.GREY));
+        }
+
         return line;
+
+
+
     }
 }

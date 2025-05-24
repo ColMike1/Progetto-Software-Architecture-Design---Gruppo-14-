@@ -18,16 +18,17 @@ public class LavagnaModel {
         return instance;
     }
 
+    public void selezionaFigura(Figura figura){
 
-    /*public  void setFiguraSelezionata(Figura figuraSelezionata){
-        this.figuraSelezionata = figuraSelezionata;
         notificaOsservatori();
-        System.out.println("Ho selezionato la figura");
-    }*/
+    }
 
-   /* public  Figura getFiguraSelezionata(){
-        return figuraSelezionata;
-    }*/
+    public void deselezionaFigura(Figura figura){
+
+        notificaOsservatori();
+    }
+
+
 
     public void aggiungiFigura(Figura figura){
         figure.add(figura);

@@ -1,4 +1,6 @@
 package com.example.Model;
+import com.example.State.FiguraSelezionataManager;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -6,7 +8,6 @@ public class Rettangolo extends Figura {
 
     private double larghezza;
     private double altezza;
-
 
 
     public Rettangolo(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
@@ -26,6 +27,13 @@ public class Rettangolo extends Figura {
         r.setStroke(strokeColor);
         r.setFill(fillColor);
         r.setUserData(this); // salvo nell'istanza Rectangle il riferimento all'istanza Rettangolo per poi poter recuperare la figura Rettangolo dal model, è un metadato.
+
+
+        if (FiguraSelezionataManager.getInstance().get() == this) {
+            r.setEffect(new DropShadow(20, Color.GREY));
+        }
+
         return r;
     }
+
 }
