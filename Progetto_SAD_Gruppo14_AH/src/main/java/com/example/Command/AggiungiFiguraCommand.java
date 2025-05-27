@@ -23,10 +23,14 @@ public class AggiungiFiguraCommand implements Command {
         this.fillColor = fillColor;
 
     }
-
+    @Override
     public void execute() {
         Figura figura = figuraFactory.creaFigura(x1, y1, x2 , y2, strokeColor, fillColor );
         lavagnaModel.aggiungiFigura(figura);
+    }
+    @Override
+    public void undo() {
+        return;
     }
 }
 

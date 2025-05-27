@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import com.example.State.*;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -36,6 +37,12 @@ public class HelloController{
 
     @FXML
     private ToggleButton selezioneButton;
+    @FXML
+    private Button spostaSopraButton;
+    @FXML
+    private Button spostaSottoButton;
+    @FXML
+    private Button undoButton;
 
     @FXML
     private ColorPicker strokeColorPicker;
@@ -45,6 +52,7 @@ public class HelloController{
 
     private LavagnaModel lavagnaModel;
     private LavagnaView lavagnaView;
+    private FiguraSelezionataManager figuraSelezionataManager = FiguraSelezionataManager.getInstance();
 
     private StatoManager statoManager = StatoManager.getInstance();
 
@@ -100,14 +108,13 @@ public class HelloController{
 
         lavagna.setOnMousePressed(event ->{
             statoManager.getStato().onMousePressed(event);
+
         });
 
         lavagna.setOnMouseDragged(event ->{
             statoManager.getStato().onMouseDragged(event);
 
         });
-
-
 
         lavagna.setOnMouseReleased(event ->{
             statoManager.getStato().onMouseReleased(event);
@@ -130,6 +137,54 @@ public class HelloController{
             Invoker.getInstance().executeCommand(cmd);
 
             System.out.println("FILE CARICATO");
+        });
+
+        spostaSopraButton.setOnAction(e -> {
+            if(figuraSelezionataManager.get() != null){
+                Command cmd = new SpostaSopraCommand(lavagnaModel, figuraSelezionataManager.get());
+
+                Invoker.getInstance().executeCommand(cmd);
+
+                System.out.println("TO THE TOP");
+            }
+        });
+
+        spostaSottoButton.setOnAction(e -> {
+            if(figuraSelezionataManager.get() != null){
+                Command cmd = new SpostaSottoCommand(lavagnaModel, figuraSelezionataManager.get());
+
+                Invoker.getInstance().executeCommand(cmd);
+
+                System.out.println("TO THE BACK");
+            }
+        });
+
+        fillColorPicker.setOnAction(e -> {
+            if(figuraSelezionataManager.get() != null){
+                Command cmd = new CambiaColoreInternoCommand(lavagnaModel, figuraSelezionataManager.get(), fillColorPicker.getValue());
+
+                Invoker.getInstance().executeCommand(cmd);
+
+                System.out.println("CAMBIO COLORE INTERNO");
+
+            }
+        });
+
+        strokeColorPicker.setOnAction(e -> {
+            if(figuraSelezionataManager.get() != null){
+                Command cmd = new CambiaColoreBordoCommand(lavagnaModel, figuraSelezionataManager.get(), strokeColorPicker.getValue());
+
+                Invoker.getInstance().executeCommand(cmd);
+
+                System.out.println("CAMBIO COLORE BORDO");
+            }
+        });
+
+        undoButton.setOnAction(e -> {
+            Invoker invoker = Invoker.getInstance();
+
+            invoker.undo();
+
         });
 
 

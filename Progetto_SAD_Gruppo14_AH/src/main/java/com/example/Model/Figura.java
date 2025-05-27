@@ -24,7 +24,7 @@ public abstract class Figura {
         this.strokeColor = strokeColor;
     }
 
-    public void setFillColorColor(Color fillColor) {
+    public void setFillColor( Color fillColor) {
         this.fillColor = fillColor;
     }
 

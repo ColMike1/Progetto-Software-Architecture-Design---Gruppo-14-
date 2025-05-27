@@ -74,5 +74,4 @@ public class DisegnaEllisseStato implements Stato{
         figuraTemporanea = null;
 
     }
-
 }

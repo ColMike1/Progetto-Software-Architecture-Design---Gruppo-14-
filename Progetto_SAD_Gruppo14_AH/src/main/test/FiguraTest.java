@@ -31,7 +31,7 @@ public class FiguraTest {
     @Test
     void testSetColori() {
         figura.setStrokeColor(Color.GREEN);
-        figura.setFillColorColor(Color.YELLOW);
+        figura.setFillColor(Color.YELLOW);
 
         assertEquals(Color.GREEN, figura.getStrokeColor());
         assertEquals(Color.YELLOW, figura.getFillColor());

@@ -17,7 +17,6 @@ public class SalvaFiguraCommand implements Command {
     MenuItem salvaConNome;
 
     public SalvaFiguraCommand(MenuItem bottone, LavagnaModel lavagna) {
-
         this.salvaConNome = bottone;
         this.lavagnaModel = lavagna;
     }
@@ -64,5 +63,9 @@ public class SalvaFiguraCommand implements Command {
 
         }
 
+    }
+    @Override
+    public void undo() {
+        return;
     }
 }
