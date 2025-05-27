@@ -99,5 +99,9 @@ public class CaricaCommand implements Command {
     public void undo() {
         return;
     }
+    @Override
+    public boolean isUndoable() {
+        return false;
+    }
 }
 

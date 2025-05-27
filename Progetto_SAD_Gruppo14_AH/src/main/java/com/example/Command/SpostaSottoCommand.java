@@ -34,4 +34,8 @@ public class SpostaSottoCommand implements Command {
 
         return index != 0;
     }
+    @Override
+    public boolean isUndoable() {
+        return true;
+    }
 }

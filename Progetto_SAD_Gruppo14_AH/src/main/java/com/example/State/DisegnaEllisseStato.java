@@ -65,8 +65,13 @@ public class DisegnaEllisseStato implements Stato{
         double y2 = event.getY();
 
         lavagna.getChildren().remove(figuraTemporanea);
+        if(x1<0 || y1<0 || x2<0 || y2<0) {
+            figuraTemporanea = null;
+            return;
+        }
         Command cmd = new AggiungiFiguraCommand(lavagnaModel,
                                                 new EllisseFactory(),
+                                                lavagna,
                                                 x1, y1, x2, y2,
                                                 strokeColor.getValue(),
                                                 fillColor.getValue());

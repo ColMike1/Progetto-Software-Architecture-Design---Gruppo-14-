@@ -2,6 +2,7 @@ import com.example.Command.AggiungiFiguraCommand;
 import com.example.Factory.FiguraFactory;
 import com.example.Model.Figura;
 import com.example.Model.LavagnaModel;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
 
@@ -15,11 +16,12 @@ public class AggiungiFiguraTest {
     void testAggiungiFigura() {
 
         LavagnaModel lavagnaModel = new LavagnaModel();
+        AnchorPane lavagna = new AnchorPane();
         FiguraFactory fakeFactory = (x1, y1, x2, y2, stroke, fill) -> new FiguraFinta(x1, y1, x2, y2, stroke, fill);
 
 
         AggiungiFiguraCommand cmd = new AggiungiFiguraCommand(
-                lavagnaModel, fakeFactory,
+                lavagnaModel, fakeFactory, lavagna,
                 10, 20, 30, 40,
                 Color.BLACK, Color.RED
         );

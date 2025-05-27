@@ -33,6 +33,11 @@ public class LavagnaModel {
         notificaOsservatori();
     }
 
+    public void rimuoviFigura(Figura figura){
+        figure.remove(figura);
+        notificaOsservatori();
+    }
+
     public void cambiaColoreBordo(Figura figura, Color colore){
         int index = figure.indexOf(figura);
         figure.get(index).setStrokeColor(colore);

@@ -2,6 +2,7 @@ import com.example.Command.AggiungiFiguraCommand;
 import com.example.Command.Command;
 import com.example.Factory.SegmentoFactory;
 import com.example.Model.LavagnaModel;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import org.junit.jupiter.api.Test;
@@ -33,10 +34,11 @@ public class DisegnaSegmentoStatoTest {
 
     @Test
     void testAggiuntaSegmentoAlModel() {
-        LavagnaModel model = new LavagnaModel(); // deve essere autonomo
+        LavagnaModel model = new LavagnaModel();
+        AnchorPane lavagna = new AnchorPane();// deve essere autonomo
         Command cmd = new AggiungiFiguraCommand(
                 model, new SegmentoFactory(),
-                10, 10, 50, 50,
+                lavagna,10, 10, 50, 50,
                 Color.BLACK, Color.TRANSPARENT // il fill è ignorato per Line
         );
 

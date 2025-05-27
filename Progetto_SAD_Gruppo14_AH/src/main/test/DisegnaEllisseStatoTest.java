@@ -4,6 +4,7 @@ import com.example.Factory.EllisseFactory;
 import com.example.Model.LavagnaModel;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import org.junit.jupiter.api.Test;
@@ -26,9 +27,10 @@ public class DisegnaEllisseStatoTest {
 
     @Test
     void testAggiuntaFiguraAlModel() {
-        LavagnaModel model = new LavagnaModel(); // deve essere testabile
+        LavagnaModel model = new LavagnaModel();
+        AnchorPane lavagna = new AnchorPane();// deve essere testabile
         EllisseFactory factory = new EllisseFactory();
-        Command cmd = new AggiungiFiguraCommand(model, factory, 10, 20, 30, 40, Color.BLACK, Color.BLUE);
+        Command cmd = new AggiungiFiguraCommand(model, factory, lavagna,10, 20, 30, 40, Color.BLACK, Color.BLUE);
 
         cmd.execute();
 

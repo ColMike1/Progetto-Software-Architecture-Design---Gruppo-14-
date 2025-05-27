@@ -19,7 +19,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1178.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_sad_gruppo14_ah.HelloController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1178.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_sad_gruppo14_ah.HelloController">
   <top>
     <VBox prefHeight="38.0" prefWidth="922.0" BorderPane.alignment="CENTER">
       <children>
@@ -31,9 +31,9 @@
                 <MenuItem fx:id="salvaConNome" mnemonicParsing="false" text="Salva con nome" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Edit">
+            <Menu fx:id="menuEdit" mnemonicParsing="false" text="Edit">
               <items>
-                <MenuItem mnemonicParsing="false" text="Delete" />
+                <MenuItem fx:id="Elimina" mnemonicParsing="false" text="Delete" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
@@ -178,7 +178,7 @@
       </VBox>
    </left>
    <center>
-      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <content>
           <AnchorPane fx:id="lavagna" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1330.0" style="-fx-border-color: #3062A8;" />
         </content>

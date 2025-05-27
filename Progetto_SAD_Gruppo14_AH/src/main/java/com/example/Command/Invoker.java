@@ -18,7 +18,6 @@ public class Invoker {
 
     public void undo(){
         if (!undoStack.isEmpty()) {
-            System.out.println("Test");
             Command cmd = undoStack.pop();
             cmd.undo();
         }
@@ -27,9 +26,12 @@ public class Invoker {
     public void executeCommand(Command cmd){
         if(cmd.canExecute()) {
             cmd.execute();
-            if(!(cmd instanceof CaricaCommand || cmd instanceof SalvaFiguraCommand))
+            if(cmd.isUndoable())
                 undoStack.push(cmd);
         }
     }
 
+    public void svuotaStack(){
+        undoStack.clear();
+    }
 }

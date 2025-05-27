@@ -5,6 +5,7 @@ import com.example.Factory.EllisseFactory;
 import com.example.Factory.FiguraFactory;
 import com.example.Factory.RettangoloFactory;
 import com.example.Factory.SegmentoFactory;
+import com.example.Model.Figura;
 import com.example.Model.LavagnaModel;
 import com.example.State.DisegnaRettangoloStato;
 import com.example.View.LavagnaView;
@@ -43,6 +44,10 @@ public class HelloController{
     private Button spostaSottoButton;
     @FXML
     private Button undoButton;
+    @FXML
+    private MenuItem Elimina;
+    @FXML
+    private Menu menuEdit;
 
     @FXML
     private ColorPicker strokeColorPicker;
@@ -64,6 +69,7 @@ public class HelloController{
 
         lavagnaModel = LavagnaModel.getInstance();
         lavagnaView = LavagnaView.getInstance(lavagnaModel, lavagna);
+        Elimina.setDisable(true);
 
         rettangoloButton.setOnAction(e -> {
             if (rettangoloButton.isSelected()) {
@@ -135,6 +141,7 @@ public class HelloController{
             Command cmd = new CaricaCommand(lavagnaModel, caricaFile);
 
             Invoker.getInstance().executeCommand(cmd);
+            Invoker.getInstance().svuotaStack();
 
             System.out.println("FILE CARICATO");
         });
@@ -181,13 +188,31 @@ public class HelloController{
         });
 
         undoButton.setOnAction(e -> {
-            Invoker invoker = Invoker.getInstance();
-
-            invoker.undo();
-
+            Invoker.getInstance().undo();
+            figuraSelezionataManager.clear();
         });
 
+        menuEdit.setOnShown(e -> {
+            Figura figura = figuraSelezionataManager.get();
+            if(figura != null) {
+                Elimina.setDisable(false);
+            }
+        });
+
+        menuEdit.setOnHidden(e -> {
+            Elimina.setDisable(true);
+        });
+
+        Elimina.setOnAction(e->{
+            Figura figura = figuraSelezionataManager.get();
+            if(figura != null) {
+                Command cmd = new EliminaCommand(lavagnaModel, figura);
+                Invoker.getInstance().executeCommand(cmd);
+                figuraSelezionataManager.clear();
+
+                System.out.println("FIGURA ELIMINATA");
+            }
+        });
 
     }
-
 }

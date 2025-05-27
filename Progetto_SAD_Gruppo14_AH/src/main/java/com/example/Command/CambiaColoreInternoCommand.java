@@ -26,4 +26,8 @@ public class CambiaColoreInternoCommand implements Command {
     public void undo() {
         lavagnaModel.cambiaColoreInterno(element, vecchioColore);
     }
+    @Override
+    public boolean isUndoable() {
+        return true;
+    }
 }

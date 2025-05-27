@@ -2,6 +2,7 @@ import com.example.Command.AggiungiFiguraCommand;
 import com.example.Command.Command;
 import com.example.Factory.RettangoloFactory;
 import com.example.Model.LavagnaModel;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import org.junit.jupiter.api.Test;
@@ -34,9 +35,10 @@ public class DisegnaRettangoloStatoTest {
 
     @Test
     void testAggiuntaFiguraAlModel() {
-        LavagnaModel model = new LavagnaModel(); // deve essere testabile
+        LavagnaModel model = new LavagnaModel();
+        AnchorPane lavagna = new AnchorPane();// deve essere testabile
         RettangoloFactory factory = new RettangoloFactory();
-        Command cmd = new AggiungiFiguraCommand(model, factory, 10, 20, 30, 40, Color.BLACK, Color.BLUE);
+        Command cmd = new AggiungiFiguraCommand(model, factory, lavagna, 10, 20, 30, 40, Color.BLACK, Color.BLUE);
 
         cmd.execute();
 

@@ -68,4 +68,8 @@ public class SalvaFiguraCommand implements Command {
     public void undo() {
         return;
     }
+    @Override
+    public boolean isUndoable() {
+        return false;
+    }
 }

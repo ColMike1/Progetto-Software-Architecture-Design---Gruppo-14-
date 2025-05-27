@@ -32,4 +32,8 @@ public class SpostaSopraCommand implements Command{
 
         return index < lavagnaModel.getFigure().size() - 1;
     }
+    @Override
+    public boolean isUndoable() {
+        return true;
+    }
 }
