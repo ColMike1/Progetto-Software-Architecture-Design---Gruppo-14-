@@ -36,9 +36,7 @@ public class CaricaCommand implements Command {
         File file = fileChooser.showOpenDialog(apriFile.getParentPopup().getOwnerWindow());
         if (file != null) {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                List<Figura> figure = lavagnaModel.getFigure();
-                figure.clear();
-                lavagnaModel.notificaOsservatori();
+                lavagnaModel.svuotaLavagna();
                 List<Figura> figureTemp = new ArrayList<>();
                 boolean fileVuoto = true;
                 String line;
@@ -83,14 +81,12 @@ public class CaricaCommand implements Command {
                     alert.setContentText("Nessuna figura è stata caricata.");
                     alert.showAndWait();
                 } else {
-
-                    figure.addAll(figureTemp);
-                    lavagnaModel.notificaOsservatori();
+                    lavagnaModel.caricaFigure(figureTemp);
                 }
 
             } catch (IOException e) {
                 e.printStackTrace();
-                lavagnaModel.getFigure().clear();
+                lavagnaModel.svuotaLavagna();
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Errore di lettura");
                 alert.setHeaderText("Impossibile leggere il file");
@@ -98,6 +94,14 @@ public class CaricaCommand implements Command {
                 alert.showAndWait();
             }
         }
+    }
+    @Override
+    public void undo() {
+        return;
+    }
+    @Override
+    public boolean isUndoable() {
+        return false;
     }
 }
 

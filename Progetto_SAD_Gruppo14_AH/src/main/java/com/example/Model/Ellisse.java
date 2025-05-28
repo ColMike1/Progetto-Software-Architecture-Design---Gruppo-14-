@@ -1,6 +1,9 @@
 package com.example.Model;
 
 import com.example.State.FiguraSelezionataManager;
+import com.example.Strategy.EllisseTemporaneoStrategy;
+import com.example.Strategy.FiguraTemporaneaStrategy;
+import com.example.Strategy.RettangoloTemporaneoStrategy;
 import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
@@ -22,7 +25,10 @@ public class Ellisse extends Figura {
         double radiusY = Math.abs(y2 - y1) / 2;
 
         Ellipse e = new Ellipse(centerX, centerY, radiusX, radiusY);
-        e.setStrokeWidth(3);
+
+        this.setNodo(e);
+
+        e.setStrokeWidth(1);
         e.setStroke(strokeColor);
         e.setFill(fillColor);
         e.setUserData(this);
@@ -33,5 +39,10 @@ public class Ellisse extends Figura {
         }
 
         return e;
+    }
+
+    @Override
+    public FiguraTemporaneaStrategy getTemporaryResizeStrategy() {
+        return new EllisseTemporaneoStrategy();
     }
 }
