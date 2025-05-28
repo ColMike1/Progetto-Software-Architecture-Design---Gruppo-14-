@@ -1,4 +1,5 @@
 package com.example.Model;
+import com.example.Strategy.FiguraTemporaneaStrategy;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 
@@ -9,6 +10,7 @@ public abstract class Figura {
     protected double x2, y2;    //Coord. OnMouseReleased
     protected Color strokeColor;
     protected Color fillColor;
+    protected Node nodo;
 
     public Figura(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
         this.x1 = x1;
@@ -20,11 +22,20 @@ public abstract class Figura {
 
     }
 
+
+    public void setNodo(Node nodo) {
+        this.nodo = nodo;
+    }
+
+    public Node getNodo() {
+        return nodo;
+    }
+
     public void setStrokeColor(Color strokeColor) {
         this.strokeColor = strokeColor;
     }
 
-    public void setFillColorColor(Color fillColor) {
+    public void setFillColor( Color fillColor) {
         this.fillColor = fillColor;
     }
 
@@ -49,5 +60,23 @@ public abstract class Figura {
         return y2;
     }
 
+
+    public void setX1(double x1) {
+        this.x1 = x1;
+    }
+    public void setX2(double x2) {
+        this.x2 = x2;
+    }
+    public void setY1(double y1) {
+        this.y1 = y1;
+    }
+    public void setY2(double y2) {
+        this.y2 = y2;
+    }
+
     public abstract Node creaNodoJavaFX();
+
+
+    public abstract FiguraTemporaneaStrategy getTemporaryResizeStrategy();
+
 }
