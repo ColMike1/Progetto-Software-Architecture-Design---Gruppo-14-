@@ -22,8 +22,6 @@ public class Rettangolo extends Figura {
         this.y1 = Math.min(y1, y2);
         this.x2 = Math.max(x1, x2);
         this.y2 = Math.max(y1, y2);
-
-
     }
 
     @Override
@@ -46,12 +44,20 @@ public class Rettangolo extends Figura {
         if (FiguraSelezionataManager.getInstance().get() == this) {
             r.setEffect(new DropShadow(20, Color.GREY));
         }
-
         return r;
     }
 
     public FiguraTemporaneaStrategy getTemporaryResizeStrategy() {
         return new RettangoloTemporaneoStrategy();
+    }
+
+    public Figura getClone() {
+        int dx = 20;
+        return new Rettangolo(x1+dx, y1+dx, x2+dx, y2+dx, strokeColor, fillColor);
+    }
+
+    public String toString(){
+        return "Rettangolo";
     }
 
 }

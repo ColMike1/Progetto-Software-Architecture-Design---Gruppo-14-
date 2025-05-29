@@ -35,18 +35,19 @@ public class AggiungiFiguraCommand implements Command {
 
         double MaxX = Math.max(x1, x2);
         double MaxY = Math.max(y1,y2);
-        if(MaxX > lavagna.getPrefWidth()) {
+        if(MaxX > lavagna.getPrefWidth())
             lavagna.setPrefWidth(MaxX + 100);
-        }
-        if(MaxY > lavagna.getPrefHeight()) {
+
+        if(MaxY > lavagna.getPrefHeight())
             lavagna.setPrefHeight(MaxY + 100);
-        }
+        System.out.println("Aggiunta: " + figuraAggiunta + "\n");
     }
     @Override
     public void undo() {
         if(figuraAggiunta != null) {
             FiguraSelezionataManager.getInstance().clear();
             lavagnaModel.rimuoviFigura(figuraAggiunta);
+            System.out.println("Rimossa figura: " + figuraAggiunta);
         }
     }
     @Override

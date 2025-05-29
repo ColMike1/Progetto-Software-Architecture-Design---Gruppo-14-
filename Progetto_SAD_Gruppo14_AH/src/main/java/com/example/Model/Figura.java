@@ -59,8 +59,6 @@ public abstract class Figura {
     public double getY2() {
         return y2;
     }
-
-
     public void setX1(double x1) {
         this.x1 = x1;
     }
@@ -76,7 +74,11 @@ public abstract class Figura {
 
     public abstract Node creaNodoJavaFX();
 
-
     public abstract FiguraTemporaneaStrategy getTemporaryResizeStrategy();
+
+    /*
+       getCLone() è utilizzata da PasteCommand.
+     */
+    public abstract Figura getClone();
 
 }
