@@ -25,9 +25,9 @@ public class CambiaColoreInternoCommand implements Command {
     }
     @Override
     public void undo() {
-
         FiguraSelezionataManager.getInstance().clear();
         lavagnaModel.cambiaColoreInterno(element, vecchioColore);
+        System.out.println("Coloro l'interno di " + element.toString() + " con vecchio colore: " + vecchioColore + "\n");
     }
     @Override
     public boolean isUndoable() {

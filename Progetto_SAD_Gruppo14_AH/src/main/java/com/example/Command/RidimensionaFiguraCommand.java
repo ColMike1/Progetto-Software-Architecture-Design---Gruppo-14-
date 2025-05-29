@@ -32,6 +32,7 @@ public class RidimensionaFiguraCommand implements Command {
             y2 = y1+10;
         }
         LavagnaModel.getInstance().ridimensionaFigura(figura_selezionata, x2, y2);
+
     }
 
 
@@ -40,6 +41,7 @@ public class RidimensionaFiguraCommand implements Command {
 
         FiguraSelezionataManager.getInstance().clear();
         LavagnaModel.getInstance().ridimensionaFigura(figura_selezionata, handle_x, handle_y);
+        System.out.println("Figura " + figura_selezionata + " ridimensionata");
 
     }
 

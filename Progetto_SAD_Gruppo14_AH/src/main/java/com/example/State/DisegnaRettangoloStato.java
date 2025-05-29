@@ -31,14 +31,13 @@ public class DisegnaRettangoloStato implements Stato {
         this.fillColor = fillColor;
         this.figureInserite = LavagnaView.getInstance().getFigureZoomabili();
     }
-    @Override
 
+    @Override
     public void onMousePressed(MouseEvent event) {
 
         Point2D punto = figureInserite.sceneToLocal(event.getSceneX(), event.getSceneY());
         x1 = punto.getX();
         y1 = punto.getY();
-
 
         figuraTemporanea = new Rectangle(x1, y1, 0, 0);
         figuraTemporanea.setStroke(strokeColor.getValue());

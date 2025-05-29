@@ -14,6 +14,7 @@ public class ZoomOutStato implements Stato{
     }
 
     public void onMousePressed(MouseEvent event){
+        event.consume();
         double x = event.getX();
         double y = event.getY();
 

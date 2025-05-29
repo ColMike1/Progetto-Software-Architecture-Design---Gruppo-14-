@@ -14,7 +14,6 @@ import javafx.scene.shape.Circle;
 
 public class LavagnaView implements Runnable{
 
-
     private static LavagnaView instance;
     private AnchorPane lavagna;
     private Group figureZoomabili = new Group();
@@ -73,25 +72,41 @@ public class LavagnaView implements Runnable{
 
         for (Figura f : LavagnaModel.getInstance().getFigure()) {
 
-            System.out.println("Sto aggiornando la lavagna.");
-
             Node nodo = f.creaNodoJavaFX();
             aggiungiFiguraZoomabile(nodo);
 
             nodo.setOnMouseClicked(event -> {
+                /*
+                * boolean isInZoomStato viene inserita per evitare che, una volta selezionato zoom_in button
+                * o zoom_out button, cliccando in corrispondenza di una figura, questa non viene selezionata
+                *  perchè ci si trova nello stato di zoom
+                * */
+                boolean isInZoomStato = (StatoManager.getInstance().getStato() instanceof ZoomInStato) || (StatoManager.getInstance().getStato() instanceof ZoomOutStato);
+                if (!isInZoomStato) {
+                    FiguraSelezionataManager.getInstance().set(f);
+                    System.out.println("Figura selezionataview: " + f.toString() + "\n");
+
+                    if (!(StatoManager.getInstance().getStato() instanceof SelezionaFiguraStato)) {
+                        StatoManager.getInstance().setStato(new SelezionaFiguraStato());
+                    }
+                }
+            });
+
+            /*nodo.setOnMouseClicked(event -> {
                 FiguraSelezionataManager.getInstance().set(f);
+                System.out.println("Figura selezionataview: " + f.toString() + "\n");
 
             if(!((StatoManager.getInstance().getStato())instanceof SelezionaFiguraStato))
                 StatoManager.getInstance().setStato(new SelezionaFiguraStato());
+            });*/
 
-            });
+
+
         }
 
         // gestione figura selezionata, handle e toFront()
-        if (FiguraSelezionataManager.getInstance().get() != null) {
-
-            System.out.println("sono la figura selezionata");
-            Figura f = FiguraSelezionataManager.getInstance().get();
+        Figura f = FiguraSelezionataManager.getInstance().get();
+        if (f != null) {
 
           //f.getNodo().toFront();
 
@@ -107,10 +122,10 @@ public class LavagnaView implements Runnable{
                 handle.setOnMousePressed(event -> {
 
                     StatoManager.getInstance().setStato(new RidimensionaFiguraStato());
-                    System.out.println("inizio a ridimensionare");
+                    System.out.println("Inizio a ridimensionare");
                 });
                 handle.setOnMouseReleased(event -> {
-                    System.out.println("ho ridimensionato");
+                    System.out.println("Ho ridimensionato");
                 });
 
                 // gestione handle spostamento
@@ -125,9 +140,11 @@ public class LavagnaView implements Runnable{
                 aggiungiFiguraZoomabile(handle_1);
 
                 handle_1.setOnMousePressed(event -> {
-
                     StatoManager.getInstance().setStato(new SpostamentoFiguraStato());
-
+                    System.out.println("Inizio a spostare");
+                });
+                handle_1.setOnMouseReleased(event -> {
+                    System.out.println("Figura spostata");
                 });
         }
     }

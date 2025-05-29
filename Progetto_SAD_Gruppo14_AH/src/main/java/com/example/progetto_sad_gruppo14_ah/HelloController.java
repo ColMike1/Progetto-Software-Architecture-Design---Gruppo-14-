@@ -53,6 +53,12 @@ public class HelloController{
     @FXML
     private MenuItem Elimina;
     @FXML
+    private MenuItem cut;
+    @FXML
+    private MenuItem copy;
+    @FXML
+    private MenuItem paste;
+    @FXML
     private Menu menuEdit;
 
 
@@ -77,30 +83,40 @@ public class HelloController{
         lavagnaModel = LavagnaModel.getInstance();
         lavagnaView = LavagnaView.getInstance(lavagna);
         Elimina.setDisable(true);
-
-        Invoker.getInstance().executeCommand(new RimuoviGrigliaCommand());
+        cut.setDisable(true);
+        copy.setDisable(true);
 
 
         lavagna.heightProperty().addListener((observable, oldValue, newValue) -> {
             Command cmd = new AggiungiGrigliaCommand(Integer.parseInt(nRighe.getText()), Integer.parseInt(nColonne.getText()), lavagna.getWidth(), (double) newValue, Color.LIGHTGRAY);
             if(grigliaButton.isSelected()){
-                cmd.execute();}
+                try {
+                    Invoker.getInstance().executeCommand(cmd);
+                } catch (Exception e) {
+                    System.out.println("IMPOSSIBILE AGGIORNARE GRIGLIA\n");;
+                }
+            }
         });
 
         lavagna.widthProperty().addListener((observable, oldValue, newValue) -> {
             Command cmd = new AggiungiGrigliaCommand(Integer.parseInt(nRighe.getText()), Integer.parseInt(nColonne.getText()), (double) newValue, lavagna.getHeight(), Color.LIGHTGRAY);
             if(grigliaButton.isSelected()){
-                cmd.execute();}
+                try {
+                    Invoker.getInstance().executeCommand(cmd);
+                } catch (Exception e) {
+                    System.out.println("IMPOSSIBILE AGGIORNARE GRIGLIA\n");
+                }
+            }
         });
 
         nRighe.textProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 int nRighe = Integer.parseInt(newValue);
                 Command cmd = new AggiungiGrigliaCommand( nRighe, Integer.parseInt(nColonne.getText()), lavagna.getWidth(), lavagna.getHeight(), Color.LIGHTGRAY);
-                if(grigliaButton.isSelected()){
-                    cmd.execute();}
-            } catch (NumberFormatException e) {
-                System.out.println("Valore non numerico");
+                if(grigliaButton.isSelected())
+                    Invoker.getInstance().executeCommand(cmd);
+            } catch (Exception e) {
+                System.out.println("Valore non numerico: "+ nRighe.getText() + "\n");
             }
         });
 
@@ -108,10 +124,10 @@ public class HelloController{
             try {
                 int nColonne = Integer.parseInt(newValue);
                 Command cmd = new AggiungiGrigliaCommand(Integer.parseInt(nRighe.getText()), nColonne, lavagna.getWidth(), lavagna.getHeight(), Color.LIGHTGRAY);
-                if(grigliaButton.isSelected()){
-                    cmd.execute();}
-            } catch (NumberFormatException e) {
-                System.out.println("Valore non numerico");
+                if(grigliaButton.isSelected())
+                    Invoker.getInstance().executeCommand(cmd);
+            } catch (Exception e) {
+                System.out.println("Valore non numerico: "+ nColonne.getText() + "\n");
             }
         });
 
@@ -136,42 +152,55 @@ public class HelloController{
         rettangoloButton.setOnAction(e -> {
             if (rettangoloButton.isSelected()) {
                 statoManager.setStato(new DisegnaRettangoloStato(lavagna, lavagnaModel, strokeColorPicker, fillColorPicker));
-            } else {
-
+                System.out.println("Selezionato rettangolo button\n");
+            }
+            else {
+                System.out.println("Deselezionato rettangolo button\n");
                 statoManager.setStato(new IdleStato());
             }
         });
 
 
         segmentoButton.setOnAction(e -> {
-            if (segmentoButton.isSelected()) {
+            if (segmentoButton.isSelected()){
                 statoManager.setStato(new DisegnaSegmentoStato(lavagna, lavagnaModel, strokeColorPicker, fillColorPicker));
-            } else {
-
+                System.out.println("Selezionato segmento button\n");
+            }
+            else{
+                System.out.println("Deselezionato segmento button\n");
                 statoManager.setStato(new IdleStato());
             }
         });
 
-
         ellisseButton.setOnAction(e -> {
-            if (ellisseButton.isSelected()) {
+            if (ellisseButton.isSelected()){
                 statoManager.setStato(new DisegnaEllisseStato(lavagna, lavagnaModel, strokeColorPicker, fillColorPicker));
-            } else {
-                System.out.println("ho deselezionato ellisse button");
-                statoManager.setStato(new IdleStato());;
+                System.out.println("Selezionato ellisse button\n");
+            }
+            else{
+                System.out.println("Deselezionato ellisse button\n");
+                statoManager.setStato(new IdleStato());
             }
         });
 
-        grigliaButton.setOnAction(e -> {
-            if(grigliaButton.isSelected())
-                Invoker.getInstance().executeCommand(new AggiungiGrigliaCommand(Integer.parseInt(nRighe.getText()), Integer.parseInt(nColonne.getText()), lavagna.getWidth(), lavagna.getHeight(), Color.LIGHTGRAY));
-            else
-                Invoker.getInstance().executeCommand(new RimuoviGrigliaCommand());
+        grigliaButton.setOnAction(event -> {
+            try{
+                if(grigliaButton.isSelected())
+                    Invoker.getInstance().executeCommand(new AggiungiGrigliaCommand(Integer.parseInt(nRighe.getText()), Integer.parseInt(nColonne.getText()), lavagna.getWidth(), lavagna.getHeight(), Color.LIGHTGRAY));
+                else
+                    Invoker.getInstance().executeCommand(new RimuoviGrigliaCommand());
+                }
+                catch(Exception e){
+                    System.out.println("Numero righe (colonne) non valido\n");
+                }
             });
 
 
         lavagna.setOnMousePressed(event ->{
             statoManager.getStato().onMousePressed(event);
+            if (statoManager.getStato() instanceof ZoomInStato) {
+                event.consume();
+            }
         });
 
         lavagna.setOnMouseDragged(event ->{
@@ -189,7 +218,7 @@ public class HelloController{
 
             Invoker.getInstance().executeCommand(cmd);
 
-            System.out.println("FIGURA SALVATA");
+            //System.out.println("FIGURA SALVATA\n");
 
         });
 
@@ -199,7 +228,7 @@ public class HelloController{
             Invoker.getInstance().executeCommand(cmd);
             Invoker.getInstance().svuotaStack();
 
-            System.out.println("FILE CARICATO");
+            //System.out.println("FILE CARICATO\n");
         });
 
         spostaSopraButton.setOnAction(e -> {
@@ -208,7 +237,7 @@ public class HelloController{
 
                 Invoker.getInstance().executeCommand(cmd);
 
-                System.out.println("TO THE TOP");
+                //System.out.println("TO THE TOP\n");
             }
         });
 
@@ -218,7 +247,7 @@ public class HelloController{
 
                 Invoker.getInstance().executeCommand(cmd);
 
-                System.out.println("TO THE BACK");
+                //System.out.println("TO THE BACK\n");
             }
         });
 
@@ -228,7 +257,7 @@ public class HelloController{
 
                 Invoker.getInstance().executeCommand(cmd);
 
-                System.out.println("CAMBIO COLORE INTERNO");
+                //System.out.println("CAMBIO COLORE INTERNO\n");
 
             }
         });
@@ -239,7 +268,7 @@ public class HelloController{
 
                 Invoker.getInstance().executeCommand(cmd);
 
-                System.out.println("CAMBIO COLORE BORDO");
+                //System.out.println("CAMBIO COLORE BORDO\n");
             }
         });
 
@@ -252,20 +281,54 @@ public class HelloController{
             Figura figura = figuraSelezionataManager.get();
             if(figura != null) {
                 Elimina.setDisable(false);
+                cut.setDisable(false);
+                copy.setDisable(false);
             }
         });
 
         menuEdit.setOnHidden(e -> {
             Elimina.setDisable(true);
+            cut.setDisable(true);
+            copy.setDisable(true);
         });
+
 
         Elimina.setOnAction(e->{
             Figura figura = figuraSelezionataManager.get();
             if(figura != null) {
                 Command cmd = new EliminaCommand(lavagnaModel, figura);
                 Invoker.getInstance().executeCommand(cmd);
-                System.out.println("FIGURA ELIMINATA");
-    }
+                //System.out.println("FIGURA ELIMINATA\n");
+             }
+        });
+
+        cut.setOnAction(e->{
+            Figura figura = figuraSelezionataManager.get();
+            if(figura != null) {
+                Command cmd = new CutCommand(lavagnaModel, figura);
+                Invoker.getInstance().executeCommand(cmd);
+                //System.out.println("FIGURA TAGLIATA\n");
+            }
+        });
+
+        copy.setOnAction(event->{
+            Figura figura = figuraSelezionataManager.get();
+            if(figura != null) {
+                Command cmd = new CopyCommand(lavagnaModel, figura);
+                Invoker.getInstance().executeCommand(cmd);
+                //System.out.println("FIGURA COPIATA\n");
+            }
+        });
+
+        paste.setOnAction(event->{
+            try{
+                Command cmd = new PasteCommand(lavagnaModel);
+                Invoker.getInstance().executeCommand(cmd);
+                //System.out.println("FIGURA INCOLLATA\n");
+            }
+            catch(Exception e){
+                System.out.println("Nessuna figura copiata\n");
+            }
         });
 
 }
