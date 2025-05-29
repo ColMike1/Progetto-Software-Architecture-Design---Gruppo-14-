@@ -51,6 +51,7 @@ public class SalvaFiguraCommand implements Command {
                 alert.setHeaderText(null); // Nessun header
                 alert.setContentText("Il file è stato salvato correttamente!");
                 alert.showAndWait();
+                System.out.println("Lavagna Salvata\n");
 
             } catch (IOException e) {
                 e.printStackTrace();
