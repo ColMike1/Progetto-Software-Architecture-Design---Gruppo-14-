@@ -4,7 +4,7 @@ public class StatoManager {
 
     private static StatoManager instance;
 
-    private Stato statoCorrente = new IdleStato();
+    private Stato statoCorrente;
 
     private StatoManager() {}
 

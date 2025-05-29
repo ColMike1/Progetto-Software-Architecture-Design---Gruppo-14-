@@ -18,7 +18,6 @@ public class SpostaSottoCommand implements Command {
     @Override
     public void execute() {
         lavagnaModel.spostaSotto(element);
-        System.out.println(element.toString() + " messa in fondo\n");
     }
 
     @Override

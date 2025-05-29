@@ -18,9 +18,9 @@ public class EliminaCommand implements Command {
 
     @Override
     public void execute() {
+
         FiguraSelezionataManager.getInstance().clear();
         lavagnaModel.rimuoviFigura(figura);
-        System.out.println("Figura " + figura.toString() + " eliminata\n");
     }
 
     @Override

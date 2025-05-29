@@ -18,7 +18,6 @@ public class SpostaSopraCommand implements Command{
     @Override
     public void execute() {
         lavagnaModel.spostaSopra(element);
-        System.out.println(element.toString() + " messa in primo piano\n");
     }
 
     @Override

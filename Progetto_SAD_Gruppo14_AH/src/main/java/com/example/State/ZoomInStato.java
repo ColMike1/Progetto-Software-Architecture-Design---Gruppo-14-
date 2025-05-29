@@ -15,7 +15,6 @@ public class ZoomInStato implements Stato{
     }
 
     public void onMousePressed(MouseEvent event){
-
         double x = event.getX();
         double y = event.getY();
 

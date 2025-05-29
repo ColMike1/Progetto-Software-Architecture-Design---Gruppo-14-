@@ -26,7 +26,6 @@ public class CambiaColoreBordoCommand implements Command {
     public void undo() {
         FiguraSelezionataManager.getInstance().clear();
         lavagnaModel.cambiaColoreBordo(element, vecchioColore);
-        System.out.println("Coloro il bordo di " + element.toString() + " con vecchio colore: " + vecchioColore + "\n");
     }
     @Override
     public boolean isUndoable() {
