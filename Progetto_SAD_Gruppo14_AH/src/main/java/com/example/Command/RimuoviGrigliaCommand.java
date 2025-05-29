@@ -12,7 +12,6 @@ public class RimuoviGrigliaCommand implements Command{
 
     public void execute(){
         LavagnaView.getInstance().rimuoviGriglia();
-        System.out.println("Rimossa griglia\n");
     }
     @Override
     public void undo() {

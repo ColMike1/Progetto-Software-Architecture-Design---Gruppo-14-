@@ -23,7 +23,7 @@ public class Invoker {
         }
     }
 
-    public void executeCommand(Command cmd) {
+    public void executeCommand(Command cmd){
         if(cmd.canExecute()) {
             cmd.execute();
             if(cmd.isUndoable())

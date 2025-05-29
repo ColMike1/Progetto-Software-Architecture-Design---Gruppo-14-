@@ -45,16 +45,4 @@ public class Ellisse extends Figura {
     public FiguraTemporaneaStrategy getTemporaryResizeStrategy() {
         return new EllisseTemporaneoStrategy();
     }
-
-    public Figura getClone() {
-        int dx = 20;
-        return new Ellisse(x1+dx, y1+dx, x2+dx, y2+dx, strokeColor, fillColor);
-    }
-
-    public String toString(){
-        return "Ellisse";
-    }
-
-
-
 }

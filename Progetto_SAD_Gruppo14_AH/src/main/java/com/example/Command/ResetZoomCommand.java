@@ -15,7 +15,6 @@ public class ResetZoomCommand implements Command {
         figureInserite.setScaleY(1.0);
         figureInserite.setTranslateX(0);
         figureInserite.setTranslateY(0);
-        System.out.println("Reset zoom\n");
     }
     @Override
     public void undo() {
