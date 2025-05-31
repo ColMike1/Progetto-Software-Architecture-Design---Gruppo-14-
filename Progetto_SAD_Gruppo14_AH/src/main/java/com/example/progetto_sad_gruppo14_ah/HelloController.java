@@ -7,6 +7,9 @@ import com.example.Model.LavagnaModel;
 import com.example.View.LavagnaView;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import com.example.State.*;
 import javafx.scene.paint.Color;
@@ -80,9 +83,28 @@ public class HelloController{
         lavagnaView = LavagnaView.getInstance(lavagna);
 
         // disabilito menuItems
-        Elimina.setDisable(true);
+        /*Elimina.setDisable(true);
         cut.setDisable(true);
-        copy.setDisable(true);
+        copy.setDisable(true);*/
+
+        copy.setAccelerator(new KeyCodeCombination(
+                KeyCode.C,
+                KeyCombination.CONTROL_DOWN
+        ));
+
+        Elimina.setAccelerator(new KeyCodeCombination(
+                KeyCode.D,
+                KeyCombination.CONTROL_DOWN
+        ));
+
+        cut.setAccelerator(new KeyCodeCombination(
+                KeyCode.X,
+                KeyCombination.CONTROL_DOWN
+        ));
+        paste.setAccelerator(new KeyCodeCombination(
+                KeyCode.V,
+                KeyCombination.CONTROL_DOWN
+        ));
 
 
         lavagna.heightProperty().addListener((observable, oldValue, newValue) -> {
@@ -193,13 +215,11 @@ public class HelloController{
         });
 
         testoButton.setOnAction(e -> {
-
             if (testoButton.isSelected()) {
                 statoManager.setStato(new InserisciTestoStato(lavagna, lavagnaModel, strokeColorPicker, fillColorPicker));
             } else {
                 statoManager.setStato(new IdleStato());;
             }
-
         });
 
 
@@ -279,28 +299,29 @@ public class HelloController{
             figuraSelezionataManager.clear();
         });
 
-        menuEdit.setOnShown(e -> {
+        /*menuEdit.setOnShown(e -> {
             Figura figura = figuraSelezionataManager.get();
             if(figura != null) {
                 Elimina.setDisable(false);
                 cut.setDisable(false);
                 copy.setDisable(false);
             }
-        });
+        });*/
 
-        menuEdit.setOnHidden(e -> {
+       /* menuEdit.setOnHidden(e -> {
             Elimina.setDisable(true);
             cut.setDisable(true);
             copy.setDisable(true);
-        });
+        });*/
 
         Elimina.setOnAction(e->{
             Figura figura = figuraSelezionataManager.get();
             if(figura != null) {
                 Command cmd = new EliminaCommand(lavagnaModel, figura);
                 Invoker.getInstance().executeCommand(cmd);
-                System.out.println("FIGURA ELIMINATA");
             }
+            else
+                System.out.println("Nessuna figura selezionata");
         });
 
         cut.setOnAction(e->{
@@ -308,27 +329,30 @@ public class HelloController{
             if(figura != null) {
                 Command cmd = new CutCommand(lavagnaModel, figura);
                 Invoker.getInstance().executeCommand(cmd);
-
             }
+            else
+                System.out.println("Nessuna figura selezionata");
         });
+
 
         copy.setOnAction(event->{
             Figura figura = figuraSelezionataManager.get();
             if(figura != null) {
                 Command cmd = new CopyCommand(lavagnaModel, figura);
                 Invoker.getInstance().executeCommand(cmd);
-
             }
+            else
+                System.out.println("Nessuna figura selezionata");
+
         });
 
         paste.setOnAction(event->{
             try{
                 Command cmd = new PasteCommand(lavagnaModel);
                 Invoker.getInstance().executeCommand(cmd);
-
             }
             catch(Exception e){
-                System.out.println("Nessuna figura copiata\n");
+                System.out.println("Nessuna figura copiata");
             }
         });
 
