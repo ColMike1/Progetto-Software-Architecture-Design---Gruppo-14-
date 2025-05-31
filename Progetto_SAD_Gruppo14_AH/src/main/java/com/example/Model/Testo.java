@@ -65,21 +65,22 @@ public class Testo extends Figura{
 
 
         return gruppo;
-
-
-
-
-
     }
 
 
+    public String getContenuto(){
+        return this.contenuto;
+    }
     public FiguraTemporaneaStrategy getTemporaryResizeStrategy(){
         return new TextAreaTemporaneoStrategy();
     }
 
     @Override
     public Figura getClone() {
-        return null;
+        int dx = 20;
+        Testo t = new Testo(x1+dx, y1+dx, x2+dx, y2+dx, strokeColor, fillColor);
+        t.textArea.setText(textArea.getText());
+        return t;
     }
 
     public String toString() {
