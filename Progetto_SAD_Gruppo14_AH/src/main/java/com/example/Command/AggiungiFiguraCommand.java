@@ -33,13 +33,17 @@ public class AggiungiFiguraCommand implements Command {
         figuraAggiunta = figuraFactory.creaFigura(x1, y1, x2 , y2, strokeColor, fillColor );
         lavagnaModel.aggiungiFigura(figuraAggiunta);
 
+        // scroll pane
         double MaxX = Math.max(x1, x2);
         double MaxY = Math.max(y1,y2);
-        if(MaxX > lavagna.getPrefWidth())
-            lavagna.setPrefWidth(MaxX + 100);
 
-        if(MaxY > lavagna.getPrefHeight())
+        if(MaxX > lavagna.getPrefWidth()) {
+            lavagna.setPrefWidth(MaxX + 100);
+        }
+        if(MaxY > lavagna.getPrefHeight()) {
             lavagna.setPrefHeight(MaxY + 100);
+        }
+
         System.out.println("Aggiunta: " + figuraAggiunta + "\n");
     }
     @Override

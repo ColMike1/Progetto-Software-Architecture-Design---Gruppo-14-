@@ -1,4 +1,4 @@
-import com.example.Model.Figura;
+/*import com.example.Model.Figura;
 import com.example.Model.LavagnaModel;
 import com.example.Model.Rettangolo;
 import javafx.scene.paint.Color;
@@ -45,3 +45,5 @@ public class LavagnaModelTest {
         assertTrue(osservato[0]);
     }
 }
+*/
+

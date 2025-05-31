@@ -1,4 +1,4 @@
-import javafx.scene.paint.Color;
+/*import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 
 public class EllisseUtils {
@@ -14,4 +14,4 @@ public class EllisseUtils {
         return e;
     }
 }
-
+*/

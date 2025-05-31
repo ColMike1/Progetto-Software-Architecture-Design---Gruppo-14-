@@ -26,13 +26,14 @@ public class SpostamentoFiguraCommand implements Command {
 
     public void execute() {
         LavagnaModel.getInstance().spostaFigura(figura, x1, y1);
-        //System.out.println("Figura " + figura + " spostata\n");
+        System.out.println("Figura " + figura.toString() + " spostata\n");
     }
     @Override
     public void undo() {
+
         FiguraSelezionataManager.getInstance().clear();
         LavagnaModel.getInstance().spostaFigura(figura_selezionata, handle_x, handle_y);
-        System.out.println("Figura " + figura + " spostata\n");
+        System.out.println("Undo: Figura " + figura.toString() + " spostata\n");
     }
     @Override
     public boolean isUndoable() {

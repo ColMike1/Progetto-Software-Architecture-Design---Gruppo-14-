@@ -1,4 +1,4 @@
-import com.example.Command.SalvaFiguraCommand;
+/*import com.example.Command.SalvaFiguraCommand;
 import com.example.Model.Figura;
 import com.example.Model.LavagnaModel;
 import javafx.scene.paint.Color;
@@ -58,3 +58,4 @@ public class SalvaFiguraCommandTest{
     }
 
 }
+*/

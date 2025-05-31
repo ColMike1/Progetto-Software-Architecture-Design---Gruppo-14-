@@ -1,13 +1,15 @@
 package com.example.Model;
 
 import com.example.State.FiguraSelezionataManager;
-import com.example.Strategy.EllisseTemporaneoStrategy;
 import com.example.Strategy.FiguraTemporaneaStrategy;
+import com.example.Strategy.SegmentoTemporaneoStrategy;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
+
 public class Segmento extends Figura {
+
 
     public Segmento(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
         super(x1, y1, x2, y2, strokeColor, fillColor); // salva tutto nella superclasse
@@ -15,6 +17,7 @@ public class Segmento extends Figura {
 
     @Override
     public Line creaNodoJavaFX() {
+
         Line line = new Line(x1, y1, x2, y2);
 
         this.setNodo(line);
@@ -31,14 +34,13 @@ public class Segmento extends Figura {
 
         return line;
 
-
-
     }
 
     public FiguraTemporaneaStrategy getTemporaryResizeStrategy() {
-        return new EllisseTemporaneoStrategy();
+        return new SegmentoTemporaneoStrategy();
     }
 
+    @Override
     public Figura getClone() {
         int dx = 20;
         return new Segmento(x1+dx, y1+dx, x2+dx, y2+dx, strokeColor, fillColor);

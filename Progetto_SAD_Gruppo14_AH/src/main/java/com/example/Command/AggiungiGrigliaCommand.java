@@ -30,7 +30,6 @@ public class AggiungiGrigliaCommand implements Command {
         LavagnaView.getInstance().aggiungiGriglia(griglia);
         System.out.println("Aggiunta griglia\n");
     }
-
     @Override
     public void undo() {
         return;
