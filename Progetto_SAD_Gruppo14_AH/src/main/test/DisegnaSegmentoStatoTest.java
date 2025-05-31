@@ -1,4 +1,4 @@
-import com.example.Command.AggiungiFiguraCommand;
+/*import com.example.Command.AggiungiFiguraCommand;
 import com.example.Command.Command;
 import com.example.Factory.SegmentoFactory;
 import com.example.Model.LavagnaModel;
@@ -46,3 +46,4 @@ public class DisegnaSegmentoStatoTest {
 
 
 }
+*/

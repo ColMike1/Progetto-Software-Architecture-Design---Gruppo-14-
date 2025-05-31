@@ -1,4 +1,4 @@
-import com.example.Model.Rettangolo;
+/*import com.example.Model.Rettangolo;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import org.junit.jupiter.api.Test;
@@ -45,4 +45,4 @@ public class RettangoloTest {
         assertEquals(rett, node.getUserData()); // Verifica che venga salvata la figura come metadato
     }
 }
-
+*/

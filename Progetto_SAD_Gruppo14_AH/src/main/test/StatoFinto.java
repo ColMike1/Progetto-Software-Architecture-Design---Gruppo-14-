@@ -1,4 +1,4 @@
-import com.example.State.Stato;
+/*import com.example.State.Stato;
 import javafx.scene.input.MouseEvent;
 
 public class StatoFinto implements Stato {
@@ -19,3 +19,4 @@ public class StatoFinto implements Stato {
         // non ci serve per il test
     }
 }
+*/

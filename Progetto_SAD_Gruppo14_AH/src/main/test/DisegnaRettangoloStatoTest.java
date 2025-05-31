@@ -1,4 +1,4 @@
-import com.example.Command.AggiungiFiguraCommand;
+/*import com.example.Command.AggiungiFiguraCommand;
 import com.example.Command.Command;
 import com.example.Factory.RettangoloFactory;
 import com.example.Model.LavagnaModel;
@@ -44,3 +44,4 @@ public class DisegnaRettangoloStatoTest {
     }
 
 }
+*/

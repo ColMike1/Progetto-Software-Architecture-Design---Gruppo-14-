@@ -13,8 +13,8 @@ public class ZoomOutStato implements Stato{
         this.lavagnaView = lavagnaView;
     }
 
+    @Override
     public void onMousePressed(MouseEvent event){
-        event.consume();
         double x = event.getX();
         double y = event.getY();
 
@@ -22,6 +22,9 @@ public class ZoomOutStato implements Stato{
         Invoker.getInstance().executeCommand(cmd);
     }
 
+    @Override
     public void onMouseDragged(MouseEvent event){}
+
+    @Override
     public void onMouseReleased(MouseEvent event){}
 }

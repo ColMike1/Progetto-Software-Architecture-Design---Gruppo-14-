@@ -3,29 +3,32 @@ package com.example.State;
 import com.example.Command.AggiungiFiguraCommand;
 import com.example.Command.Command;
 import com.example.Command.Invoker;
+import com.example.Factory.FiguraFactory;
 import com.example.Factory.RettangoloFactory;
-import com.example.Factory.SegmentoFactory;
 import com.example.Model.LavagnaModel;
+import com.example.Strategy.FiguraTemporaneaStrategy;
 import com.example.View.LavagnaView;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 
-public class DisegnaSegmentoStato implements Stato {
-
+public class DisegnaFiguraStato implements Stato{
     private double x1, y1;
-    private Line figuraTemporanea;
+    private Node figuraTemporanea;
     private AnchorPane lavagna;
     private LavagnaModel model;
     private ColorPicker strokeColor, fillColor;
     private Group figureInserite;
+    private FiguraFactory figuraFactory;
+    private FiguraTemporaneaStrategy figuraTemporaneaStrategy;
 
 
-    public DisegnaSegmentoStato(AnchorPane lavagna, LavagnaModel model, ColorPicker strokeColor, ColorPicker fillColor) {
+    public DisegnaFiguraStato(FiguraFactory figuraFactory, AnchorPane lavagna, LavagnaModel model, ColorPicker strokeColor, ColorPicker fillColor) {
+        this.figuraFactory = figuraFactory;
         this.lavagna = lavagna;
         this.model = model;
         this.strokeColor = strokeColor;
@@ -35,26 +38,24 @@ public class DisegnaSegmentoStato implements Stato {
 
     @Override
     public void onMousePressed(MouseEvent event) {
+
         Point2D punto = figureInserite.sceneToLocal(event.getSceneX(), event.getSceneY());
         x1 = punto.getX();
         y1 = punto.getY();
-        figuraTemporanea = new Line(x1, y1, x1, y1);
-        figuraTemporanea.setStroke(strokeColor.getValue());
+
+        figuraTemporaneaStrategy = figuraFactory.creaFigura(0,0,0,0,null, null).getTemporaryResizeStrategy();
+        figuraTemporanea = figuraTemporaneaStrategy.crea(x1,y1);
         figureInserite.getChildren().add((figuraTemporanea));
-
-
     }
 
     @Override
     public void onMouseDragged(MouseEvent e) {
+
         Point2D punto = figureInserite.sceneToLocal(e.getSceneX(), e.getSceneY());
         double x2 = punto.getX();
         double y2 = punto.getY();
 
-
-        figuraTemporanea.setEndX(x2);
-        figuraTemporanea.setEndY(y2);
-
+        figuraTemporaneaStrategy.aggiorna(figuraTemporanea,x1,y1,x2,y2);
     }
 
 
@@ -64,16 +65,33 @@ public class DisegnaSegmentoStato implements Stato {
         double x2 = punto.getX();
         double y2 = punto.getY();
 
+        double x1_temp = x1;
+        double y1_temp = y1;
+        double x2_temp = x2;
+        double y2_temp = y2;
+
         figureInserite.getChildren().remove((figuraTemporanea));
-        if(x1<0 || y1<0 || x2<0 || y2<0) {
+
+       if(x1<0 || y1<0 || x2<0 || y2<0) {
             figuraTemporanea = null;
             return;
         }
+
+       if(x2<x1_temp){
+           x1 = x2_temp;
+           x2 = x1_temp;
+       }
+
+        if(y2<y1_temp){
+            y1 = y2_temp;
+            y2 = y1_temp;
+        }
+
+
         // Usa Command se vuoi supportare Undo
-        Command cmd = new AggiungiFiguraCommand(model, new SegmentoFactory(), lavagna, x1, y1, x2, y2, strokeColor.getValue(), fillColor.getValue());
+        Command cmd = new AggiungiFiguraCommand(model, figuraFactory, lavagna, x1, y1, x2, y2, strokeColor.getValue(), fillColor.getValue());
         Invoker.getInstance().executeCommand(cmd);
 
         figuraTemporanea = null;
-
     }
 }

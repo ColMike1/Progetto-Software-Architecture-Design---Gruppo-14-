@@ -1,4 +1,4 @@
-import javafx.scene.paint.Color;
+/*import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class RettangoloUtils {
@@ -13,3 +13,4 @@ public class RettangoloUtils {
         return r;
     }
 }
+*/

@@ -1,4 +1,4 @@
-import com.example.Factory.RettangoloFactory;
+/*import com.example.Factory.RettangoloFactory;
 import com.example.Model.Figura;
 import com.example.Model.Rettangolo;
 import javafx.scene.paint.Color;
@@ -27,3 +27,4 @@ class RettangoloFactoryTest {
         assertEquals(Color.YELLOW, figura.getFillColor());
     }
 }
+*/

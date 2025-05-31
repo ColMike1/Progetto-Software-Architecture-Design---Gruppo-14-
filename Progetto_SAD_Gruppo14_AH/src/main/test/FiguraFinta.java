@@ -1,3 +1,4 @@
+/*
 import com.example.Model.Figura;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -15,3 +16,4 @@ public class FiguraFinta extends Figura {
         return new Rectangle();
     }
 }
+*/

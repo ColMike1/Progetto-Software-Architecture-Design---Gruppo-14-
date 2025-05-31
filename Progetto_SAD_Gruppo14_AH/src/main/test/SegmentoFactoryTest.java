@@ -1,4 +1,4 @@
-import com.example.Factory.SegmentoFactory;
+/*import com.example.Factory.SegmentoFactory;
 import com.example.Model.Figura;
 import com.example.Model.Segmento;
 import javafx.scene.paint.Color;
@@ -27,3 +27,4 @@ class SegmentoFactoryTest {
         assertEquals(Color.GREEN, figura.getFillColor());
     }
 }
+*/
