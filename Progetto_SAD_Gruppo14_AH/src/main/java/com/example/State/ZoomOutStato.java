@@ -27,4 +27,9 @@ public class ZoomOutStato implements Stato{
 
     @Override
     public void onMouseReleased(MouseEvent event){}
+
+    @Override
+    public void onSliderChanged(double sliderValue) {return;}
+    @Override
+    public void onSliderReleased(double sliderValue){return;}
 }

@@ -38,6 +38,7 @@ public class Rettangolo extends Figura {
 
         this.setNodo(r);
 
+        r.setRotate(rotazione);
         r.setStrokeWidth(1);
         r.setStroke(strokeColor);
         r.setFill(fillColor);
@@ -54,6 +55,13 @@ public class Rettangolo extends Figura {
 
     public FiguraTemporaneaStrategy getTemporaryResizeStrategy() {
         return new RettangoloTemporaneoStrategy();
+    }
+
+    public double getLarghezza() {
+        return larghezza;
+    }
+    public double getAltezza() {
+        return altezza;
     }
 
     @Override

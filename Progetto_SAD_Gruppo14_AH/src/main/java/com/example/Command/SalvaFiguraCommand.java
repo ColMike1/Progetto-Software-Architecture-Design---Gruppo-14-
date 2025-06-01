@@ -35,14 +35,15 @@ public class SalvaFiguraCommand implements Command {
                 List<Figura> figure = lavagnaModel.getFigure(); // Recupera le figure
 
                 for (Figura f : figure) {
-                    String tipo = f.getClass().getSimpleName().toLowerCase(); // esempio: "rettangolo"
+                    String tipo = f.getClass().getSimpleName().toLowerCase();
                     String line = tipo + ";" +
                             "x1=" + f.getX1() + ";" +
                             "y1=" + f.getY1() + ";" +
                             "x2=" + f.getX2() + ";" +
                             "y2=" + f.getY2() + ";" +
                             "stroke=" + f.getStrokeColor() + ";" +
-                            "fill=" + f.getFillColor() + "\n";
+                            "fill=" + f.getFillColor() + ";" +
+                            "rotation="+ f.getRotazione() + "\n";
                     writer.write(line);
                 }
 

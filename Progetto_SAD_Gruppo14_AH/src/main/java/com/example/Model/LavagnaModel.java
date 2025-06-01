@@ -120,5 +120,10 @@ public class LavagnaModel {
         figure.add(0, figura);
         notificaOsservatori();
     }
+    public void cambiaRotazione(Figura figura, double rotazione){
+        int index = figure.indexOf(figura);
+        figure.get(index).setRotazione(rotazione);
+        notificaOsservatori();
+    }
 
 }

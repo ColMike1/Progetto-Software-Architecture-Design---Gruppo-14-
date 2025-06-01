@@ -28,6 +28,7 @@ public class Ellisse extends Figura {
 
         this.setNodo(e);
 
+        e.setRotate(rotazione);
         e.setStrokeWidth(1);
         e.setStroke(strokeColor);
         e.setFill(fillColor);

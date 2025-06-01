@@ -11,6 +11,7 @@ public abstract class Figura {
     protected Color strokeColor;
     protected Color fillColor;
     protected Node nodo;
+    protected double rotazione;
 
     public Figura(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
         this.x1 = x1;
@@ -19,9 +20,9 @@ public abstract class Figura {
         this.y2 = y2;
         this.fillColor = fillColor;
         this.strokeColor = strokeColor;
+        this.rotazione = 0;
 
     }
-
 
     public void setNodo(Node nodo) {
         this.nodo = nodo;
@@ -46,6 +47,11 @@ public abstract class Figura {
     public Color getStrokeColor() {
         return strokeColor;
     }
+
+    public void setRotazione(double rotazione) {this.rotazione = rotazione;}
+
+    public double getRotazione() { return rotazione; }
+
 
     public double getX1() {
         return x1;

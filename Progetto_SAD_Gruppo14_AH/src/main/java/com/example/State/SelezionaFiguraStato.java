@@ -59,5 +59,10 @@ public class SelezionaFiguraStato implements Stato {
         return;
     }
 
+    @Override
+    public void onSliderChanged(double sliderValue) {return;}
+    @Override
+    public void onSliderReleased(double sliderValue){return;}
+
 
 }

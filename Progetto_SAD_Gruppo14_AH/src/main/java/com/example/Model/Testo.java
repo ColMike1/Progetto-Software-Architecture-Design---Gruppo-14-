@@ -39,6 +39,7 @@ public class Testo extends Figura{
 
         textArea.textProperty().addListener((obs, oldVal, newVal) -> setContenuto(newVal));
 
+        textArea.setRotate(rotazione);
         textArea.setLayoutX(x1+padding);
         textArea.setLayoutY(y1+padding);
         textArea.setPrefWidth(Math.abs(x2 - x1)-2*padding);

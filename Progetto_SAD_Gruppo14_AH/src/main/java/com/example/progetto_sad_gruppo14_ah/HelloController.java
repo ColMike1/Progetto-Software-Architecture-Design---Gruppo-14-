@@ -59,6 +59,8 @@ public class HelloController{
     private MenuItem paste;
     @FXML
     private Menu menuEdit;
+    @FXML
+    private Slider sliderRotazione;
 
 
     @FXML
@@ -81,6 +83,8 @@ public class HelloController{
 
         lavagnaModel = LavagnaModel.getInstance();
         lavagnaView = LavagnaView.getInstance(lavagna);
+        sliderRotazione.setMin(0);
+        sliderRotazione.setMax(360);
 
         // disabilito menuItems
         /*Elimina.setDisable(true);
@@ -235,6 +239,18 @@ public class HelloController{
 
         lavagna.setOnMouseReleased(event ->{
             statoManager.getStato().onMouseReleased(event);
+        });
+
+        sliderRotazione.setOnMousePressed(event ->{
+            statoManager.setStato(new RuotaFiguraStato());
+        });
+
+        sliderRotazione.valueProperty().addListener((obs, oldVal, newVal) -> {
+            statoManager.getStato().onSliderChanged(newVal.doubleValue());
+        });
+
+        sliderRotazione.setOnMouseReleased(e -> {
+            statoManager.getStato().onSliderReleased(sliderRotazione.getValue());
         });
 
         salvaConNome.setOnAction(e ->{

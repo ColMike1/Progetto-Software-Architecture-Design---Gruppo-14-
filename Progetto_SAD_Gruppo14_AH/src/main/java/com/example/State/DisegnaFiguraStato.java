@@ -78,4 +78,8 @@ public class DisegnaFiguraStato implements Stato{
 
         figuraTemporanea = null;
     }
+    @Override
+    public void onSliderChanged(double sliderValue) {return;}
+    @Override
+    public void onSliderReleased(double sliderValue){return;}
 }

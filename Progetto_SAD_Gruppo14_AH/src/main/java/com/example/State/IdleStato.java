@@ -18,5 +18,9 @@ public class IdleStato implements Stato {
     public void onMouseReleased(MouseEvent event){
 
     }
+    @Override
+    public void onSliderChanged(double sliderValue) {return;}
+    @Override
+    public void onSliderReleased(double sliderValue){return;}
 
 }

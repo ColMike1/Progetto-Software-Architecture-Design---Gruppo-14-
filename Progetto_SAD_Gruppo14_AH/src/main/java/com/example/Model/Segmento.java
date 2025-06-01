@@ -22,6 +22,7 @@ public class Segmento extends Figura {
 
         this.setNodo(line);
 
+        line.setRotate(rotazione);
         line.setStrokeWidth(2);
         line.setStroke(strokeColor);
         line.setUserData(this);

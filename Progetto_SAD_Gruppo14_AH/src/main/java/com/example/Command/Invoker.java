@@ -1,7 +1,4 @@
 package com.example.Command;
-
-import javafx.fxml.FXML;
-
 import java.util.Stack;
 
 public class Invoker {

@@ -21,4 +21,15 @@ public class SegmentoTemporaneoStrategy implements FiguraTemporaneaStrategy {
         l.setEndX(x2);
         l.setEndY(y2);
     }
+    @Override
+    public void aggiornaRotazione(Node node, double rotazione) {
+        Line e = (Line) node;
+        e.setRotate(rotazione);
+    }
+    @Override
+    public Node creaRotazione(double x1, double y1, double x2, double y2) {
+        Line line = new Line(x1, y1, x2, y2);
+        line.setStroke(Color.BLACK);
+        return line;
+    }
 }

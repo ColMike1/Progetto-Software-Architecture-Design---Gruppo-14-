@@ -7,7 +7,6 @@ import com.example.State.*;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -104,6 +103,7 @@ public class LavagnaView implements Runnable{
 
                 handle = new Circle(hx, hy, 5, Color.BROWN);
                 handle.setCursor(Cursor.SE_RESIZE);
+                //handle.toFront();
 
                 aggiungiFiguraZoomabile(handle);
 
@@ -138,7 +138,7 @@ public class LavagnaView implements Runnable{
                 });
         }
     }
-    
+
     @Override
     public void run() {
         aggiornaLavagna();

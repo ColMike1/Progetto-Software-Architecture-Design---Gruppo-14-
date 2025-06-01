@@ -73,4 +73,8 @@ public class InserisciTestoStato implements Stato {
 
         Invoker.getInstance().executeCommand(cmd);
     }
+    @Override
+    public void onSliderChanged(double sliderValue) {return;}
+    @Override
+    public void onSliderReleased(double sliderValue){return;}
 }
