@@ -34,7 +34,7 @@ public class Rettangolo extends Figura {
         larghezza = Math.abs(x2 - x1);
         altezza = Math.abs(y2 - y1);
 
-        Rectangle r = new Rectangle(x1, y1, larghezza, altezza);
+        Rectangle r = new Rectangle(Math.min(x1, x2), Math.min(y1, y2), larghezza, altezza);
 
         this.setNodo(r);
 
