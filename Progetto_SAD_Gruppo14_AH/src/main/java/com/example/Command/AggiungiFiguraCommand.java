@@ -14,7 +14,7 @@ public class AggiungiFiguraCommand implements Command {
     private double x1, y1, x2, y2;
     Color strokeColor;
     Color fillColor;
-    double rotazione;
+    private double rotazione;
     private Figura figuraAggiunta;
 
     public AggiungiFiguraCommand(LavagnaModel lavagnaModel, FiguraFactory factory, AnchorPane lavagna, double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {

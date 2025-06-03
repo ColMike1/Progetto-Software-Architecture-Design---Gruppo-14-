@@ -1,6 +1,15 @@
+/*
+* Factory concreta per la creazione di oggetti 'Segmento'.
+*
+* Implementa l'interfaccia 'FiguraFactory' e fornisce un'istanza di 'Segmento'
+* basata sulle coordinate e sui colori specificati.
+*
+* Autori:
+*  - Michele
+*
+*/
 package com.example.Factory;
 
-import com.example.Model.Ellisse;
 import com.example.Model.Figura;
 import com.example.Model.Segmento;
 import javafx.scene.paint.Color;

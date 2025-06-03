@@ -21,15 +21,21 @@ public class SegmentoTemporaneoStrategy implements FiguraTemporaneaStrategy {
         l.setEndX(x2);
         l.setEndY(y2);
     }
+
+    //Aggiunto da Kevin
+    // Applica una rotazione al nodo (l'intera linea) attorno al suo punto di rotazione predefinito
     @Override
     public void aggiornaRotazione(Node node, double rotazione) {
         Line e = (Line) node;
+
         e.setRotate(rotazione);
     }
+
+    // Crea una nuova linea tra due punti, da usare per visualizzare l'effetto della rotazione
     @Override
     public Node creaRotazione(double x1, double y1, double x2, double y2) {
         Line line = new Line(x1, y1, x2, y2);
-        line.setStroke(Color.BLACK);
+        line.setStroke(Color.BLACK); // Colore del tratto nero per la visibilità
         return line;
     }
 }

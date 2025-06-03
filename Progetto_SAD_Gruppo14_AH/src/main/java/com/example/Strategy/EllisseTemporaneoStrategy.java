@@ -27,11 +27,16 @@ public class EllisseTemporaneoStrategy implements FiguraTemporaneaStrategy {
         e.setRadiusX(radiusX);
         e.setRadiusY(radiusY);
     }
+
+    //Aggiunto da Kevin
+    // Applica una rotazione al nodo attorno al suo punto di rotazione predefinito
     @Override
     public void aggiornaRotazione(Node node, double rotazione){
         Ellipse e = (Ellipse) node;
         e.setRotate(rotazione);
     }
+
+    // Crea un'ellisse utile per visualizzare l'effetto della rotazione
     @Override
     public Node creaRotazione(double x1, double y1, double x2, double y2) {
         double centerX = (x1 + x2) / 2;
@@ -44,6 +49,5 @@ public class EllisseTemporaneoStrategy implements FiguraTemporaneaStrategy {
         e.setFill(Color.LIGHTGRAY.deriveColor(1, 1, 1, 0.4));
 
         return e;
-
     }
 }

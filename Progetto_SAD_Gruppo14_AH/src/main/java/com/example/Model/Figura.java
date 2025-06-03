@@ -53,6 +53,8 @@ public abstract class Figura {
     public double getRotazione() { return rotazione; }
 
 
+
+
     public double getX1() {
         return x1;
     }
@@ -85,9 +87,6 @@ public abstract class Figura {
 
     public abstract FiguraTemporaneaStrategy getTemporaryResizeStrategy();
 
-    /*
-       getCLone() è utilizzata da PasteCommand.
-     */
     public abstract Figura getClone();
 
 }

@@ -2,8 +2,6 @@ package com.example.State;
 
 import com.example.Model.Figura;
 import com.example.Model.LavagnaModel;
-import com.example.progetto_sad_gruppo14_ah.HelloController;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
@@ -11,15 +9,9 @@ import javafx.scene.shape.Circle;
 
 public class SelezionaFiguraStato implements Stato {
 
-
     FiguraSelezionataManager figuraSelezionataManager = FiguraSelezionataManager.getInstance();
-
-
-
     public SelezionaFiguraStato() {
-
         LavagnaModel.getInstance().notificaOsservatori();
-
     }
 
     @Override

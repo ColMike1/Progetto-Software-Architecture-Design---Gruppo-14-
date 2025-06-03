@@ -1,3 +1,14 @@
+/**
+ * Stato dell'applicazione che gestisce la rotazione di una figura selezionata tramite uno slider.
+ *
+ * Quando l'utente interagisce con lo slider:
+ *
+ * Viene creata una rappresentazione temporanea della figura da ruotare.
+ * La rotazione visiva viene aggiornata in tempo reale.
+ * Alla conferma (rilascio dello slider), la rotazione viene applicata definitivamente tramite comando.
+ * Autori: Kevin
+ */
+
 package com.example.State;
 
 import com.example.Command.Command;
@@ -22,9 +33,6 @@ public class RuotaFiguraStato implements Stato {
             // Crea la figura temporanea ruotabile
             figuraTemporaneaFX = strategy.creaRotazione(figura.getX1(), figura.getY1(), figura.getX2(), figura.getY2());
             LavagnaView.getInstance().getFigureZoomabili().getChildren().add(figuraTemporaneaFX);
-            figuraTemporaneaFX.setVisible(true);
-            figuraTemporaneaFX.setOpacity(1.0);
-            figuraTemporaneaFX.setRotate(nuovoAngolo);
         }
 
         // Applica la rotazione temporanea visiva
@@ -47,16 +55,19 @@ public class RuotaFiguraStato implements Stato {
 
     @Override
     public void onMousePressed(MouseEvent event) {
+        // Nessuna azione richiesta in questo stato
         return;
     }
 
     @Override
     public void onMouseDragged(MouseEvent event) {
+        // Nessuna azione richiesta in questo stato
         return;
     }
 
     @Override
     public void onMouseReleased(MouseEvent event) {
-       return;
+        // Nessuna azione richiesta in questo stato
+        return;
     }
 }
