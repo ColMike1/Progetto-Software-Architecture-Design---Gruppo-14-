@@ -30,9 +30,6 @@ public class RidimensionaFiguraStato implements Stato {
     Node figuraTemporaneaFX = null;
     FiguraTemporaneaStrategy strategy = figura.getTemporaryResizeStrategy();
 
-    private AnchorPane lavagna;
-
-
 
     @Override
     public void onMousePressed(MouseEvent event) {
@@ -51,11 +48,7 @@ public class RidimensionaFiguraStato implements Stato {
         double x2 = punto.getX();
         double y2 = punto.getY();
 
-
-        if(x2 > FiguraSelezionataManager.getInstance().get().getX1() && y2 > FiguraSelezionataManager.getInstance().get().getY1()) {
-            strategy.aggiorna(figuraTemporaneaFX, x1_init, y1_init, x2, y2);
-        }
-
+        strategy.aggiorna(figuraTemporaneaFX, x1_init, y1_init, x2, y2);
     }
 
 

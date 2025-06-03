@@ -65,28 +65,12 @@ public class DisegnaFiguraStato implements Stato{
         double x2 = punto.getX();
         double y2 = punto.getY();
 
-        double x1_temp = x1;
-        double y1_temp = y1;
-        double x2_temp = x2;
-        double y2_temp = y2;
-
         figureInserite.getChildren().remove((figuraTemporanea));
 
        if(x1<0 || y1<0 || x2<0 || y2<0) {
             figuraTemporanea = null;
             return;
         }
-
-       if(x2<x1_temp){
-           x1 = x2_temp;
-           x2 = x1_temp;
-       }
-
-        if(y2<y1_temp){
-            y1 = y2_temp;
-            y2 = y1_temp;
-        }
-
 
         // Usa Command se vuoi supportare Undo
         Command cmd = new AggiungiFiguraCommand(model, figuraFactory, lavagna, x1, y1, x2, y2, strokeColor.getValue(), fillColor.getValue());

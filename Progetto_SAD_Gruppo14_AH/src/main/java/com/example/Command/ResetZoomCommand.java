@@ -1,3 +1,12 @@
+/*
+* Comando che gestisce il reset dello zoom sulla lavagna.
+*
+* Reimposta scala e traslazioni del gruppo contenente le figure zoomabili.
+* Non supporta l'operazione di annullamento ('undo').
+*
+* Autori:
+*  - Michele
+*/
 package com.example.Command;
 import com.example.View.LavagnaView;
 import javafx.scene.Group;

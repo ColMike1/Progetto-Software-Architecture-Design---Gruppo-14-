@@ -1,3 +1,12 @@
+/*
+* Classe che rappresenta lo stato di selezione del tasto di zoom '+'.
+*
+* Al momento del click sulla lavagna, onMousePressed chiama il comando ZoomOutCommand.
+* Implementa l'interfaccia Stato.
+*
+* Autori:
+*  - Michele
+*/
 package com.example.State;
 
 import com.example.Command.Command;
@@ -7,17 +16,14 @@ import com.example.View.LavagnaView;
 import javafx.scene.input.MouseEvent;
 
 public class ZoomOutStato implements Stato{
-    private LavagnaView lavagnaView;
 
-    public ZoomOutStato(LavagnaView lavagnaView){
-        this.lavagnaView = lavagnaView;
-    }
 
     @Override
     public void onMousePressed(MouseEvent event){
         double x = event.getX();
         double y = event.getY();
 
+        LavagnaView lavagnaView = LavagnaView.getInstance();
         Command cmd = new ZoomOutCommand(lavagnaView, x, y);
         Invoker.getInstance().executeCommand(cmd);
     }

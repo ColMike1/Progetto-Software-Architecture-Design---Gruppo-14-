@@ -1,3 +1,13 @@
+/*
+* Factory concreta per la creazione di oggetti 'Rettangolo'.
+*
+* Implementa l'interfaccia 'FiguraFactory' e fornisce un'istanza di 'Rettangolo'
+* basata sulle coordinate e sui colori specificati.
+*
+* Autori:
+*  - Michele
+*
+*/
 package com.example.Factory;
 
 import com.example.Model.Figura;
