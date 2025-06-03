@@ -62,7 +62,7 @@ public class PoligonoArbitrario extends Figura{
         return poligono;
     }
     @Override
-    public FiguraTemporaneaStrategy getTemporaryResizeStrategy() {return new PoligonoArbitrarioStrategy();}
+    public FiguraTemporaneaStrategy getTemporaryRenderStrategy() {return new PoligonoArbitrarioStrategy();}
     @Override
     public Figura getClone() {
         int dx = 20;
@@ -115,4 +115,10 @@ public class PoligonoArbitrario extends Figura{
         }
         punti.set(punti.size() / 2 + 1, y2);
     }
+
+    @Override
+    public String toString(){
+        return "Poligono";
+    }
+
 }

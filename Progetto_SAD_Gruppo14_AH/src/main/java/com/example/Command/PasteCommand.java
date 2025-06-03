@@ -24,7 +24,7 @@ public class PasteCommand implements Command {
 
     public void execute(){
         Figura figuraCopiata = lavagnaModel.getFiguraCopiata();
-        Figura figuraClonata = figuraCopiata.getClone();
+        Figura figuraClonata = figuraCopiata.getClone(); // per offset
         lavagnaModel.aggiungiFigura(figuraClonata);
         lavagnaModel.setFiguraCopiata(figuraClonata);
         figuraIncollata = figuraClonata;

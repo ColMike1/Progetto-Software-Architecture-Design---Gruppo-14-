@@ -25,6 +25,7 @@ public class RotazioneFiguraCommand implements Command{
 
     // Costruttore che inizializza la figura e gli angoli
     public RotazioneFiguraCommand(Figura element, double rotazione) {
+
         this.element = element;
         this.rotazione = rotazione;
         vecchiaRotazione = element.getRotazione();

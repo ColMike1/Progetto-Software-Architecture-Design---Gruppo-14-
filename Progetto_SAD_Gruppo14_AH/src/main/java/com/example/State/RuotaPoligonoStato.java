@@ -13,9 +13,6 @@
  * - onSliderReleased: rimuove la figura temporanea e applica la rotazione reale alla figura
  *   originale, utilizzando un RotazioneFiguraCommand per supportare undo.
  *
- * Questo stato incapsula la logica necessaria per trattare correttamente
- * la trasformazione di oggetti con geometria libera, distinguendosi così
- * dalla rotazione di figure standard, dove il centro e la forma sono più facilmente determinabili.
  */
 
 package com.example.State;
@@ -33,9 +30,9 @@ import javafx.scene.input.MouseEvent;
 
 public class RuotaPoligonoStato implements Stato {
 
-    Figura figura = FiguraSelezionataManager.getInstance().get();
+    PoligonoArbitrario figura = (PoligonoArbitrario) FiguraSelezionataManager.getInstance().get();
     Node figuraTemporaneaFX = null;
-    FiguraTemporaneaStrategy strategy = figura.getTemporaryResizeStrategy();
+    FiguraTemporaneaStrategy strategy = figura.getTemporaryRenderStrategy();
 
 
     @Override
@@ -43,8 +40,7 @@ public class RuotaPoligonoStato implements Stato {
         if (figuraTemporaneaFX == null) {
             // Crea la figura temporanea ruotabile
 
-            PoligonoArbitrario p = (PoligonoArbitrario) figura;
-            figuraTemporaneaFX = ((PoligonoArbitrarioStrategy) strategy).creaRotazionePoligono(p.getPunti(), nuovoAngolo);
+            figuraTemporaneaFX = ((PoligonoArbitrarioStrategy) strategy).creaPoligono(figura.getPunti(), nuovoAngolo);
 
             LavagnaView.getInstance().getFigureZoomabili().getChildren().add(figuraTemporaneaFX);
             figuraTemporaneaFX.setVisible(true);
@@ -53,7 +49,7 @@ public class RuotaPoligonoStato implements Stato {
         }
 
         // Applica la rotazione temporanea visiva
-        strategy.aggiornaRotazione(figuraTemporaneaFX, nuovoAngolo);
+        ((PoligonoArbitrarioStrategy) strategy).aggiornaPoligono(figuraTemporaneaFX, figura.getPunti(), nuovoAngolo);
     }
     @Override
     public void onSliderReleased(double angoloFinale) {
@@ -87,6 +83,5 @@ public class RuotaPoligonoStato implements Stato {
 
     @Override
     public void onMouseClicked(MouseEvent event) {
-        // Non gestiamo il click in questo stato
     }
 }

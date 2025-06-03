@@ -1,3 +1,17 @@
+/**
+* Classe che implementa il comando per l'aggiunta di una nuova figura alla lavagna,
+* secondo il pattern Command, consentendo l'annullamento (undo) dell'operazione.
+* La creazione della figura avviene tramite il pattern Factory, che astrae la logica
+* di istanziazione e consente di generare dinamicamente diverse tipologie di figure
+* (rettangolo, ellisse, segmento, testo) senza che il comando debba conoscere il tipo specifico di figura da creare.
+* In questo modo il Command rimane indipendente dalle classi concrete delle figure.
+*
+* Questa classe viene istanziata nella classe DisegnaFiguraStato.
+*
+* Autori:
+* - Maria Silvana: Costruttore, execute()
+* - Mirko: gestione undo(), controlli ScrollPane
+*/
 package com.example.Command;
 
 import com.example.Factory.FiguraFactory;
@@ -18,6 +32,7 @@ public class AggiungiFiguraCommand implements Command {
     private Figura figuraAggiunta;
     private int fontSize;
 
+
     public AggiungiFiguraCommand(LavagnaModel lavagnaModel, FiguraFactory factory, AnchorPane lavagna, double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor, int fontSize) {
         this.lavagnaModel = lavagnaModel;
         this.figuraFactory = factory;
@@ -34,6 +49,7 @@ public class AggiungiFiguraCommand implements Command {
     }
     @Override
     public void execute() {
+        // creaFigura rappresenta il Factory Method
         figuraAggiunta = figuraFactory.creaFigura(x1, y1, x2 , y2, strokeColor, fillColor, fontSize);
         lavagnaModel.aggiungiFigura(figuraAggiunta);
 
@@ -62,5 +78,7 @@ public class AggiungiFiguraCommand implements Command {
     public boolean isUndoable() {
         return true;
     }
+
+
 }
 

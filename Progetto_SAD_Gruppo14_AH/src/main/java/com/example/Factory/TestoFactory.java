@@ -5,7 +5,7 @@
 * basata sulle coordinate e sui colori specificati.
 *
 * Autori:
-*  - Mariasilvana
+*  - Maria Silvana
 *
 */
 package com.example.Factory;

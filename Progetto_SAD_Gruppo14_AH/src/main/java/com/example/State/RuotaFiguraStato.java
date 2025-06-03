@@ -24,19 +24,23 @@ public class RuotaFiguraStato implements Stato {
 
     Figura figura = FiguraSelezionataManager.getInstance().get();
     Node figuraTemporaneaFX = null;
-    FiguraTemporaneaStrategy strategy = figura.getTemporaryResizeStrategy();
+    FiguraTemporaneaStrategy strategy = figura.getTemporaryRenderStrategy();
 
 
     @Override
     public void onSliderChanged(double nuovoAngolo) {
         if (figuraTemporaneaFX == null) {
             // Crea la figura temporanea ruotabile
-            figuraTemporaneaFX = strategy.creaRotazione(figura.getX1(), figura.getY1(), figura.getX2(), figura.getY2());
+            figuraTemporaneaFX = strategy.crea(figura.getX1(), figura.getY1(), figura.getRotazione());
             LavagnaView.getInstance().getFigureZoomabili().getChildren().add(figuraTemporaneaFX);
+            figuraTemporaneaFX.setVisible(true);
+            figuraTemporaneaFX.setOpacity(1.0);
+            figuraTemporaneaFX.setRotate(nuovoAngolo);
+
         }
 
         // Applica la rotazione temporanea visiva
-        strategy.aggiornaRotazione(figuraTemporaneaFX, nuovoAngolo);
+        strategy.aggiorna(figuraTemporaneaFX, figura.getX1(), figura.getY1(), figura.getX2(), figura.getY2(), nuovoAngolo);
     }
     @Override
     public void onSliderReleased(double angoloFinale) {
@@ -55,22 +59,21 @@ public class RuotaFiguraStato implements Stato {
 
     @Override
     public void onMousePressed(MouseEvent event) {
-        // Nessuna azione richiesta in questo stato
         return;
     }
 
     @Override
     public void onMouseDragged(MouseEvent event) {
-        // Nessuna azione richiesta in questo stato
         return;
     }
 
     @Override
     public void onMouseReleased(MouseEvent event) {
-        // Nessuna azione richiesta in questo stato
-        return;
+       return;
     }
 
     @Override
-    public void onMouseClicked(MouseEvent event){}
+    public void onMouseClicked(MouseEvent event) {
+        return;
+    }
 }

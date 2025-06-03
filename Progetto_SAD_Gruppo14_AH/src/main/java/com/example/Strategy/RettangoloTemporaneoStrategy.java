@@ -1,3 +1,17 @@
+/**
+ * Strategia concreta per la gestione della rappresentazione temporanea di un rettangolo durante
+ * le operazioni interattive, secondo il pattern Strategy.
+ *
+ * Questa classe definisce come viene generata e aggiornata graficamente l'anteprima temporanea
+ * dell'ellisse durante le fasi di disegno, spostamento e ridimensionamento, senza modificare
+ * immediatamente lo stato persistente del modello.
+ *
+ * Autori:
+ *  - Maria Silvana
+ */
+
+
+
 package com.example.Strategy;
 
 import javafx.scene.Node;
@@ -24,20 +38,6 @@ public class RettangoloTemporaneoStrategy implements FiguraTemporaneaStrategy {
         r.setHeight(Math.abs(y2 - y1));
         r.setRotate(rotazione);
     }
-    //Aggiunto da Kevin
-    // Applica una rotazione al nodo attorno al suo punto di rotazione predefinito
-    @Override
-    public void aggiornaRotazione(Node node, double rotazione) {
-        Rectangle e = (Rectangle) node;
-        e.setRotate(rotazione);
-    }
-    // Crea un rettangolo utile per visualizzare l'effetto della rotazione
-    @Override
-    public Node creaRotazione(double x1, double y1, double x2, double y2) {
-        Rectangle r = new Rectangle(x1, y1, x2-x1, y2-y1);
-        r.setStroke(Color.BLACK);
-        r.setFill(Color.LIGHTGRAY.deriveColor(1, 1, 1, 0.4));
-        return r;
-    }
+
 
 }

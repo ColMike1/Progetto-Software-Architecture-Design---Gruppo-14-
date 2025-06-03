@@ -25,6 +25,7 @@ package com.example.State;
 import com.example.Command.Command;
 import com.example.Command.Invoker;
 import com.example.Command.SpostamentoFiguraCommand;
+import com.example.Command.SpostamentoPoligonoCommand;
 import com.example.Model.Figura;
 import com.example.Model.LavagnaModel;
 import com.example.Model.PoligonoArbitrario;
@@ -57,7 +58,7 @@ public class SpostamentoPoligonoStato implements Stato {
         handle_x_iniziale = punto.getX();
         handle_y_iniziale = punto.getY();
 
-        figuraTemporaneaStrategy = figuraSelezionataManager.get().getTemporaryResizeStrategy();
+        figuraTemporaneaStrategy = figuraSelezionataManager.get().getTemporaryRenderStrategy();
 
 
         figuraTemporanea = ((PoligonoArbitrarioStrategy)figuraTemporaneaStrategy).creaPoligono(punti_iniziali, figura.getRotazione());
@@ -99,7 +100,7 @@ public class SpostamentoPoligonoStato implements Stato {
             return;
         }
 
-        Command cmd = new SpostamentoFiguraCommand(figuraSelezionataManager.get(),x2,y2,handle_x_iniziale,handle_y_iniziale);
+        Command cmd = new SpostamentoPoligonoCommand(figuraSelezionataManager.get(),x2,y2,handle_x_iniziale,handle_y_iniziale);
         Invoker.getInstance().executeCommand(cmd);
         StatoManager.getInstance().setStato(new SelezionaFiguraStato());
 
