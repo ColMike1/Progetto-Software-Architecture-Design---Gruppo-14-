@@ -7,18 +7,14 @@ import com.example.View.LavagnaView;
 import javafx.scene.input.MouseEvent;
 
 public class ZoomOutStato implements Stato{
-    private LavagnaView lavagnaView;
 
-    public ZoomOutStato(LavagnaView lavagnaView){
-        this.lavagnaView = lavagnaView;
-    }
 
     @Override
     public void onMousePressed(MouseEvent event){
         double x = event.getX();
         double y = event.getY();
 
-        Command cmd = new ZoomOutCommand(lavagnaView, x, y);
+        Command cmd = new ZoomOutCommand(x, y);
         Invoker.getInstance().executeCommand(cmd);
     }
 

@@ -74,8 +74,9 @@ public class InserisciTestoStato implements Stato {
         Invoker.getInstance().executeCommand(cmd);
     }
     @Override
-    public void onMouseClicked(MouseEvent event) {
-        // Non implementato, ma potrebbe essere usato per gestire clic specifici
-    }
+    public void onSliderChanged(double sliderValue) {return;}
+    @Override
+    public void onSliderReleased(double sliderValue){return;}
+}
 }
  */

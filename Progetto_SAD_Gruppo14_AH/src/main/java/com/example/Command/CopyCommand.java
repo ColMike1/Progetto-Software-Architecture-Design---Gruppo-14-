@@ -1,3 +1,11 @@
+/*
+* Comando che gestisce l'operazione di copia di una figura nel modello della lavagna.
+*
+* Imposta la figura selezionata come figura copiata. Non supporta l'annullamento ('undo').
+*
+* Autori:
+* - Michele
+*/
 package com.example.Command;
 
 import com.example.Model.Figura;
@@ -22,6 +30,4 @@ public class CopyCommand implements Command {
     public boolean isUndoable(){
         return false;
     }
-
-
 }

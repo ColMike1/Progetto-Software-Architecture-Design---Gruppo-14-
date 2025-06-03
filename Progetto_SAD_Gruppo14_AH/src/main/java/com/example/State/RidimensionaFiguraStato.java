@@ -5,7 +5,10 @@ import com.example.Command.Invoker;
 import com.example.Command.RidimensionaFiguraCommand;
 import com.example.Command.RidimensionaPoligonoCommand;
 import com.example.Model.*;
-import com.example.Strategy.*;
+import com.example.Strategy.EllisseTemporaneoStrategy;
+import com.example.Strategy.FiguraTemporaneaStrategy;
+import com.example.Strategy.RettangoloTemporaneoStrategy;
+import com.example.Strategy.SegmentoTemporaneoStrategy;
 import com.example.View.LavagnaView;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -30,8 +33,6 @@ public class RidimensionaFiguraStato implements Stato {
 
     Node figuraTemporaneaFX = null;
     FiguraTemporaneaStrategy strategy = figura.getTemporaryResizeStrategy();
-
-
 
 
     @Override
@@ -73,8 +74,8 @@ public class RidimensionaFiguraStato implements Stato {
         Command cmd = new RidimensionaFiguraCommand(x2, y2, x1, y1);
         Invoker.getInstance().executeCommand(cmd);
         StatoManager.getInstance().setStato(new SelezionaFiguraStato());
-    }
 
+    }
     @Override
     public void onSliderChanged(double sliderValue) {return;}
     @Override

@@ -44,7 +44,9 @@ public class Segmento extends Figura {
     @Override
     public Figura getClone() {
         int dx = 20;
-        return new Segmento(x1+dx, y1+dx, x2+dx, y2+dx, strokeColor, fillColor);
+        Segmento s = new Segmento(x1+dx, y1+dx, x2+dx, y2+dx, strokeColor, fillColor);
+        s.setRotazione(rotazione);
+        return s;
     }
 
     public String toString(){

@@ -11,7 +11,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/progetto_sad_gruppo14_ah/hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1080, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Geometric Draw App");
         stage.setScene(scene);
         stage.show();

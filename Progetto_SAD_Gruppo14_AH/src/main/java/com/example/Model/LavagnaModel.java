@@ -12,7 +12,7 @@ public class LavagnaModel {
     private static LavagnaModel instance;
     private List<Figura> figure = new ArrayList<>();
     private List<Runnable> osservatori = new ArrayList<>();
-    private Figura figuraCopiata;
+    private Figura figuraCopiata; // Aggiunto da: Michele
 
 
     public static LavagnaModel getInstance(){
@@ -49,6 +49,7 @@ public class LavagnaModel {
 
         figure.get(figure.indexOf(figura)).setX2(x2);
         figure.get(figure.indexOf(figura)).setY2(y2);
+
         notificaOsservatori();
     }
 
@@ -81,21 +82,23 @@ public class LavagnaModel {
 
         figure.get(figure.indexOf(figura)).setX1(x1);
         figure.get(figure.indexOf(figura)).setY1(y1);
-        figure.get(figure.indexOf(figura)).setX2(x1 + x2_diff);
-        figure.get(figure.indexOf(figura)).setY2(y1 + y2_diff);
+        figure.get(figure.indexOf(figura)).setX2(x1+x2_diff);
+        figure.get(figure.indexOf(figura)).setY2(y1+y2_diff);
 
         notificaOsservatori();
+
+
     }
 
+    //Cambia Colore bordo della figura. Aggiunto da Kevin
     public void cambiaColoreBordo(Figura figura, Color colore){
-        int index = figure.indexOf(figura);
-        figure.get(index).setStrokeColor(colore);
+        figure.get(figure.indexOf(figura)).setStrokeColor(colore);
         notificaOsservatori();
 
     }
+    //Cambia colore interno della figura. Aggiunto da Kevin
     public void cambiaColoreInterno(Figura figura, Color colore){
-        int index = figure.indexOf(figura);
-        figure.get(index).setFillColor(colore);
+        figure.get(figure.indexOf(figura)).setFillColor(colore);
         notificaOsservatori();
     }
 
@@ -130,20 +133,29 @@ public class LavagnaModel {
         notificaOsservatori();
     }
 
+    //Aggiunto da Kevin
     public void spostaSopra(Figura figura){
-        figure.remove(figura);               // la rimuove dalla posizione attuale
-        figure.add(figura);                  // la aggiunge in fondo (cioè sopra)
+        // Rimuove la figura dalla sua posizione attuale
+        figure.remove(figura);
+        // la aggiunge in cima
+        figure.add(figura);
         notificaOsservatori();
     }
 
+    //Aggiunto da Kevin
     public void spostaSotto(Figura figura){
+        // Rimuove la figura dalla sua posizione attuale
         figure.remove(figura);
+        // Inserisce la figura in fondo
         figure.add(0, figura);
+        // Notifica gli osservatori che il modello è cambiato
         notificaOsservatori();
     }
+    //Aggiunto da Kevin
     public void cambiaRotazione(Figura figura, double rotazione){
-        int index = figure.indexOf(figura);
-        figure.get(index).setRotazione(rotazione);
+        // Imposta una nuova rotazione sulla figura indicata
+        figure.get(figure.indexOf(figura)).setRotazione(rotazione);
+        // Notifica gli osservatori della modifica
         notificaOsservatori();
     }
 

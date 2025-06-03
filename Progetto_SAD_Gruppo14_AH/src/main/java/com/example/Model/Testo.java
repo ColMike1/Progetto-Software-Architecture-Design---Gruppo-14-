@@ -1,6 +1,5 @@
 package com.example.Model;
 
-
 import com.example.Strategy.FiguraTemporaneaStrategy;
 import com.example.Strategy.TextAreaTemporaneoStrategy;
 import javafx.scene.Group;
@@ -11,7 +10,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 public class Testo extends Figura{
-
 
     private String contenuto = null;
     private Group gruppo;
@@ -26,10 +24,6 @@ public class Testo extends Figura{
 
     public void setContenuto(String contenuto) { this.contenuto = contenuto; }
 
-    public String getContenuto() {
-        return contenuto;
-    }
-
 
     public Node creaNodoJavaFX(){
 
@@ -40,21 +34,19 @@ public class Testo extends Figura{
         textArea.textProperty().addListener((obs, oldVal, newVal) -> setContenuto(newVal));
 
         textArea.setRotate(rotazione);
-        textArea.setLayoutX(Math.min(x1,x2)+padding);
-        textArea.setLayoutY(Math.min(y1,y2)+padding);
+        textArea.setLayoutX(Math.min(x1, x2)+padding);
+        textArea.setLayoutY(Math.min(y1, y2)+padding);
         textArea.setPrefWidth(Math.abs(x2 - x1)-2*padding);
         textArea.setPrefHeight(Math.abs(y2 - y1)-2*padding);
-        //textArea.setWrapText(true);
+        textArea.setWrapText(true);
         textArea.setMinWidth(10);
         textArea.setMinHeight(10);
         textArea.setStyle("-fx-background-color: transparent; -fx-border-color:gray;");
-        textArea.setFont(Font.font(this.fontSize));
-        textArea.setText(contenuto);
 
 
         Rectangle box = new Rectangle();
-        box.setX(Math.min(x1,x2));
-        box.setY(Math.min(y1,y2));
+        box.setX(Math.min(x1, x2));
+        box.setY(Math.min(y1, y2));
         box.setWidth(Math.abs(x2 - x1));
         box.setHeight(Math.abs(y2 - y1));
         box.setFill(fillColor);
@@ -71,6 +63,9 @@ public class Testo extends Figura{
     }
 
 
+    public String getContenuto(){
+        return this.contenuto;
+    }
     public FiguraTemporaneaStrategy getTemporaryResizeStrategy(){
         return new TextAreaTemporaneoStrategy();
     }
@@ -79,7 +74,8 @@ public class Testo extends Figura{
     public Figura getClone() {
         int dx = 20;
         Testo t = new Testo(x1+dx, y1+dx, x2+dx, y2+dx, strokeColor, fillColor, fontSize, contenuto);
-        t.setContenuto(contenuto);
+        t.textArea.setText(textArea.getText());
+        t.setRotazione(rotazione);
         return t;
     }
 

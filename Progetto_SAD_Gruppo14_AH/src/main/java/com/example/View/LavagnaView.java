@@ -90,37 +90,19 @@ public class LavagnaView implements Runnable{
                 if (!isInZoomStato && !(StatoManager.getInstance().getStato() instanceof DisegnaPoligonoArbitrarioStato)) {
                     FiguraSelezionataManager.getInstance().set(f);
                     System.out.println("Figura selezionata: " + f.toString() + "\n");
-                    StatoManager.getInstance().setStato(new SelezionaFiguraStato());
+
+                        StatoManager.getInstance().setStato(new SelezionaFiguraStato());
+
                 }
             });
-
-            /*f.getNodo().setOnMouseClicked(event -> {
-
-                FiguraSelezionataManager.getInstance().set(f);
-
-                StatoManager.getInstance().setStato(new SelezionaFiguraStato());
-
-
-            });*/
-
-
-
-
-
         }
 
         // gestione figura selezionata, handle e toFront()
         Figura f = FiguraSelezionataManager.getInstance().get();
         if (f != null) {
 
-          //f.getNodo().toFront();
-
-               // double hx = Math.max(f.getX1(), f.getX2());
-               // double hy = Math.max(f.getY1(), f.getY2());
-
                 double hx = f.getX2();
                 double hy = f.getY2();
-
 
                 handle = new Circle(hx, hy, 5, Color.BROWN);
                 handle.setCursor(Cursor.SE_RESIZE);
@@ -143,10 +125,6 @@ public class LavagnaView implements Runnable{
                 double hx_1 = f.getX1();
                 double hy_1 = f.getY1();
 
-               // double hx_1 = Math.min(f.getX1(), f.getX2());
-               // double hy_1 = Math.min(f.getY1(), f.getY2());
-
-
 
                 handle_1 = new Circle(hx_1, hy_1, 5, Color.GRAY);
                 handle_1.setCursor(Cursor.MOVE);
@@ -167,8 +145,6 @@ public class LavagnaView implements Runnable{
                 });
         }
     }
-
-
 
     @Override
     public void run() {

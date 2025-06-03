@@ -1,7 +1,5 @@
 package com.example.State;
 
-import com.example.Model.Figura;
-import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
 public interface Stato {

@@ -1,8 +1,17 @@
+/*
+* Comando che gestisce l'operazione di incolla (paste) nel modello della lavagna.
+*
+* Clona la figura precedentemente copiata e la aggiunge al modello. Supporta l'operazione
+* di annullamento ('undo'), rimuovendo la figura incollata dalla lavagna.
+*
+* Autori:
+*  - Michele
+*
+*/
 package com.example.Command;
 
 import com.example.Model.Figura;
 import com.example.Model.LavagnaModel;
-import com.example.Model.Testo;
 
 public class PasteCommand implements Command {
 

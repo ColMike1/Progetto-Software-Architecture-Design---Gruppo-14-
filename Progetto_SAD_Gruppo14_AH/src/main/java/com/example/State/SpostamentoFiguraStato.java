@@ -5,16 +5,11 @@ import com.example.Command.Invoker;
 import com.example.Command.SpostamentoFiguraCommand;
 import com.example.Model.Figura;
 import com.example.Model.LavagnaModel;
-import com.example.Model.PoligonoArbitrario;
 import com.example.Strategy.FiguraTemporaneaStrategy;
-import com.example.Strategy.PoligonoArbitrarioStrategy;
 import com.example.View.LavagnaView;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SpostamentoFiguraStato implements Stato {
 

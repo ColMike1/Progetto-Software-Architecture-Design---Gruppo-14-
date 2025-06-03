@@ -1,3 +1,13 @@
+/*
+* Factory concreta per la creazione di oggetti 'Testo'.
+*
+* Implementa l'interfaccia 'FiguraFactory' e fornisce un'istanza di 'Testo'
+* basata sulle coordinate e sui colori specificati.
+*
+* Autori:
+*  - Mariasilvana
+*
+*/
 package com.example.Factory;
 import com.example.Model.Figura;
 import com.example.Model.Testo;

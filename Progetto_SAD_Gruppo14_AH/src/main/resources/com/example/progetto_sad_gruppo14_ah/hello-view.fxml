@@ -24,7 +24,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1178.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_sad_gruppo14_ah.HelloController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1178.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progetto_sad_gruppo14_ah.HelloController">
   <top>
     <VBox prefHeight="38.0" prefWidth="922.0" BorderPane.alignment="CENTER">
       <children>
@@ -142,9 +142,16 @@
                </VBox.margin>
             </Label>
             <ToggleButton fx:id="grigliaButton" mnemonicParsing="false" prefHeight="36.0" prefWidth="50.0">
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Images/griglia.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                <contextMenu>
                   <ContextMenu>
-                     <items>
+                    <items>
                         <MenuItem mnemonicParsing="false" text="Righe">
                            <graphic>
                               <TextField fx:id="nRighe" text="20" />
@@ -155,7 +162,7 @@
                               <TextField fx:id="nColonne" text="20" />
                            </graphic>
                         </MenuItem>
-                     </items>
+                    </items>
                   </ContextMenu>
                </contextMenu>
                <VBox.margin>

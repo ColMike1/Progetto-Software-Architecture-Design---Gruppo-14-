@@ -1,3 +1,13 @@
+/*
+* Classe che rappresenta una griglia disegnata sulla lavagna.
+*
+* Permette di creare un nodo ('Group') composto da linee verticali e orizzontali,
+* in base al numero di righe e colonne specificato. Il metodo 'creaNodoJavaFX' restituisce
+* la griglia come nodo JavaFX.
+*
+* Autori:
+*  -Michele
+*/
 package com.example.Model;
 
 import javafx.scene.Group;

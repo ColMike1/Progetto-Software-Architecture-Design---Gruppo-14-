@@ -5,8 +5,6 @@ import com.example.Model.LavagnaModel;
 import com.example.Model.PoligonoArbitrario;
 import com.example.State.FiguraSelezionataManager;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class SpostamentoFiguraCommand implements Command {
 
@@ -15,7 +13,6 @@ public class SpostamentoFiguraCommand implements Command {
     private double y1;
     private double handle_x;
     private double handle_y;
-
 
     public SpostamentoFiguraCommand(Figura figura, double x1, double y1, double handle_x, double handle_y) {
         this.figura = figura;
@@ -33,7 +30,7 @@ public class SpostamentoFiguraCommand implements Command {
         if(figura_selezionata.getClass()== PoligonoArbitrario.class)
             LavagnaModel.getInstance().spostaPoligono((PoligonoArbitrario) figura_selezionata, x1, y1);
         else
-            LavagnaModel.getInstance().spostaFigura(figura, x1, y1);
+        LavagnaModel.getInstance().spostaFigura(figura, x1, y1);
         System.out.println("Figura " + figura.toString() + " spostata\n");
     }
     @Override
@@ -42,8 +39,8 @@ public class SpostamentoFiguraCommand implements Command {
             FiguraSelezionataManager.getInstance().clear();
             LavagnaModel.getInstance().spostaPoligono((PoligonoArbitrario) figura_selezionata, handle_x, handle_y);
         }else {
-            FiguraSelezionataManager.getInstance().clear();
-            LavagnaModel.getInstance().spostaFigura(figura_selezionata, handle_x, handle_y);
+        FiguraSelezionataManager.getInstance().clear();
+        LavagnaModel.getInstance().spostaFigura(figura_selezionata, handle_x, handle_y);
         }
         System.out.println("Undo: Figura " + figura.toString() + " spostata\n");
     }

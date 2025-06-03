@@ -26,7 +26,6 @@ public abstract class Figura {
 
     }
 
-
     public void setNodo(Node nodo) {
         this.nodo = nodo;
     }
@@ -92,9 +91,6 @@ public abstract class Figura {
 
     public abstract FiguraTemporaneaStrategy getTemporaryResizeStrategy();
 
-    /*
-       getClone() è utilizzata da PasteCommand.
-     */
     public abstract Figura getClone();
 
 }

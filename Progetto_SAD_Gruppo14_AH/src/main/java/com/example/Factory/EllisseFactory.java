@@ -1,3 +1,15 @@
+/*
+* Factory concreta per la creazione di oggetti 'Ellisse'.
+*
+*
+* Implementa l'interfaccia 'FiguraFactory' e fornisce un'istanza di 'Ellisse'
+* basata sulle coordinate e sui colori specificati.
+*
+* Autori:
+*  - Michele
+*
+*/
+
 package com.example.Factory;
 
 import com.example.Model.Ellisse;
