@@ -12,7 +12,7 @@ public class LavagnaModel {
     private static LavagnaModel instance;
     private List<Figura> figure = new ArrayList<>();
     private List<Runnable> osservatori = new ArrayList<>();
-    private Figura figuraCopiata; // Aggiunto da: Michele
+    private Figura figuraCopiata;
 
 
     public static LavagnaModel getInstance(){
@@ -30,6 +30,7 @@ public class LavagnaModel {
         notificaOsservatori();
     }
 
+    //Aggiunto da: Mirko
     public void rimuoviFigura(Figura figura){
         figure.remove(figura);
         notificaOsservatori();
@@ -48,9 +49,31 @@ public class LavagnaModel {
 
         figure.get(figure.indexOf(figura)).setX2(x2);
         figure.get(figure.indexOf(figura)).setY2(y2);
-
         notificaOsservatori();
     }
+
+    //Aggiunto da: Mirko
+    public void ridimensionaPoligono(PoligonoArbitrario figura, List<Double> nuoviPunti) {
+        figura.getPunti().clear();
+        figura.getPunti().addAll(nuoviPunti);
+        notificaOsservatori();
+    }
+
+    //Aggiunto da: Mirko
+    public void spostaPoligono(PoligonoArbitrario poligono, double x1, double y1){
+        double x2_diff = figure.get(figure.indexOf(poligono)).getX2() - figure.get(figure.indexOf(poligono)).getX1();
+        double y2_diff = figure.get(figure.indexOf(poligono)).getY2() - figure.get(figure.indexOf(poligono)).getY1();
+
+        List<Double> punti = poligono.getPunti();
+        double x_diff = x1 - punti.get(0);
+        double y_diff = y1 - punti.get(1);
+        for (int i = 0; i < punti.size(); i += 2) {
+            punti.set(i, punti.get(i) + x_diff);
+            punti.set(i + 1, punti.get(i + 1) + y_diff);
+        }
+        notificaOsservatori();
+    }
+
 
     public void spostaFigura(Figura figura, double x1, double y1){
         double x2_diff = figure.get(figure.indexOf(figura)).getX2() - figure.get(figure.indexOf(figura)).getX1();
@@ -58,23 +81,21 @@ public class LavagnaModel {
 
         figure.get(figure.indexOf(figura)).setX1(x1);
         figure.get(figure.indexOf(figura)).setY1(y1);
-        figure.get(figure.indexOf(figura)).setX2(x1+x2_diff);
-        figure.get(figure.indexOf(figura)).setY2(y1+y2_diff);
+        figure.get(figure.indexOf(figura)).setX2(x1 + x2_diff);
+        figure.get(figure.indexOf(figura)).setY2(y1 + y2_diff);
 
         notificaOsservatori();
-
-
     }
 
-    //Cambia Colore bordo della figura. Aggiunto da Kevin
     public void cambiaColoreBordo(Figura figura, Color colore){
-        figure.get(figure.indexOf(figura)).setStrokeColor(colore);
+        int index = figure.indexOf(figura);
+        figure.get(index).setStrokeColor(colore);
         notificaOsservatori();
 
     }
-    //Cambia colore interno della figura. Aggiunto da Kevin
     public void cambiaColoreInterno(Figura figura, Color colore){
-        figure.get(figure.indexOf(figura)).setFillColor(colore);
+        int index = figure.indexOf(figura);
+        figure.get(index).setFillColor(colore);
         notificaOsservatori();
     }
 
@@ -109,29 +130,20 @@ public class LavagnaModel {
         notificaOsservatori();
     }
 
-    //Aggiunto da Kevin
     public void spostaSopra(Figura figura){
-        // Rimuove la figura dalla sua posizione attuale
-        figure.remove(figura);
-        // la aggiunge in cima
-        figure.add(figura);
+        figure.remove(figura);               // la rimuove dalla posizione attuale
+        figure.add(figura);                  // la aggiunge in fondo (cioè sopra)
         notificaOsservatori();
     }
 
-    //Aggiunto da Kevin
     public void spostaSotto(Figura figura){
-        // Rimuove la figura dalla sua posizione attuale
         figure.remove(figura);
-        // Inserisce la figura in fondo
         figure.add(0, figura);
-        // Notifica gli osservatori che il modello è cambiato
         notificaOsservatori();
     }
-    //Aggiunto da Kevin
     public void cambiaRotazione(Figura figura, double rotazione){
-        // Imposta una nuova rotazione sulla figura indicata
-        figure.get(figure.indexOf(figura)).setRotazione(rotazione);
-        // Notifica gli osservatori della modifica
+        int index = figure.indexOf(figura);
+        figure.get(index).setRotazione(rotazione);
         notificaOsservatori();
     }
 

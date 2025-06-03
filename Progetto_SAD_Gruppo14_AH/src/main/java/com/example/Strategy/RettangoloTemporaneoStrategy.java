@@ -7,29 +7,28 @@ import javafx.scene.shape.Rectangle;
 public class RettangoloTemporaneoStrategy implements FiguraTemporaneaStrategy {
 
     @Override
-    public Node crea(double x1, double y1) {
+    public Node crea(double x1, double y1, double rotazione) {
         Rectangle r = new Rectangle(x1, y1, 0, 0);
         r.setStroke(Color.BLACK);
         r.setFill(Color.LIGHTGRAY.deriveColor(1, 1, 1, 0.4));
+        r.setRotate(rotazione);
         return r;
     }
 
     @Override
-    public void aggiorna(Node node, double x1, double y1, double x2, double y2) {
+    public void aggiorna(Node node, double x1, double y1, double x2, double y2,double rotazione) {
         Rectangle r = (Rectangle) node;
         r.setX(Math.min(x1, x2));
         r.setY(Math.min(y1, y2));
         r.setWidth(Math.abs(x2 - x1));
         r.setHeight(Math.abs(y2 - y1));
+        r.setRotate(rotazione);
     }
-    //Aggiunto da Kevin
-    // Applica una rotazione al nodo attorno al suo punto di rotazione predefinito
     @Override
     public void aggiornaRotazione(Node node, double rotazione) {
         Rectangle e = (Rectangle) node;
         e.setRotate(rotazione);
     }
-    // Crea un rettangolo utile per visualizzare l'effetto della rotazione
     @Override
     public Node creaRotazione(double x1, double y1, double x2, double y2) {
         Rectangle r = new Rectangle(x1, y1, x2-x1, y2-y1);

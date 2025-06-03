@@ -1,11 +1,15 @@
 package com.example.Command;
 
 import com.example.Factory.FiguraFactory;
+import com.example.Factory.PoligonoArbitrarioFactory;
 import com.example.Model.Figura;
 import com.example.Model.LavagnaModel;
 import com.example.State.FiguraSelezionataManager;
+import javafx.collections.ObservableList;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+
+import java.util.List;
 
 public class AggiungiFiguraCommand implements Command {
     private LavagnaModel lavagnaModel;
@@ -14,10 +18,12 @@ public class AggiungiFiguraCommand implements Command {
     private double x1, y1, x2, y2;
     Color strokeColor;
     Color fillColor;
-    private double rotazione;
+    double rotazione;
     private Figura figuraAggiunta;
+    private int fontSize;
+    private List<Double> punti;
 
-    public AggiungiFiguraCommand(LavagnaModel lavagnaModel, FiguraFactory factory, AnchorPane lavagna, double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
+    public AggiungiFiguraCommand(LavagnaModel lavagnaModel, FiguraFactory factory, AnchorPane lavagna, double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor, int fontSize) {
         this.lavagnaModel = lavagnaModel;
         this.figuraFactory = factory;
         this.lavagna = lavagna;
@@ -27,12 +33,15 @@ public class AggiungiFiguraCommand implements Command {
         this.y2 = y2;
         this.strokeColor= strokeColor;
         this.fillColor = fillColor;
-        this.rotazione = 0;
-
+        this.fontSize = fontSize;
+        this.punti = null;
+        this.rotazione=0;
     }
+
+
     @Override
     public void execute() {
-        figuraAggiunta = figuraFactory.creaFigura(x1, y1, x2 , y2, strokeColor, fillColor );
+        figuraAggiunta = figuraFactory.creaFigura(x1, y1, x2 , y2, strokeColor, fillColor, fontSize);
         lavagnaModel.aggiungiFigura(figuraAggiunta);
 
         // scroll pane

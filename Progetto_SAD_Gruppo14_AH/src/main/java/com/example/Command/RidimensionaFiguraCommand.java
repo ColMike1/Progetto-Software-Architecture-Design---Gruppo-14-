@@ -2,7 +2,11 @@ package com.example.Command;
 
 import com.example.Model.Figura;
 import com.example.Model.LavagnaModel;
+import com.example.Model.PoligonoArbitrario;
 import com.example.State.FiguraSelezionataManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RidimensionaFiguraCommand implements Command {
 
@@ -17,16 +21,28 @@ public class RidimensionaFiguraCommand implements Command {
         this.handle_y = handle_y;
     }
 
+    //double x1 = FiguraSelezionataManager.getInstance().get().getX1();
+    //double y1 = FiguraSelezionataManager.getInstance().get().getY1();
+
+
     public void execute() {
-        LavagnaModel.getInstance().ridimensionaFigura(figura_selezionata, x2, y2);
-        System.out.println("Figura " + figura_selezionata + " ridimensionata");
+
+       /*if(x2<x1){
+            x2 = x1+10;
+        }
+
+        if (y2<y1){
+            y2 = y1+10;
+        }*/ //michele levato questo controllo
+
+
+            LavagnaModel.getInstance().ridimensionaFigura(figura_selezionata, x2, y2);
     }
 
 
     @Override
     public void undo() {
 
-        FiguraSelezionataManager.getInstance().clear();
         LavagnaModel.getInstance().ridimensionaFigura(figura_selezionata, handle_x, handle_y);
         System.out.println("Figura " + figura_selezionata + " ridimensionata");
 

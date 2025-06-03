@@ -4,6 +4,7 @@ import com.example.Command.AggiungiFiguraCommand;
 import com.example.Command.Command;
 import com.example.Command.Invoker;
 import com.example.Factory.FiguraFactory;
+import com.example.Factory.RettangoloFactory;
 import com.example.Model.LavagnaModel;
 import com.example.Strategy.FiguraTemporaneaStrategy;
 import com.example.View.LavagnaView;
@@ -11,8 +12,10 @@ import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 
 public class DisegnaFiguraStato implements Stato{
     private double x1, y1;
@@ -20,18 +23,21 @@ public class DisegnaFiguraStato implements Stato{
     private AnchorPane lavagna;
     private LavagnaModel model;
     private ColorPicker strokeColor, fillColor;
+    private ComboBox fontSizeComboBox;
     private Group figureInserite;
     private FiguraFactory figuraFactory;
     private FiguraTemporaneaStrategy figuraTemporaneaStrategy;
 
 
-    public DisegnaFiguraStato(FiguraFactory figuraFactory, AnchorPane lavagna, LavagnaModel model, ColorPicker strokeColor, ColorPicker fillColor) {
+    public DisegnaFiguraStato(FiguraFactory figuraFactory, AnchorPane lavagna, LavagnaModel model, ColorPicker strokeColor, ColorPicker fillColor, ComboBox fontSizeComboBox) {
         this.figuraFactory = figuraFactory;
         this.lavagna = lavagna;
         this.model = model;
         this.strokeColor = strokeColor;
         this.fillColor = fillColor;
         this.figureInserite = LavagnaView.getInstance().getFigureZoomabili();
+        this.fontSizeComboBox = fontSizeComboBox;
+
     }
 
     @Override
@@ -41,8 +47,8 @@ public class DisegnaFiguraStato implements Stato{
         x1 = punto.getX();
         y1 = punto.getY();
 
-        figuraTemporaneaStrategy = figuraFactory.creaFigura(0,0,0,0,null, null).getTemporaryResizeStrategy();
-        figuraTemporanea = figuraTemporaneaStrategy.crea(x1,y1);
+        figuraTemporaneaStrategy = figuraFactory.creaFigura(0,0,0,0,null, null,0).getTemporaryResizeStrategy();
+        figuraTemporanea = figuraTemporaneaStrategy.crea(x1,y1,0);
         figureInserite.getChildren().add((figuraTemporanea));
     }
 
@@ -53,7 +59,7 @@ public class DisegnaFiguraStato implements Stato{
         double x2 = punto.getX();
         double y2 = punto.getY();
 
-        figuraTemporaneaStrategy.aggiorna(figuraTemporanea,x1,y1,x2,y2);
+        figuraTemporaneaStrategy.aggiorna(figuraTemporanea,x1,y1,x2,y2,0);
     }
 
 
@@ -63,6 +69,11 @@ public class DisegnaFiguraStato implements Stato{
         double x2 = punto.getX();
         double y2 = punto.getY();
 
+        /*double x1_temp = x1;
+        double y1_temp = y1;
+        double x2_temp = x2;
+        double y2_temp = y2;*/
+
         figureInserite.getChildren().remove((figuraTemporanea));
 
        if(x1<0 || y1<0 || x2<0 || y2<0) {
@@ -70,8 +81,19 @@ public class DisegnaFiguraStato implements Stato{
             return;
         }
 
+       /*if(x2<x1_temp){
+           x1 = x2_temp;
+           x2 = x1_temp;
+       }
+
+        if(y2<y1_temp){
+            y1 = y2_temp;
+            y2 = y1_temp;
+        }*/
+
+
         // Usa Command se vuoi supportare Undo
-        Command cmd = new AggiungiFiguraCommand(model, figuraFactory, lavagna, x1, y1, x2, y2, strokeColor.getValue(), fillColor.getValue());
+        Command cmd = new AggiungiFiguraCommand(model, figuraFactory, lavagna, x1, y1, x2, y2, strokeColor.getValue(), fillColor.getValue(),(int)fontSizeComboBox.getValue());
         Invoker.getInstance().executeCommand(cmd);
 
         figuraTemporanea = null;
@@ -80,4 +102,8 @@ public class DisegnaFiguraStato implements Stato{
     public void onSliderChanged(double sliderValue) {return;}
     @Override
     public void onSliderReleased(double sliderValue){return;}
+    @Override
+    public void onMouseClicked(MouseEvent event) {}
+    // Non implementato, ma puoi aggiungere logica se necessario
+
 }

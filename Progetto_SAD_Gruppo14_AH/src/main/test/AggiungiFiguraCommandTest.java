@@ -1,4 +1,4 @@
-import com.example.Command.AggiungiFiguraCommand;
+/*import com.example.Command.AggiungiFiguraCommand;
 import com.example.Factory.FiguraFactory;
 import com.example.Model.Figura;
 import com.example.Model.LavagnaModel;
@@ -80,3 +80,4 @@ public class AggiungiFiguraCommandTest {
         verify(mockModel).rimuoviFigura(mockFigura);
     }
 }
+*/

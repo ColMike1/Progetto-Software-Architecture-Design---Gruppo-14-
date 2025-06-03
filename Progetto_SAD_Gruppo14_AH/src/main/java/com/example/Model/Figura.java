@@ -11,18 +11,21 @@ public abstract class Figura {
     protected Color strokeColor;
     protected Color fillColor;
     protected Node nodo;
+    protected int fontSize;
     protected double rotazione;
 
-    public Figura(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
+    public Figura(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor, int fontSize) {
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
         this.fillColor = fillColor;
         this.strokeColor = strokeColor;
+        this.fontSize = fontSize;
         this.rotazione = 0;
 
     }
+
 
     public void setNodo(Node nodo) {
         this.nodo = nodo;
@@ -52,7 +55,9 @@ public abstract class Figura {
 
     public double getRotazione() { return rotazione; }
 
+    public void setFontSize(int size) {this.fontSize = size;}
 
+    public int getFontSize() { return fontSize; }
 
 
     public double getX1() {
@@ -87,6 +92,9 @@ public abstract class Figura {
 
     public abstract FiguraTemporaneaStrategy getTemporaryResizeStrategy();
 
+    /*
+       getClone() è utilizzata da PasteCommand.
+     */
     public abstract Figura getClone();
 
 }

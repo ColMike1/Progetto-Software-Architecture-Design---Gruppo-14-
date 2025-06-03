@@ -3,6 +3,7 @@ package com.example.Model;
 import com.example.State.FiguraSelezionataManager;
 import com.example.Strategy.EllisseTemporaneoStrategy;
 import com.example.Strategy.FiguraTemporaneaStrategy;
+import com.example.Strategy.RettangoloTemporaneoStrategy;
 import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
@@ -12,7 +13,7 @@ import javafx.scene.shape.Ellipse;
 public class Ellisse extends Figura {
 
     public Ellisse(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
-        super(x1, y1, x2, y2, strokeColor, fillColor); // salva tutte le coordinate nella superclasse
+        super(x1, y1, x2, y2, strokeColor, fillColor,0); // salva tutte le coordinate nella superclasse
     }
 
     @Override
@@ -52,12 +53,13 @@ public class Ellisse extends Figura {
     @Override
     public Figura getClone() {
         int dx = 20;
-        Ellisse x = new Ellisse(x1+dx, y1+dx, x2+dx, y2+dx, strokeColor, fillColor);
-        x.setRotazione(rotazione);
-        return x;
+        return new Ellisse(x1+dx, y1+dx, x2+dx, y2+dx, strokeColor, fillColor);
     }
 
     public String toString(){
         return "Ellisse";
     }
+
+
+
 }
