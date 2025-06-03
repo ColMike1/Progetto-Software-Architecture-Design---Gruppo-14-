@@ -1,3 +1,22 @@
+/**
+ * Comando per caricare una lista di figure geometriche da un file di testo formattato.
+ *
+ * Il comando apre una finestra di dialogo per la selezione di un file .txt, quindi legge
+ * il file riga per riga, interpretando ogni riga come una descrizione di una figura:
+ * - Supporta i tipi: ellisse, rettangolo, segmento, testo e poligono arbitrario.
+ * - Per ogni figura legge le proprietà geometriche, colori e rotazione.
+ *
+ * In caso di errore di formato o I/O viene mostrato un alert all'utente.
+ * Se il file è vuoto, viene mostrato un avviso e nessuna figura viene caricata.
+ *
+ * Il caricamento comporta la pulizia della lavagna (modello) e l'inserimento delle nuove figure.
+ *
+ * Il comando non supporta l'undo.
+ *
+ * Il file di input deve rispettare il formato previsto, con campi separati da ';',
+ * ed etichette per proprietà come x1=valore, stroke=#hexcolor, ecc.
+ */
+
 package com.example.Command;
 
 
@@ -35,6 +54,12 @@ public class CaricaCommand implements Command {
 
         File file = fileChooser.showOpenDialog(apriFile.getParentPopup().getOwnerWindow());
         if (file != null) {
+            double x1 = 0;
+            double y1 = 0;
+            double x2 = 0;
+            double y2 = 0;
+            Color stroke;
+            Color fill;
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 lavagnaModel.svuotaLavagna();
                 List<Figura> figureTemp = new ArrayList<>();
@@ -46,21 +71,41 @@ public class CaricaCommand implements Command {
                     try {
                         String[] parts = line.split(";");
                         String tipo = parts[0];
-
-                        double x1 = Double.parseDouble(parts[1].split("=")[1]);
-                        double y1 = Double.parseDouble(parts[2].split("=")[1]);
-                        double x2 = Double.parseDouble(parts[3].split("=")[1]);
-                        double y2 = Double.parseDouble(parts[4].split("=")[1]);
-                        Color stroke = Color.web(parts[5].split("=")[1]);
-                        Color fill = Color.web(parts[6].split("=")[1]);
+                        String content = "";
+                        int fontSize = 0;
+                        double rotazione = 0;
+                        List<Double> punti = new ArrayList<>();
+                        if (tipo.equals("poligonoarbitrario")) {
+                            for (int i = 1; i < parts.length - 3; i++) {
+                            punti.add(Double.parseDouble(parts[i]));
+                            }
+                            stroke = Color.web(parts[parts.length-3].split("=")[1]);
+                            fill = Color.web(parts[parts.length-2].split("=")[1]);
+                            rotazione = Double.parseDouble(parts[parts.length-1].split("=")[1]);
+                        } else {
+                            x1 = Double.parseDouble(parts[1].split("=")[1]);
+                            y1 = Double.parseDouble(parts[2].split("=")[1]);
+                            x2 = Double.parseDouble(parts[3].split("=")[1]);
+                            y2 = Double.parseDouble(parts[4].split("=")[1]);
+                            stroke = Color.web(parts[5].split("=")[1]);
+                            fill = Color.web(parts[6].split("=")[1]);
+                            rotazione = Double.parseDouble(parts[7].split("=")[1]);
+                            if(parts.length == 10){
+                                fontSize = Integer.parseInt(parts[8].split("=")[1]);
+                                content = parts[9].split("=")[1];
+                            }
+                        }
 
                         figura = switch (tipo) {
                             case "ellisse" -> new Ellisse(x1, y1, x2, y2, stroke, fill);
                             case "rettangolo" -> new Rettangolo(x1, y1, x2, y2, stroke, fill);
                             case "segmento" -> new Segmento(x1, y1, x2, y2, stroke, fill);
+                            case "testo" -> new Testo(x1, y1, x2, y2, stroke, fill, fontSize, content);
+                            case "poligonoarbitrario" -> new PoligonoArbitrario(punti, stroke, fill);
                             default -> throw new IllegalArgumentException("Tipo di tipo non valido"+tipo);
                         };
 
+                        figura.setRotazione(rotazione);
                         figureTemp.add(figura);
 
                     } catch (Exception e) {

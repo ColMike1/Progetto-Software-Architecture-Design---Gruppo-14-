@@ -1,6 +1,7 @@
 module com.example.progetto_sad_gruppo14_ah {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens com.example.progetto_sad_gruppo14_ah to javafx.fxml;

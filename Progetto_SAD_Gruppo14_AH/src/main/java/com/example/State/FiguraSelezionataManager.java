@@ -1,3 +1,21 @@
+/**
+ * Classe che gestisce la figura attualmente selezionata sulla lavagna.
+ *
+ * Implementa il pattern Singleton per garantire la presenza di un'unica istanza che mantiene il riferimento alla figura selezionata corrente.
+ * In questo modo tutti i componenti del sistema (State, Command, Controller) possono accedere e modificare
+ * lo stato di selezione.
+ *
+ * Metodi principali:
+ *  - get(): restituisce la figura attualmente selezionata.
+ *  - set(): imposta la nuova figura selezionata.
+ *  - clear(): annulla la selezione corrente.
+ *
+ * Autori:
+ *  - Maria Silvana (implementazione del manager di selezione con pattern Singleton)
+*/
+
+
+
 package com.example.State;
 
 import com.example.Model.Figura;
@@ -26,17 +44,10 @@ public class FiguraSelezionataManager {
         this.figuraSelezionata = figura;
     }
 
-    public boolean isSelezionata(Figura figura) {
-        return figura != null && figura.equals(figuraSelezionata);
-    }
-
     public void clear() {
         this.figuraSelezionata = null;
     }
 
-    public boolean isSelezionata() {
-        return figuraSelezionata != null;
-    }
 
 
 }

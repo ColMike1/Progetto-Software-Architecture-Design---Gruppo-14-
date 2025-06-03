@@ -1,4 +1,18 @@
-package com.example.Command;
+/**
+ * Classe che implementa il comando per il ridimensionamento di una figura selezionata,
+ * secondo il pattern Command, consentendo anche l'annullamento (undo) dell'operazione.
+ *
+ * Il comando opera sulla figura selezionata mantenuta dal FiguraSelezionataManager e
+ * applica il ridimensionamento tramite il LavagnaModel. Vengono memorizzate sia le nuove
+ * coordinate finali che le coordinate iniziali (handle_x, handle_y) per poter ripristinare
+ * lo stato precedente durante l'operazione di undo.
+ *
+ * Questa classe viene istanziata nella classe RidimensionaFiguraStato.
+ *
+ * Autori: Maria Silvana
+ */
+
+ package com.example.Command;
 
 import com.example.Model.Figura;
 import com.example.Model.LavagnaModel;
@@ -7,7 +21,8 @@ import com.example.State.FiguraSelezionataManager;
 public class RidimensionaFiguraCommand implements Command {
 
     double x2, y2;
-    double handle_x, handle_y;
+    double handle_x, handle_y; // coordinate da cui inizia il ridimensionamento
+    Figura figura_selezionata = FiguraSelezionataManager.getInstance().get();
 
     public RidimensionaFiguraCommand(double x2, double y2, double handle_x, double handle_y) {
         this.y2 = y2;
@@ -16,22 +31,13 @@ public class RidimensionaFiguraCommand implements Command {
         this.handle_y = handle_y;
     }
 
-    double x1 = FiguraSelezionataManager.getInstance().get().getX1();
-    double y1 = FiguraSelezionataManager.getInstance().get().getY1();
 
-    Figura figura_selezionata = FiguraSelezionataManager.getInstance().get();
 
 
     public void execute() {
 
-        if(x2<x1){
-            x2 = x1+10;
-        }
-
-        if (y2<y1){
-            y2 = y1+10;
-        }
         LavagnaModel.getInstance().ridimensionaFigura(figura_selezionata, x2, y2);
+        System.out.println("Figura " + figura_selezionata + " ridimensionata");
     }
 
 
@@ -40,6 +46,7 @@ public class RidimensionaFiguraCommand implements Command {
 
         FiguraSelezionataManager.getInstance().clear();
         LavagnaModel.getInstance().ridimensionaFigura(figura_selezionata, handle_x, handle_y);
+        System.out.println("Figura " + figura_selezionata + " ridimensionata");
 
     }
 
