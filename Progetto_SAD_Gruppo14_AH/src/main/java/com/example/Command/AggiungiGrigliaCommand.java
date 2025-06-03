@@ -1,3 +1,13 @@
+/*
+* Comando che inserisce una griglia sulla lavagna.
+*
+* Crea una griglia con le dimensioni e colori specificati e la aggiunge alla lavagna.
+* Non supporta l'operazione di annullamento ('undo').
+*
+* Autori:
+*  - Michele
+*/
+
 package com.example.Command;
 
 import com.example.Factory.FiguraFactory;
@@ -28,6 +38,7 @@ public class AggiungiGrigliaCommand implements Command {
     public void execute() {
         Griglia griglia = new Griglia(nRighe, nColonne, x2 , y2, strokeColor);
         LavagnaView.getInstance().aggiungiGriglia(griglia);
+        System.out.println("Aggiunta griglia\n");
     }
     @Override
     public void undo() {
