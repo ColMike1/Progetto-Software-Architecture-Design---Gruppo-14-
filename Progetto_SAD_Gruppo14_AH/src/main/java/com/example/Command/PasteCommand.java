@@ -12,7 +12,6 @@ package com.example.Command;
 
 import com.example.Model.Figura;
 import com.example.Model.LavagnaModel;
-import com.example.Model.Testo;
 
 public class PasteCommand implements Command {
 

@@ -1,9 +1,11 @@
 package com.example.Strategy;
 
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
 
 public class TextAreaTemporaneoStrategy implements FiguraTemporaneaStrategy {
 
@@ -34,5 +36,12 @@ public class TextAreaTemporaneoStrategy implements FiguraTemporaneaStrategy {
         textArea.setStyle("-fx-background-color:white;-fx-border-color:white;");
         textArea.setVisible(true);
 
+    }
+    @Override
+    public void aggiornaRotazione(Node node, double rotazione) {
+    }
+    @Override
+    public Node creaRotazione(double x1, double y1, double x2, double y2) {
+        return null;
     }
 }

@@ -22,6 +22,7 @@ public class Segmento extends Figura {
 
         this.setNodo(line);
 
+        line.setRotate(rotazione);
         line.setStrokeWidth(2);
         line.setStroke(strokeColor);
         line.setUserData(this);
@@ -43,7 +44,9 @@ public class Segmento extends Figura {
     @Override
     public Figura getClone() {
         int dx = 20;
-        return new Segmento(x1+dx, y1+dx, x2+dx, y2+dx, strokeColor, fillColor);
+        Segmento x = new Segmento(x1+dx, y1+dx, x2+dx, y2+dx, strokeColor, fillColor);
+        x.setRotazione(rotazione);
+        return x;
     }
 
     public String toString(){

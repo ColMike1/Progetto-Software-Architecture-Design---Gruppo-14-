@@ -4,7 +4,6 @@ import com.example.Command.AggiungiFiguraCommand;
 import com.example.Command.Command;
 import com.example.Command.Invoker;
 import com.example.Factory.FiguraFactory;
-import com.example.Factory.RettangoloFactory;
 import com.example.Model.LavagnaModel;
 import com.example.Strategy.FiguraTemporaneaStrategy;
 import com.example.View.LavagnaView;
@@ -14,7 +13,6 @@ import javafx.scene.Node;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
 
 public class DisegnaFiguraStato implements Stato{
     private double x1, y1;
@@ -78,4 +76,8 @@ public class DisegnaFiguraStato implements Stato{
 
         figuraTemporanea = null;
     }
+    @Override
+    public void onSliderChanged(double sliderValue) {return;}
+    @Override
+    public void onSliderReleased(double sliderValue){return;}
 }

@@ -21,8 +21,8 @@ public class ZoomInCommand implements Command {
     private double x, y;
 
 
-    public ZoomInCommand(LavagnaView lavagnaView, double x, double y) {
-        this.figureZoomabili = lavagnaView.getFigureZoomabili();
+    public ZoomInCommand(double x, double y) {
+        this.figureZoomabili = LavagnaView.getInstance().getFigureZoomabili();
         this.x = x;
         this.y = y;
     }

@@ -1,8 +1,5 @@
 package com.example.Model;
 import com.example.State.FiguraSelezionataManager;
-import com.example.State.SelezionaFiguraStato;
-import com.example.State.StatoManager;
-import com.example.Strategy.EllisseTemporaneoStrategy;
 import com.example.Strategy.FiguraTemporaneaStrategy;
 import com.example.Strategy.RettangoloTemporaneoStrategy;
 import javafx.scene.effect.DropShadow;
@@ -38,12 +35,11 @@ public class Rettangolo extends Figura {
 
         this.setNodo(r);
 
+        r.setRotate(rotazione);
         r.setStrokeWidth(1);
         r.setStroke(strokeColor);
         r.setFill(fillColor);
         r.setUserData(this); // salvo nell'istanza Rectangle il riferimento all'istanza Rettangolo per poi poter recuperare la figura Rettangolo dal model, è un metadato.
-
-
 
         if (FiguraSelezionataManager.getInstance().get() == this) {
             r.setEffect(new DropShadow(20, Color.GREY));
@@ -59,7 +55,9 @@ public class Rettangolo extends Figura {
     @Override
     public Figura getClone() {
         int dx = 20;
-        return new Rettangolo(x1+dx, y1+dx, x2+dx, y2+dx, strokeColor, fillColor);
+        Rettangolo x = new Rettangolo(x1+dx, y1+dx, x2+dx, y2+dx, strokeColor, fillColor);
+        x.setRotazione(rotazione);
+        return x;
     }
 
     public String toString(){

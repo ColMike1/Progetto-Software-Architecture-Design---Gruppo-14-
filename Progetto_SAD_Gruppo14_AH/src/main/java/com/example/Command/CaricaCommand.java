@@ -1,6 +1,4 @@
 package com.example.Command;
-
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -53,6 +51,7 @@ public class CaricaCommand implements Command {
                         double y2 = Double.parseDouble(parts[4].split("=")[1]);
                         Color stroke = Color.web(parts[5].split("=")[1]);
                         Color fill = Color.web(parts[6].split("=")[1]);
+                        double rotazione = Double.parseDouble(parts[7].split("=")[1]);
 
                         figura = switch (tipo) {
                             case "ellisse" -> new Ellisse(x1, y1, x2, y2, stroke, fill);
@@ -61,6 +60,7 @@ public class CaricaCommand implements Command {
                             default -> throw new IllegalArgumentException("Tipo di tipo non valido"+tipo);
                         };
 
+                        figura.setRotazione(rotazione);
                         figureTemp.add(figura);
 
                     } catch (Exception e) {

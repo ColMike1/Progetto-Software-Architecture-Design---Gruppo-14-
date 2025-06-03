@@ -11,15 +11,12 @@
 */
 
 package com.example.Command;
-
-import javafx.fxml.FXML;
-
 import java.util.Stack;
 
 public class Invoker {
 
     private static Invoker invokerInstance;
-    private Stack<Command> undoStack = new Stack<>();
+    private Stack<Command> undoStack = new Stack<>(); //Stack per la memorizzazione dei comandi peer l'undo
 
     public static Invoker getInstance(){
         if(invokerInstance == null){
@@ -39,7 +36,7 @@ public class Invoker {
         if(cmd.canExecute()) {
             cmd.execute();
             if(cmd.isUndoable())
-                undoStack.push(cmd);
+                undoStack.push(cmd); //Inserimento nello stack
         }
     }
 
