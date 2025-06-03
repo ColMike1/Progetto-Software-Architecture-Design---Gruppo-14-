@@ -58,6 +58,12 @@ public class HelloController{
     @FXML
     private MenuItem paste;
     @FXML
+    private Slider sliderRotazione;
+
+
+
+
+    @FXML
     private ColorPicker strokeColorPicker;
     @FXML
     private ColorPicker fillColorPicker;
@@ -77,6 +83,9 @@ public class HelloController{
 
         lavagnaModel = LavagnaModel.getInstance();
         lavagnaView = LavagnaView.getInstance(lavagna);
+        sliderRotazione.setMin(0);
+        sliderRotazione.setMax(360);
+
 
         // (cut, copy, paste).setAccelerator(...)
         // Aggiunto da: Michele
@@ -223,6 +232,20 @@ public class HelloController{
             statoManager.getStato().onMouseReleased(event);
         });
 
+        //Aggiunto da Kevin
+        sliderRotazione.setOnMousePressed(event ->{
+            statoManager.setStato(new RuotaFiguraStato());
+        });
+        //Aggiunto da Kevin
+        sliderRotazione.valueProperty().addListener((obs, oldVal, newVal) -> {
+            statoManager.getStato().onSliderChanged(newVal.doubleValue());
+        });
+        //Aggiunto da Kevin
+        sliderRotazione.setOnMouseReleased(e -> {
+            statoManager.getStato().onSliderReleased(sliderRotazione.getValue());
+        });
+
+        //Aggiunto da Kevin
         salvaConNome.setOnAction(e ->{
 
             Command cmd = new SalvaFiguraCommand(salvaConNome, lavagnaModel);

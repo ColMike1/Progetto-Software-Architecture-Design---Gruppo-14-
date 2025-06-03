@@ -10,6 +10,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -123,6 +124,11 @@
                   <Insets left="30.0" />
                </VBox.margin>
             </Button>
+            <Slider fx:id="sliderRotazione" orientation="VERTICAL" prefHeight="252.0" prefWidth="103.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Slider>
       </children>
       <BorderPane.margin>
         <Insets />

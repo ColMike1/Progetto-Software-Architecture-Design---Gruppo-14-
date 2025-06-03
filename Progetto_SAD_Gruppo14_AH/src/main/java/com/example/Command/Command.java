@@ -6,7 +6,8 @@
 *
 * Autori:
 *  - Michele: execute(), undo()
-*  - Kevin: isUndoable(), canExecute()
+*  - Kevin: canExecute()
+*  - Mirko: isUndoable()
 */
 package com.example.Command;
 

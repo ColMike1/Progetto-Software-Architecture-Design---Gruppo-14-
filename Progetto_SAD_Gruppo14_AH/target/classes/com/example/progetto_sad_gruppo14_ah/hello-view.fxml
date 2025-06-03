@@ -10,6 +10,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -226,6 +227,7 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Slider fx:id="sliderRotazione" orientation="VERTICAL" prefHeight="229.0" prefWidth="52.0" />
          </children>
          <padding>
             <Insets left="20.0" right="20.0" top="20.0" />

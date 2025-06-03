@@ -19,11 +19,11 @@ public class ZoomOutCommand implements Command {
 
     private Group figureZoomabili;
     private LavagnaView lavagnaView;
-    private double x, y, scaleFactor = 1.1;
+    private double x, y;
 
 
-    public ZoomOutCommand(LavagnaView lavagnaView, double x, double y) {
-        this.lavagnaView = lavagnaView;
+    public ZoomOutCommand(double x, double y) {
+        this.lavagnaView = LavagnaView.getInstance();
         this.figureZoomabili = lavagnaView.getFigureZoomabili();
         this.x = x;
         this.y = y;

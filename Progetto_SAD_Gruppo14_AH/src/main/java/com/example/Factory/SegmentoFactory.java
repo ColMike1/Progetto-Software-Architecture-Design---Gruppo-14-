@@ -10,7 +10,6 @@
 */
 package com.example.Factory;
 
-import com.example.Model.Ellisse;
 import com.example.Model.Figura;
 import com.example.Model.Segmento;
 import javafx.scene.paint.Color;

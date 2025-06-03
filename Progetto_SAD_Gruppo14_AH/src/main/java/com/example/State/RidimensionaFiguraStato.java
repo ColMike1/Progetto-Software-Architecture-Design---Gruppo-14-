@@ -71,4 +71,8 @@ public class RidimensionaFiguraStato implements Stato {
         StatoManager.getInstance().setStato(new SelezionaFiguraStato());
 
     }
+    @Override
+    public void onSliderChanged(double sliderValue) {return;}
+    @Override
+    public void onSliderReleased(double sliderValue){return;}
 }

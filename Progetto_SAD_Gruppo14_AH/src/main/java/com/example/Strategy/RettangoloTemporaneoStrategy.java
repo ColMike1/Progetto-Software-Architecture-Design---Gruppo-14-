@@ -22,4 +22,20 @@ public class RettangoloTemporaneoStrategy implements FiguraTemporaneaStrategy {
         r.setWidth(Math.abs(x2 - x1));
         r.setHeight(Math.abs(y2 - y1));
     }
+    //Aggiunto da Kevin
+    // Applica una rotazione al nodo attorno al suo punto di rotazione predefinito
+    @Override
+    public void aggiornaRotazione(Node node, double rotazione) {
+        Rectangle e = (Rectangle) node;
+        e.setRotate(rotazione);
+    }
+    // Crea un rettangolo utile per visualizzare l'effetto della rotazione
+    @Override
+    public Node creaRotazione(double x1, double y1, double x2, double y2) {
+        Rectangle r = new Rectangle(x1, y1, x2-x1, y2-y1);
+        r.setStroke(Color.BLACK);
+        r.setFill(Color.LIGHTGRAY.deriveColor(1, 1, 1, 0.4));
+        return r;
+    }
+
 }
