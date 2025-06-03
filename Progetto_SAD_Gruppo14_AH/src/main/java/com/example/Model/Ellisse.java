@@ -1,3 +1,16 @@
+/**
+ * Classe che rappresenta una Ellisse come entità del modello.
+ * Contiene le informazioni geometriche e di stile necessarie per descrivere la figura Ellisse.
+ * I dati sono utilizzati dalla View per generare la rappresentazione grafica sulla lavagna.
+ * Inoltre la classe fornisce la strategia di rendering temporaneo tramite il pattern Strategy.
+ *
+ * Autori:
+ *  - Maria Silvana (costruttore, rendering statico del nodo Ellipse a partire dai dati del Model, metodo getTemporaryRenderStrategy())
+ *  - Michele (metodi getClone() e toString())
+ *  - Kevin (gestione rotazione)
+ */
+
+
 package com.example.Model;
 
 import com.example.State.FiguraSelezionataManager;
@@ -15,6 +28,7 @@ public class Ellisse extends Figura {
         super(x1, y1, x2, y2, strokeColor, fillColor,0); // salva tutte le coordinate nella superclasse
     }
 
+
     @Override
     public Node creaNodoJavaFX() {
         // Calcola centro e raggi
@@ -25,12 +39,15 @@ public class Ellisse extends Figura {
 
         Ellipse e = new Ellipse(centerX, centerY, radiusX, radiusY);
 
+        // collegamento tra nodo JavaFX ellipse e figura corrispondente Ellisse
         this.setNodo(e);
 
         e.setRotate(rotazione);
         e.setStrokeWidth(1);
         e.setStroke(strokeColor);
         e.setFill(fillColor);
+
+        // salvo nell'istanza Ellipse il riferimento all'istanza Ellisse per poi poter recuperare la figura Ellisse dal model, è un metadato.
         e.setUserData(this);
 
 
@@ -42,7 +59,7 @@ public class Ellisse extends Figura {
     }
 
     @Override
-    public FiguraTemporaneaStrategy getTemporaryResizeStrategy() {
+    public FiguraTemporaneaStrategy getTemporaryRenderStrategy() {
         return new EllisseTemporaneoStrategy();
     }
 
@@ -57,7 +74,12 @@ public class Ellisse extends Figura {
         return e;
     }
 
+
+    @Override
     public String toString(){
         return "Ellisse";
     }
+
+
+
 }

@@ -32,7 +32,8 @@ public class SpostaSottoCommand implements Command {
     // Undo che riporta la figura in cima (inverte l'esecuzione)
     @Override
     public void undo() {
-        FiguraSelezionataManager.getInstance().clear(); // Svuota la selezione corrente (per evitare conflitti)
+
+        FiguraSelezionataManager.getInstance().clear();
         lavagnaModel.spostaSopra(element);
     }
 
@@ -48,6 +49,7 @@ public class SpostaSottoCommand implements Command {
 
         return index != 0;
     }
+
     //Supporta l'undo
     @Override
     public boolean isUndoable() {

@@ -10,16 +10,21 @@
 
 package com.example.Command;
 
+import com.example.Factory.FiguraFactory;
+import com.example.Model.Figura;
 import com.example.Model.Griglia;
+import com.example.Model.LavagnaModel;
 import com.example.View.LavagnaView;
 import javafx.scene.paint.Color;
 
+import java.util.List;
 
 public class AggiungiGrigliaCommand implements Command {
 
     private double x2, y2;
     private int nRighe, nColonne;
     private Color strokeColor;
+    private Figura griglia;
 
     public AggiungiGrigliaCommand(int nRighe, int nColonne, double x2, double y2, Color strokeColor) {
         this.nRighe = nRighe;

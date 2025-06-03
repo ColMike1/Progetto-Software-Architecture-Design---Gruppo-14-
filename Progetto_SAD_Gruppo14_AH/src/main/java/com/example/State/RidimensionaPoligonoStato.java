@@ -28,18 +28,13 @@ package com.example.State;
 
 import com.example.Command.Command;
 import com.example.Command.Invoker;
-import com.example.Command.RidimensionaFiguraCommand;
 import com.example.Command.RidimensionaPoligonoCommand;
 import com.example.Model.*;
 import com.example.Strategy.*;
 import com.example.View.LavagnaView;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +46,7 @@ public class RidimensionaPoligonoStato implements Stato {
 
     Figura figura = FiguraSelezionataManager.getInstance().get();
     Node figuraTemporaneaFX = null;
-    FiguraTemporaneaStrategy strategy = figura.getTemporaryResizeStrategy();
+    FiguraTemporaneaStrategy strategy = figura.getTemporaryRenderStrategy();
 
     private List<Double> vecchiPunti = new ArrayList<>();
 

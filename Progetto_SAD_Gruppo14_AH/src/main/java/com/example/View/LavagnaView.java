@@ -1,14 +1,25 @@
+/**
+ * Classe che rappresenta la View principale della lavagna grafica nel pattern MVC.
+ *
+ * Implementa il pattern Singleton per garantire un'unica istanza globale della View,
+ * e funge da osservatore del LavagnaModel, aggiornando dinamicamente la rappresentazione
+ * grafica delle figure sulla lavagna tramite il metodo aggiornaLavana().
+ *
+ * Autori: tutti
+ *
+ */
+
+
 package com.example.View;
+
 import com.example.Model.Figura;
 import com.example.Model.Griglia;
 import com.example.Model.LavagnaModel;
 import com.example.Model.PoligonoArbitrario;
 import com.example.State.*;
-//import com.example.State.FiguraSelezionataManager;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -35,7 +46,11 @@ public class LavagnaView implements Runnable{
         }
         return instance;
     }
-    public AnchorPane getLavagna() {return lavagna;}
+
+    //vedere se serve
+    public AnchorPane getLavagna() {
+        return lavagna;
+    }
 
     public LavagnaView(AnchorPane lavagna){
         this.lavagna = lavagna;
@@ -90,11 +105,10 @@ public class LavagnaView implements Runnable{
                 if (!isInZoomStato && !(StatoManager.getInstance().getStato() instanceof DisegnaPoligonoArbitrarioStato)) {
                     FiguraSelezionataManager.getInstance().set(f);
                     System.out.println("Figura selezionata: " + f.toString() + "\n");
-
-                        StatoManager.getInstance().setStato(new SelezionaFiguraStato());
-
+                    StatoManager.getInstance().setStato(new SelezionaFiguraStato());
                 }
             });
+
         }
 
         // gestione figura selezionata, handle e toFront()
@@ -117,9 +131,6 @@ public class LavagnaView implements Runnable{
                         StatoManager.getInstance().setStato(new RidimensionaFiguraStato());
                     System.out.println("Inizio a ridimensionare");
                 });
-                handle.setOnMouseReleased(event -> {
-                    System.out.println("Ho ridimensionato");
-                });
 
                 // gestione handle spostamento
                 double hx_1 = f.getX1();
@@ -140,9 +151,7 @@ public class LavagnaView implements Runnable{
                     System.out.println("Inizio a spostare");
                 });
 
-                handle_1.setOnMouseReleased(event -> {
-                    System.out.println("Figura spostata");
-                });
+
         }
     }
 

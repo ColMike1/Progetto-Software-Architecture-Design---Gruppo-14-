@@ -1,3 +1,9 @@
+/** Stato del sistema che gestisce l'interazione per effettuare uno zoom-in.
+** Al click del mouse sulla lavagna, viene creato e eseguito un comando
+* di ZoomIn centrato sul punto cliccato.* Gli altri eventi non sono gestiti in questo stato.
+Autori:
+- Michele*/
+
 package com.example.State;
 
 import com.example.Command.Command;
@@ -29,7 +35,7 @@ public class ZoomInStato implements Stato{
     public void onSliderReleased(double sliderValue){return;}
     @Override
     public void onMouseClicked(MouseEvent event) {
-        // Non gestiamo il click in questo stato
+        return;
     }
 
 }

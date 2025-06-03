@@ -1,3 +1,16 @@
+/**
+ * Classe che rappresenta un Segmento come entità del modello.
+ * Contiene le informazioni geometriche e di stile necessarie per descrivere la figura Segmento.
+ * I dati sono utilizzati dalla View per generare la rappresentazione grafica sulla lavagna.
+ * Inoltre la classe fornisce la strategia di rendering temporaneo tramite il pattern Strategy.
+ *
+ * Autori:
+ *  - Maria Silvana (costruttore, rendering statico del nodo Line a partire dai dati del Model, metodo getTemporaryRenderStrategy())
+ *  - Michele (metodi getClone() e toString())
+ *  - Kevin (gestione rotazione)
+ */
+
+
 package com.example.Model;
 
 import com.example.State.FiguraSelezionataManager;
@@ -20,6 +33,7 @@ public class Segmento extends Figura {
 
         Line line = new Line(x1, y1, x2, y2);
 
+        // collegamento tra un'istanza di Segmento e la corrispondente istanza di Line
         this.setNodo(line);
 
         line.setRotate(rotazione);
@@ -37,7 +51,7 @@ public class Segmento extends Figura {
 
     }
 
-    public FiguraTemporaneaStrategy getTemporaryResizeStrategy() {
+    public FiguraTemporaneaStrategy getTemporaryRenderStrategy() {
         return new SegmentoTemporaneoStrategy();
     }
 

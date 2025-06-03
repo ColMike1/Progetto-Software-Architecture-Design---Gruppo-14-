@@ -1,25 +1,34 @@
-package com.example.State;
+/**
+ * Stato che gestisce l'operazione di ridimensionamento di una figura selezionata sulla lavagna,
+ * secondo il pattern State.
+ *
+ * Durante l'interazione dell'utente:
+ *  - onMousePressed(): memorizza il punto iniziale di ridimensionamento e crea la figura temporanea visualizzata durante l'interazione.
+ *  - onMouseDragged(): aggiorna dinamicamente la rappresentazione temporanea della figura durante il ridimensionamento.
+ *  - onMouseReleased(): applica il ridimensionamento definitivo tramite l'invocazione del comando RidimensionaFiguraCommand
+ *    (pattern Command), permettendo la gestione centralizzata dell'undo/redo.
+ *
+ * La gestione grafica temporanea durante l'interazione è delegata al pattern Strategy (FiguraTemporaneaStrategy),
+ * che permette di generare e aggiornare il preview visivo in modo uniforme per tutte le figure.
+ *
+ * Autori:
+ *  - Maria Silvana (implementazione dello stato di ridimensionamento, integrazione con Strategy e Command)
+ */
+
+
+ package com.example.State;
 
 import com.example.Command.Command;
 import com.example.Command.Invoker;
 import com.example.Command.RidimensionaFiguraCommand;
-import com.example.Command.RidimensionaPoligonoCommand;
 import com.example.Model.*;
-import com.example.Strategy.EllisseTemporaneoStrategy;
 import com.example.Strategy.FiguraTemporaneaStrategy;
-import com.example.Strategy.RettangoloTemporaneoStrategy;
-import com.example.Strategy.SegmentoTemporaneoStrategy;
 import com.example.View.LavagnaView;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class RidimensionaFiguraStato implements Stato {
@@ -32,7 +41,9 @@ public class RidimensionaFiguraStato implements Stato {
     double y1_init = FiguraSelezionataManager.getInstance().get().getY1();
 
     Node figuraTemporaneaFX = null;
-    FiguraTemporaneaStrategy strategy = figura.getTemporaryResizeStrategy();
+    FiguraTemporaneaStrategy strategy = figura.getTemporaryRenderStrategy();
+
+
 
 
     @Override
@@ -41,7 +52,6 @@ public class RidimensionaFiguraStato implements Stato {
         Point2D punto = LavagnaView.getInstance().getFigureZoomabili().sceneToLocal(event.getSceneX(), event.getSceneY());
         x1 = punto.getX();
         y1 = punto.getY();
-
 
         figuraTemporaneaFX = strategy.crea(x1, y1,figura.getRotazione());
         LavagnaView.getInstance().getFigureZoomabili().getChildren().add(figuraTemporaneaFX);
@@ -52,6 +62,7 @@ public class RidimensionaFiguraStato implements Stato {
         Point2D punto = LavagnaView.getInstance().getFigureZoomabili().sceneToLocal(e.getSceneX(), e.getSceneY());
         double x2 = punto.getX();
         double y2 = punto.getY();
+
 
         strategy.aggiorna(figuraTemporaneaFX, x1_init, y1_init, x2, y2, figura.getRotazione());
     }
@@ -82,6 +93,6 @@ public class RidimensionaFiguraStato implements Stato {
     public void onSliderReleased(double sliderValue){return;}
     @Override
     public void onMouseClicked(MouseEvent event) {
-        // Non implementato, ma necessario per l'interfaccia
+        return;
     }
 }

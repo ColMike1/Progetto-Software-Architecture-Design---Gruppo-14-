@@ -1,3 +1,23 @@
+/**
+ * Classe che rappresenta il modello centrale della lavagna grafica secondo il pattern MVC.
+ *
+ * LavagnaModel mantiene lo stato completo della lavagna, gestendo l'elenco di tutte le figure
+ * presenti (rettangoli, ellissi, testi, poligoni e segmenti) e coordinando tutte le operazioni di
+ * modifica delle figure: aggiunta, rimozione, spostamento, ridimensionamento, rotazione.
+ *
+ * Viene implementato come Singleton per garantire un'unica istanza condivisa in tutto il sistema.
+ *
+ * Il modello è osservabile: mantiene una lista di osservatori (Runnable) che vengono notificati
+ * tramite il metodo notificaOsservatori() ogni volta che lo stato della lavagna viene modificato.
+ * In questo modo la View (LavagnaView) può aggiornare automaticamente la rappresentazione grafica
+ * in seguito a modifiche del modello.
+ *
+ * Autori: tutti
+ *
+ */
+
+
+
 package com.example.Model;
 
 
@@ -22,10 +42,12 @@ public class LavagnaModel {
         return instance;
     }
 
+    // Maria Silvana
     public void selezionaFigura(Figura figura){
         notificaOsservatori();
     }
 
+    // Maria Silvana
     public void deselezionaFigura(Figura figura){
         notificaOsservatori();
     }
@@ -36,15 +58,17 @@ public class LavagnaModel {
         notificaOsservatori();
     }
 
+    // Michele
     public void setFiguraCopiata(Figura figura){
         figuraCopiata = figura;
     }
 
+    // Michele
     public Figura getFiguraCopiata(){
         return figuraCopiata;
     }
 
-
+    // Maria Silvana
     public void ridimensionaFigura(Figura figura, double x2, double y2){
 
         figure.get(figure.indexOf(figura)).setX2(x2);
@@ -75,7 +99,7 @@ public class LavagnaModel {
         notificaOsservatori();
     }
 
-
+    // Maria Silvana
     public void spostaFigura(Figura figura, double x1, double y1){
         double x2_diff = figure.get(figure.indexOf(figura)).getX2() - figure.get(figure.indexOf(figura)).getX1();
         double y2_diff = figure.get(figure.indexOf(figura)).getY2() - figure.get(figure.indexOf(figura)).getY1();
@@ -92,16 +116,19 @@ public class LavagnaModel {
 
     //Cambia Colore bordo della figura. Aggiunto da Kevin
     public void cambiaColoreBordo(Figura figura, Color colore){
-        figure.get(figure.indexOf(figura)).setStrokeColor(colore);
+        int index = figure.indexOf(figura);
+        figure.get(index).setStrokeColor(colore);
         notificaOsservatori();
 
     }
     //Cambia colore interno della figura. Aggiunto da Kevin
     public void cambiaColoreInterno(Figura figura, Color colore){
-        figure.get(figure.indexOf(figura)).setFillColor(colore);
+        int index = figure.indexOf(figura);
+        figure.get(index).setFillColor(colore);
         notificaOsservatori();
     }
 
+    // Maria Silvana
     public void aggiungiFigura(Figura figura){
         figure.add(figura);
         notificaOsservatori();
@@ -122,12 +149,14 @@ public class LavagnaModel {
         }
     }
 
+    // Mirko
     public void svuotaLavagna() {
         figure.clear();
         FiguraSelezionataManager.getInstance().clear();
         notificaOsservatori();
     }
 
+    // Mirko
     public void caricaFigure(List <Figura> tempList){
         figure.addAll(tempList);
         notificaOsservatori();
@@ -151,12 +180,20 @@ public class LavagnaModel {
         // Notifica gli osservatori che il modello è cambiato
         notificaOsservatori();
     }
+
     //Aggiunto da Kevin
     public void cambiaRotazione(Figura figura, double rotazione){
         // Imposta una nuova rotazione sulla figura indicata
         figure.get(figure.indexOf(figura)).setRotazione(rotazione);
         // Notifica gli osservatori della modifica
         notificaOsservatori();
+
+    }
+
+    public void setFont(int font){
+       Figura figura = FiguraSelezionataManager.getInstance().get();
+       figura.fontSize = font;
+       notificaOsservatori();
     }
 
 }

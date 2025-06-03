@@ -62,14 +62,12 @@ public class HelloController{
     private MenuItem copy;
     @FXML
     private MenuItem paste;
+
     @FXML
     private ComboBox<Integer> fontSizeComboBox;
 
     @FXML
     private Slider sliderRotazione;
-
-
-
 
     @FXML
     private ColorPicker strokeColorPicker;
@@ -79,8 +77,8 @@ public class HelloController{
 
     private LavagnaModel lavagnaModel;
     private LavagnaView lavagnaView;
-    private FiguraSelezionataManager figuraSelezionataManager = FiguraSelezionataManager.getInstance();
 
+    private FiguraSelezionataManager figuraSelezionataManager = FiguraSelezionataManager.getInstance();
     private StatoManager statoManager = StatoManager.getInstance();
 
 
@@ -91,21 +89,25 @@ public class HelloController{
 
         lavagnaModel = LavagnaModel.getInstance();
         lavagnaView = LavagnaView.getInstance(lavagna);
+
+        // Aggiunto da: Kevin
         sliderRotazione.setMin(0);
         sliderRotazione.setMax(360);
+
 
         // inizializzazione fontSizeComboBox
         ObservableList<Integer> fontSizes = FXCollections.observableArrayList(
                 8, 10, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 48, 56, 64, 72
         );
 
+        // Aggiunto da: Maria Silvana
         fontSizeComboBox.setItems(fontSizes);
         fontSizeComboBox.setValue(12);
 
-        copy.setAccelerator(new KeyCodeCombination(
-                KeyCode.C,
-                KeyCombination.CONTROL_DOWN
-        ));
+        // Aggiunto da: Maria Silvana
+        fontSizeComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            lavagnaModel.setFont(newValue);
+        });
 
 
         // (cut, copy, paste).setAccelerator(...)
@@ -126,6 +128,7 @@ public class HelloController{
                 cmd = new RimuoviGrigliaCommand();
                 Invoker.getInstance().executeCommand(cmd);
             }
+
         });
 
         // Aggiunto da: Michele
@@ -185,6 +188,7 @@ public class HelloController{
             Invoker.getInstance().executeCommand(new ResetZoomCommand(lavagnaView));
         });
 
+        // Aggiunto da: Maria Silvana
         rettangoloButton.setOnAction(e -> {
             if (rettangoloButton.isSelected()) {
                 statoManager.setStato(new DisegnaFiguraStato(new RettangoloFactory(), lavagna, lavagnaModel, strokeColorPicker, fillColorPicker,fontSizeComboBox));
@@ -197,7 +201,7 @@ public class HelloController{
             LavagnaModel.getInstance().deselezionaFigura(figuraSelezionataManager.get());
         });
 
-
+        // Aggiunto da: Maria Silvana
         segmentoButton.setOnAction(e -> {
             if (segmentoButton.isSelected()) {
                 statoManager.setStato(new DisegnaFiguraStato(new SegmentoFactory(),lavagna, lavagnaModel, strokeColorPicker, fillColorPicker,fontSizeComboBox));
@@ -210,7 +214,7 @@ public class HelloController{
             LavagnaModel.getInstance().deselezionaFigura(figuraSelezionataManager.get());
         });
 
-
+        // Aggiunto da: Maria Silvana
         ellisseButton.setOnAction(e -> {
             if (ellisseButton.isSelected()) {
                 statoManager.setStato(new DisegnaFiguraStato(new EllisseFactory(), lavagna, lavagnaModel, strokeColorPicker, fillColorPicker,fontSizeComboBox));
@@ -236,7 +240,9 @@ public class HelloController{
             }
         });
 
+        // Aggiunto da: Maria Silvana
         testoButton.setOnAction(e -> {
+
             if (testoButton.isSelected()) {
                 statoManager.setStato(new DisegnaFiguraStato(new TestoFactory(),lavagna, lavagnaModel, strokeColorPicker, fillColorPicker,fontSizeComboBox));
             } else {
@@ -260,16 +266,18 @@ public class HelloController{
         });
 
 
-
+        // Aggiunto da: Maria Silvana
         lavagna.setOnMousePressed(event ->{
             statoManager.getStato().onMousePressed(event);
         });
 
+        // Aggiunto da: Maria Silvana
         lavagna.setOnMouseDragged(event ->{
             statoManager.getStato().onMouseDragged(event);
 
         });
 
+        // Aggiunto da: Maria Silvana
         lavagna.setOnMouseReleased(event ->{
             statoManager.getStato().onMouseReleased(event);
         });
@@ -284,13 +292,14 @@ public class HelloController{
             if (FiguraSelezionataManager.getInstance().get().getClass() == PoligonoArbitrario.class)
                 statoManager.setStato(new RuotaPoligonoStato());
             else
-             statoManager.setStato(new RuotaFiguraStato());
+                statoManager.setStato(new RuotaFiguraStato());
         });
 
         //Aggiunto da Kevin
         sliderRotazione.valueProperty().addListener((obs, oldVal, newVal) -> {
             statoManager.getStato().onSliderChanged(newVal.doubleValue());
         });
+
         //Aggiunto da Kevin
         sliderRotazione.setOnMouseReleased(e -> {
             statoManager.getStato().onSliderReleased(sliderRotazione.getValue());
@@ -315,6 +324,7 @@ public class HelloController{
 
         });
 
+        // Aggiunto da: Kevin
         spostaSopraButton.setOnAction(e -> {
             if(figuraSelezionataManager.get() != null){
                 Command cmd = new SpostaSopraCommand(lavagnaModel, figuraSelezionataManager.get());
@@ -325,6 +335,7 @@ public class HelloController{
             }
         });
 
+        // Aggiunto da: Kevin
         spostaSottoButton.setOnAction(e -> {
             if(figuraSelezionataManager.get() != null){
                 Command cmd = new SpostaSottoCommand(lavagnaModel, figuraSelezionataManager.get());
@@ -335,6 +346,7 @@ public class HelloController{
             }
         });
 
+        // Aggiunto da: Kevin
         fillColorPicker.setOnAction(e -> {
             if(figuraSelezionataManager.get() != null){
                 Command cmd = new CambiaColoreInternoCommand(lavagnaModel, figuraSelezionataManager.get(), fillColorPicker.getValue());
@@ -346,6 +358,7 @@ public class HelloController{
             }
         });
 
+        // Aggiunto da: Kevin
         strokeColorPicker.setOnAction(e -> {
             if(figuraSelezionataManager.get() != null){
                 Command cmd = new CambiaColoreBordoCommand(lavagnaModel, figuraSelezionataManager.get(), strokeColorPicker.getValue());
@@ -361,12 +374,14 @@ public class HelloController{
             figuraSelezionataManager.clear();
         });
 
+
         // Aggiunto da: Mirko
         Elimina.setOnAction(e->{
             Figura figura = figuraSelezionataManager.get();
             if(figura != null) {
                 Command cmd = new EliminaCommand(lavagnaModel, figura);
                 Invoker.getInstance().executeCommand(cmd);
+                System.out.println("FIGURA ELIMINATA");
             }
             else
                 System.out.println("Nessuna figura selezionata");
@@ -378,6 +393,7 @@ public class HelloController{
             if(figura != null) {
                 Command cmd = new CutCommand(lavagnaModel, figura);
                 Invoker.getInstance().executeCommand(cmd);
+
             }
             else
                 System.out.println("Nessuna figura selezionata");
@@ -390,6 +406,7 @@ public class HelloController{
             if(figura != null) {
                 Command cmd = new CopyCommand(lavagnaModel, figura);
                 Invoker.getInstance().executeCommand(cmd);
+
             }
             else
                 System.out.println("Nessuna figura selezionata");

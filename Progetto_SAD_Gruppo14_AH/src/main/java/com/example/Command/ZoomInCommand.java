@@ -29,13 +29,17 @@ public class ZoomInCommand implements Command {
 
     public void execute() {
 
+        // Trasforma le coordinate locali del punto cliccato in coordinate della scena
         Point2D puntoNellaScena = figureZoomabili.localToScene(x, y);
 
+        // Applica lo zoom
         figureZoomabili.setScaleX(figureZoomabili.getScaleX() * scaleFactor);
         figureZoomabili.setScaleY(figureZoomabili.getScaleY() * scaleFactor);
 
+        // Ricalcola la posizione del punto dopo lo zoom
         Point2D nuovoPuntoNellaScena = figureZoomabili.localToScene(x, y);
 
+        // Calcola differenza e trasla il contenuto per mantenere il punto sotto il mouse
         double dx = nuovoPuntoNellaScena.getX() - puntoNellaScena.getX();
         double dy = nuovoPuntoNellaScena.getY() - puntoNellaScena.getY();
 

@@ -18,6 +18,8 @@
  */
 
 package com.example.Command;
+
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -74,7 +76,7 @@ public class CaricaCommand implements Command {
                         double rotazione = 0;
                         List<Double> punti = new ArrayList<>();
                         if (tipo.equals("poligonoarbitrario")) {
-                            for (int i = 1; i < parts.length - 4; i++) {
+                            for (int i = 1; i < parts.length - 3; i++) {
                             punti.add(Double.parseDouble(parts[i]));
                             }
                             stroke = Color.web(parts[parts.length-3].split("=")[1]);
