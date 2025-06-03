@@ -39,8 +39,8 @@ public class Testo extends Figura{
 
         textArea.textProperty().addListener((obs, oldVal, newVal) -> setContenuto(newVal));
 
-        textArea.setLayoutX(x1+padding);
-        textArea.setLayoutY(y1+padding);
+        textArea.setLayoutX(Math.min(x1, x2)+padding);
+        textArea.setLayoutY(Math.min(y1, y2)+padding);
         textArea.setPrefWidth(Math.abs(x2 - x1)-2*padding);
         textArea.setPrefHeight(Math.abs(y2 - y1)-2*padding);
         textArea.setWrapText(true);
@@ -50,8 +50,8 @@ public class Testo extends Figura{
 
 
         Rectangle box = new Rectangle();
-        box.setX(x1);
-        box.setY(y1);
+        box.setX(Math.min(x1, x2));
+        box.setY(Math.min(y1, y2));
         box.setWidth(Math.abs(x2 - x1));
         box.setHeight(Math.abs(y2 - y1));
         box.setFill(fillColor);

@@ -1,3 +1,12 @@
+/*
+* Comando che rimuove la griglia dalla vista della lavagna.
+*
+* Agisce direttamente sulla LavagnaView per eliminare la griglia attualmente visualizzata.
+* Non supporta l'operazione di annullamento ('undo').
+*
+* Autori:
+*  -Michele
+*/
 package com.example.Command;
 
 import com.example.Factory.FiguraFactory;

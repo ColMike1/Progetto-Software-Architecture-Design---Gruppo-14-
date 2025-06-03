@@ -1,3 +1,14 @@
+/*
+* Comando che gestisce lo zoom-out sulla lavagna centrato sul punto cliccato.
+*
+* Riduce gradualmente la scala del gruppo di figure zoomabili, mantenendo il focus
+* sul punto di interazione. Se già alla scala iniziale, ripristina anche le traslazioni.
+* Non è annullabile.
+*
+* Autori:
+*  - Michele
+*
+*/
 package com.example.Command;
 
 import com.example.View.LavagnaView;
@@ -23,7 +34,7 @@ public class ZoomOutCommand implements Command {
         double scalaCorrente = figureZoomabili.getScaleX();
         double scalaTarget = 1.0;
 
-        // Se siamo già alla scala iniziale, esci
+        // Se scalaCorrente - scalaTarget è minima, fai solo reset dello zoom
         if (Math.abs(scalaCorrente - scalaTarget) < 0.01) {
             figureZoomabili.setScaleX(1.0);
             figureZoomabili.setScaleY(1.0);

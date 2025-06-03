@@ -58,10 +58,6 @@ public class HelloController{
     @FXML
     private MenuItem paste;
     @FXML
-    private Menu menuEdit;
-
-
-    @FXML
     private ColorPicker strokeColorPicker;
     @FXML
     private ColorPicker fillColorPicker;
@@ -82,31 +78,15 @@ public class HelloController{
         lavagnaModel = LavagnaModel.getInstance();
         lavagnaView = LavagnaView.getInstance(lavagna);
 
-        // disabilito menuItems
-        /*Elimina.setDisable(true);
-        cut.setDisable(true);
-        copy.setDisable(true);*/
+        // (cut, copy, paste).setAccelerator(...)
+        // Aggiunto da: Michele
+        cut.setAccelerator(new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN));
+        copy.setAccelerator(new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN));
+        paste.setAccelerator(new KeyCodeCombination(KeyCode.V, KeyCombination.CONTROL_DOWN));
 
-        copy.setAccelerator(new KeyCodeCombination(
-                KeyCode.C,
-                KeyCombination.CONTROL_DOWN
-        ));
+        Elimina.setAccelerator(new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN));
 
-        Elimina.setAccelerator(new KeyCodeCombination(
-                KeyCode.D,
-                KeyCombination.CONTROL_DOWN
-        ));
-
-        cut.setAccelerator(new KeyCodeCombination(
-                KeyCode.X,
-                KeyCombination.CONTROL_DOWN
-        ));
-        paste.setAccelerator(new KeyCodeCombination(
-                KeyCode.V,
-                KeyCombination.CONTROL_DOWN
-        ));
-
-
+        // Aggiunto da: Michele
         lavagna.heightProperty().addListener((observable, oldValue, newValue) -> {
             Command cmd = new AggiungiGrigliaCommand(Integer.parseInt(nRighe.getText()), Integer.parseInt(nColonne.getText()), lavagna.getWidth(), (double) newValue, Color.LIGHTGRAY);
             if(grigliaButton.isSelected()){
@@ -116,9 +96,9 @@ public class HelloController{
                 cmd = new RimuoviGrigliaCommand();
                 Invoker.getInstance().executeCommand(cmd);
             }
-
         });
 
+        // Aggiunto da: Michele
         lavagna.widthProperty().addListener((observable, oldValue, newValue) -> {
             Command cmd = new AggiungiGrigliaCommand(Integer.parseInt(nRighe.getText()), Integer.parseInt(nColonne.getText()), (double) newValue, lavagna.getHeight(), Color.LIGHTGRAY);
             if(grigliaButton.isSelected()){
@@ -130,6 +110,7 @@ public class HelloController{
             }
         });
 
+        // Aggiunto da: Michele
         nRighe.textProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 int nRighe = Integer.parseInt(newValue);
@@ -141,6 +122,7 @@ public class HelloController{
             }
         });
 
+        // Aggiunto da: Michele
         nColonne.textProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 int nColonne = Integer.parseInt(newValue);
@@ -152,20 +134,23 @@ public class HelloController{
             }
         });
 
+        // Aggiunto da: Michele
         zoom_in.setOnAction((e) -> {
             if (zoom_in.isSelected())
-                statoManager.setStato(new ZoomInStato(lavagnaView));
+                statoManager.setStato(new ZoomInStato());
             else
                 statoManager.setStato(new IdleStato());
         });
 
+        // Aggiunto da: Michele
         zoom_out.setOnAction((e) -> {
             if (zoom_out.isSelected())
-                statoManager.setStato(new ZoomOutStato(lavagnaView));
+                statoManager.setStato(new ZoomOutStato());
             else
                 statoManager.setStato(new IdleStato());
         });
 
+        // Aggiunto da: Michele
         resetZoomButton.setOnAction((event) -> {
             Invoker.getInstance().executeCommand(new ResetZoomCommand(lavagnaView));
         });
@@ -202,6 +187,7 @@ public class HelloController{
             }
         });
 
+        // Aggiunto da: Michele
         grigliaButton.setOnAction(event -> {
             try{
                 if(grigliaButton.isSelected())
@@ -299,21 +285,6 @@ public class HelloController{
             figuraSelezionataManager.clear();
         });
 
-        /*menuEdit.setOnShown(e -> {
-            Figura figura = figuraSelezionataManager.get();
-            if(figura != null) {
-                Elimina.setDisable(false);
-                cut.setDisable(false);
-                copy.setDisable(false);
-            }
-        });*/
-
-       /* menuEdit.setOnHidden(e -> {
-            Elimina.setDisable(true);
-            cut.setDisable(true);
-            copy.setDisable(true);
-        });*/
-
         Elimina.setOnAction(e->{
             Figura figura = figuraSelezionataManager.get();
             if(figura != null) {
@@ -324,6 +295,7 @@ public class HelloController{
                 System.out.println("Nessuna figura selezionata");
         });
 
+        // Aggiunto da: Michele
         cut.setOnAction(e->{
             Figura figura = figuraSelezionataManager.get();
             if(figura != null) {
@@ -335,6 +307,7 @@ public class HelloController{
         });
 
 
+        // Aggiunto da: Michele
         copy.setOnAction(event->{
             Figura figura = figuraSelezionataManager.get();
             if(figura != null) {
@@ -346,6 +319,7 @@ public class HelloController{
 
         });
 
+        // Aggiunto da: Michele
         paste.setOnAction(event->{
             try{
                 Command cmd = new PasteCommand(lavagnaModel);

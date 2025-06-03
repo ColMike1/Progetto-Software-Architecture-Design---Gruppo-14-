@@ -1,3 +1,15 @@
+/*
+* Classe singleton 'Invoker' che gestisce l'esecuzione e l'annullamento dei comandi.
+*
+* Applica il pattern Command, eseguendo comandi tramite 'executeCommand()' e memorizzando
+* quelli annullabili in uno stack per supportare l'operazione di undo.
+*
+* Autori:
+* - Michele: crezione classe invoker con metodo executeCommand;
+* - Kevin, Mirko: aggiornamento classe Invoker con operazioni di Undo e caricamento dei
+*                 comandi nello stack dei comandi eseguiti.
+*/
+
 package com.example.Command;
 
 import javafx.fxml.FXML;

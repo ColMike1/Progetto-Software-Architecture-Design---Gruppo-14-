@@ -19,6 +19,7 @@ public class RidimensionaFiguraCommand implements Command {
 
     public void execute() {
         LavagnaModel.getInstance().ridimensionaFigura(figura_selezionata, x2, y2);
+        System.out.println("Figura " + figura_selezionata + " ridimensionata");
     }
 
 

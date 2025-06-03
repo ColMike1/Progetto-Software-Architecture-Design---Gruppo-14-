@@ -12,7 +12,7 @@ public class LavagnaModel {
     private static LavagnaModel instance;
     private List<Figura> figure = new ArrayList<>();
     private List<Runnable> osservatori = new ArrayList<>();
-    private Figura figuraCopiata;
+    private Figura figuraCopiata; // Aggiunto da: Michele
 
 
     public static LavagnaModel getInstance(){
@@ -35,10 +35,11 @@ public class LavagnaModel {
         notificaOsservatori();
     }
 
+    // Aggiunto da: Michele
     public void setFiguraCopiata(Figura figura){
         figuraCopiata = figura;
     }
-
+    // Aggiunto da: Michele
     public Figura getFiguraCopiata(){
         return figuraCopiata;
     }
