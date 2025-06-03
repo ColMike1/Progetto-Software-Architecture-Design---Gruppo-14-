@@ -1,3 +1,10 @@
+/**
+ * Comando per eliminare una figura dalla lavagna.
+ *
+ * Esegue la rimozione della figura dal modello LavagnaModel e pulisce la selezione corrente.
+ * Supporta l'undo, che reinserisce la figura eliminata nel modello.
+ */
+
 package com.example.Command;
 
 

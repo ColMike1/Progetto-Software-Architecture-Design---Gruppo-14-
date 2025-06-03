@@ -3,11 +3,9 @@ package com.example.State;
 import com.example.Command.Command;
 import com.example.Command.Invoker;
 import com.example.Command.RidimensionaFiguraCommand;
+import com.example.Command.RidimensionaPoligonoCommand;
 import com.example.Model.*;
-import com.example.Strategy.EllisseTemporaneoStrategy;
-import com.example.Strategy.FiguraTemporaneaStrategy;
-import com.example.Strategy.RettangoloTemporaneoStrategy;
-import com.example.Strategy.SegmentoTemporaneoStrategy;
+import com.example.Strategy.*;
 import com.example.View.LavagnaView;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -16,6 +14,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class RidimensionaFiguraStato implements Stato {
@@ -31,6 +32,8 @@ public class RidimensionaFiguraStato implements Stato {
     FiguraTemporaneaStrategy strategy = figura.getTemporaryResizeStrategy();
 
 
+
+
     @Override
     public void onMousePressed(MouseEvent event) {
 
@@ -38,7 +41,8 @@ public class RidimensionaFiguraStato implements Stato {
         x1 = punto.getX();
         y1 = punto.getY();
 
-        figuraTemporaneaFX = strategy.crea(x1, y1);
+
+        figuraTemporaneaFX = strategy.crea(x1, y1,figura.getRotazione());
         LavagnaView.getInstance().getFigureZoomabili().getChildren().add(figuraTemporaneaFX);
     }
 
@@ -48,7 +52,7 @@ public class RidimensionaFiguraStato implements Stato {
         double x2 = punto.getX();
         double y2 = punto.getY();
 
-        strategy.aggiorna(figuraTemporaneaFX, x1_init, y1_init, x2, y2);
+        strategy.aggiorna(figuraTemporaneaFX, x1_init, y1_init, x2, y2, figura.getRotazione());
     }
 
 
@@ -69,10 +73,14 @@ public class RidimensionaFiguraStato implements Stato {
         Command cmd = new RidimensionaFiguraCommand(x2, y2, x1, y1);
         Invoker.getInstance().executeCommand(cmd);
         StatoManager.getInstance().setStato(new SelezionaFiguraStato());
-
     }
+
     @Override
     public void onSliderChanged(double sliderValue) {return;}
     @Override
     public void onSliderReleased(double sliderValue){return;}
+    @Override
+    public void onMouseClicked(MouseEvent event) {
+        // Non implementato, ma necessario per l'interfaccia
+    }
 }

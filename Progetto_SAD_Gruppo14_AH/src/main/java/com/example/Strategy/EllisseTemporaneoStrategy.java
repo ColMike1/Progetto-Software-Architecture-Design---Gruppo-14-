@@ -7,15 +7,16 @@ import javafx.scene.shape.Ellipse;
 public class EllisseTemporaneoStrategy implements FiguraTemporaneaStrategy {
 
     @Override
-    public Node crea(double x1, double y1) {
+    public Node crea(double x1, double y1, double rotazione) {
         Ellipse e = new Ellipse(x1, y1, 0, 0); // centro = x1,y1 iniziale
         e.setStroke(Color.BLACK);
         e.setFill(Color.LIGHTGRAY.deriveColor(1, 1, 1, 0.4));
+        e.setRotate(rotazione);
         return e;
     }
 
     @Override
-    public void aggiorna(Node node, double x1, double y1, double x2, double y2) {
+    public void aggiorna(Node node, double x1, double y1, double x2, double y2, double rotazione) {
         Ellipse e = (Ellipse) node;
         double centerX = (x1 + x2) / 2;
         double centerY = (y1 + y2) / 2;
@@ -26,17 +27,13 @@ public class EllisseTemporaneoStrategy implements FiguraTemporaneaStrategy {
         e.setCenterY(centerY);
         e.setRadiusX(radiusX);
         e.setRadiusY(radiusY);
+        e.setRotate(rotazione);
     }
-
-    //Aggiunto da Kevin
-    // Applica una rotazione al nodo attorno al suo punto di rotazione predefinito
     @Override
     public void aggiornaRotazione(Node node, double rotazione){
         Ellipse e = (Ellipse) node;
         e.setRotate(rotazione);
     }
-
-    // Crea un'ellisse utile per visualizzare l'effetto della rotazione
     @Override
     public Node creaRotazione(double x1, double y1, double x2, double y2) {
         double centerX = (x1 + x2) / 2;
@@ -49,5 +46,6 @@ public class EllisseTemporaneoStrategy implements FiguraTemporaneaStrategy {
         e.setFill(Color.LIGHTGRAY.deriveColor(1, 1, 1, 0.4));
 
         return e;
+
     }
 }

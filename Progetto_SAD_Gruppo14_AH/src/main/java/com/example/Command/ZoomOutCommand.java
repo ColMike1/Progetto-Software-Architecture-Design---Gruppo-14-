@@ -1,32 +1,24 @@
-/*
-* Comando che gestisce lo zoom-out sulla lavagna centrato sul punto cliccato.
-*
-* Riduce gradualmente la scala del gruppo di figure zoomabili, mantenendo il focus
-* sul punto di interazione. Se già alla scala iniziale, ripristina anche le traslazioni.
-* Non è annullabile.
-*
-* Autori:
-*  - Michele
-*
-*/
 package com.example.Command;
 
 import com.example.View.LavagnaView;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.layout.AnchorPane;
 
 public class ZoomOutCommand implements Command {
 
     private Group figureZoomabili;
     private LavagnaView lavagnaView;
-    private double x, y;
+    private double x, y, scaleFactor = 1.1;
+    private AnchorPane lavagna;
 
 
-    public ZoomOutCommand(double x, double y) {
-        this.lavagnaView = LavagnaView.getInstance();
+    public ZoomOutCommand(LavagnaView lavagnaView, double x, double y) {
+        this.lavagnaView = lavagnaView;
         this.figureZoomabili = lavagnaView.getFigureZoomabili();
         this.x = x;
         this.y = y;
+        this.lavagna = lavagnaView.getLavagna();
     }
 
 
@@ -34,7 +26,9 @@ public class ZoomOutCommand implements Command {
         double scalaCorrente = figureZoomabili.getScaleX();
         double scalaTarget = 1.0;
 
-        // Se scalaCorrente - scalaTarget è minima, fai solo reset dello zoom
+
+
+        // Se siamo già alla scala iniziale, esci
         if (Math.abs(scalaCorrente - scalaTarget) < 0.01) {
             figureZoomabili.setScaleX(1.0);
             figureZoomabili.setScaleY(1.0);
@@ -54,6 +48,12 @@ public class ZoomOutCommand implements Command {
          Point2D dopo = figureZoomabili.localToScene(x, y);
          double dx = dopo.getX() - prima.getX();
          double dy = dopo.getY() - prima.getY();
+
+        /*
+        lavagna.setPrefWidth(lavagna.getPrefWidth() * 0.8);
+        lavagna.setPrefHeight(lavagna.getPrefHeight() * 0.8);
+        */
+
 
          figureZoomabili.setTranslateX((figureZoomabili.getTranslateX() - dx) * 0.8);
          figureZoomabili.setTranslateY((figureZoomabili.getTranslateY() - dy) * 0.8);

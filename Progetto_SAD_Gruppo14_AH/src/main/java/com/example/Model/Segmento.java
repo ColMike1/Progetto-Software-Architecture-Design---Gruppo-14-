@@ -12,7 +12,7 @@ public class Segmento extends Figura {
 
 
     public Segmento(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
-        super(x1, y1, x2, y2, strokeColor, fillColor); // salva tutto nella superclasse
+        super(x1, y1, x2, y2, strokeColor, fillColor,0); // salva tutto nella superclasse
     }
 
     @Override
@@ -44,9 +44,7 @@ public class Segmento extends Figura {
     @Override
     public Figura getClone() {
         int dx = 20;
-        Segmento x = new Segmento(x1+dx, y1+dx, x2+dx, y2+dx, strokeColor, fillColor);
-        x.setRotazione(rotazione);
-        return x;
+        return new Segmento(x1+dx, y1+dx, x2+dx, y2+dx, strokeColor, fillColor);
     }
 
     public String toString(){

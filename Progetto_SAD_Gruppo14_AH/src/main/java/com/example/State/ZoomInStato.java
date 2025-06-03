@@ -8,12 +8,18 @@ import javafx.scene.input.MouseEvent;
 
 public class ZoomInStato implements Stato{
 
+    private LavagnaView lavagnaView;
+
+    public ZoomInStato(LavagnaView lavagnaView){
+        this.lavagnaView = lavagnaView;
+    }
 
     @Override
     public void onMousePressed(MouseEvent event){
         double x = event.getX();
         double y = event.getY();
-        Command cmd = new ZoomInCommand(x, y);
+
+        Command cmd = new ZoomInCommand(lavagnaView, x, y);
         Invoker.getInstance().executeCommand(cmd);
     }
 
@@ -27,5 +33,9 @@ public class ZoomInStato implements Stato{
     public void onSliderChanged(double sliderValue) {return;}
     @Override
     public void onSliderReleased(double sliderValue){return;}
+    @Override
+    public void onMouseClicked(MouseEvent event) {
+        // Non gestiamo il click in questo stato
+    }
 
 }

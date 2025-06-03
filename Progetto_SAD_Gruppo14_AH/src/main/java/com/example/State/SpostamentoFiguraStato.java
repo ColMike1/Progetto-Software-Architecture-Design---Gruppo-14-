@@ -3,12 +3,18 @@ package com.example.State;
 import com.example.Command.Command;
 import com.example.Command.Invoker;
 import com.example.Command.SpostamentoFiguraCommand;
+import com.example.Model.Figura;
 import com.example.Model.LavagnaModel;
+import com.example.Model.PoligonoArbitrario;
 import com.example.Strategy.FiguraTemporaneaStrategy;
+import com.example.Strategy.PoligonoArbitrarioStrategy;
 import com.example.View.LavagnaView;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SpostamentoFiguraStato implements Stato {
 
@@ -19,7 +25,7 @@ public class SpostamentoFiguraStato implements Stato {
     double figuraX2_iniziale;
     double figuraY2_iniziale;
 
-
+    Figura figura = FiguraSelezionataManager.getInstance().get();
     FiguraSelezionataManager figuraSelezionataManager = FiguraSelezionataManager.getInstance();
     FiguraTemporaneaStrategy figuraTemporaneaStrategy = null;
     Node figuraTemporanea = null;
@@ -41,7 +47,7 @@ public class SpostamentoFiguraStato implements Stato {
 
         figuraTemporaneaStrategy = figuraSelezionataManager.get().getTemporaryResizeStrategy();
 
-        figuraTemporanea = figuraTemporaneaStrategy.crea(handle_x_iniziale, handle_y_iniziale);
+        figuraTemporanea = figuraTemporaneaStrategy.crea(handle_x_iniziale, handle_y_iniziale,figura.getRotazione());
 
         //Aggiungo la figura temporanea alla lavagna
         LavagnaView.getInstance().getFigureZoomabili().getChildren().add(figuraTemporanea);
@@ -62,8 +68,7 @@ public class SpostamentoFiguraStato implements Stato {
         double nuovoX2 = figuraX2_iniziale + deltaX;
         double nuovoY2 = figuraY2_iniziale + deltaY;
 
-        figuraTemporaneaStrategy.aggiorna(figuraTemporanea, nuovoX1,nuovoY1, nuovoX2,nuovoY2);
-
+        figuraTemporaneaStrategy.aggiorna(figuraTemporanea, nuovoX1, nuovoY1, nuovoX2, nuovoY2, figura.getRotazione());
     }
 
     @Override
@@ -90,4 +95,8 @@ public class SpostamentoFiguraStato implements Stato {
     public void onSliderChanged(double sliderValue) {return;}
     @Override
     public void onSliderReleased(double sliderValue){return;}
+    @Override
+    public void onMouseClicked(MouseEvent event) {
+        // Non gestiamo il click in questo stato
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.State;
+/*package com.example.State;
 
 
 import com.example.Command.AggiungiFiguraCommand;
@@ -74,7 +74,8 @@ public class InserisciTestoStato implements Stato {
         Invoker.getInstance().executeCommand(cmd);
     }
     @Override
-    public void onSliderChanged(double sliderValue) {return;}
-    @Override
-    public void onSliderReleased(double sliderValue){return;}
+    public void onMouseClicked(MouseEvent event) {
+        // Non implementato, ma potrebbe essere usato per gestire clic specifici
+    }
 }
+ */
